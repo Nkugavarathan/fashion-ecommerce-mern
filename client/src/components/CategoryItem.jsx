@@ -40,6 +40,7 @@ const Button = styled.button`
   color: gray;
   cursor: pointer;
   font-weight: bold;
+  border-radius: 10px;
 
   &: hover {
     transition: background-color 0.2s linear;

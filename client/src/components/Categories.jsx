@@ -14,11 +14,16 @@ const Container = styled.div`
 
 function Categories() {
   return (
-    <Container>
-      {categories.map((item) => (
-        <CategoryItem item={item} />
-      ))}
-    </Container>
+    <>
+      <h2 style={{ textAlign: "center", color: "teal", fontWeight: "bold" }}>
+        Our Categories
+      </h2>
+      <Container>
+        {categories.map((item) => (
+          <CategoryItem item={item} key={item.id} />
+        ))}
+      </Container>
+    </>
   )
 }
 
