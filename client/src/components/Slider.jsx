@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined"
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined"
-
+import { sliderItems } from "../data"
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -96,28 +96,6 @@ const Button = styled.button`
     color: white;
   }
 `
-
-// ✅ ONLINE IMAGES
-const sliderItems = [
-  {
-    id: 1,
-    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e", // beach summer
-    title: "SUMMER SALE",
-    desc: "Elevate your summer wardrobe with exclusive offers crafted for trendsetters.",
-  },
-  {
-    id: 2,
-    img: "https://images.unsplash.com/photo-1506748686214-e9df14d4d9d0", // autumn leaves
-    title: "AUTUMN COLLECTION",
-    desc: "Discover cozy layers and timeless styles for your autumn days.",
-  },
-  {
-    id: 3,
-    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e", // snowy mountains
-    title: "WINTER ESSENTIALS",
-    desc: "Stay warm and stylish with our premium winter collection.",
-  },
-]
 
 export default function Slider() {
   const [slideIndex, setSlideIndex] = useState(0)

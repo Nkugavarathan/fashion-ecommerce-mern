@@ -57,6 +57,7 @@ const Input = styled.input`
   outline: none;
   font-size: 14px;
   margin-right: 5px;
+  background-color: transparent;
 `
 
 const Center = styled.div`
