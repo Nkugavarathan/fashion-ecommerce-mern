@@ -4,6 +4,7 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
 
 import SearchIcon from "@mui/icons-material/Search"
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"
+
 const Info = styled.div`
   opacity: 0;
   width: 100%;
