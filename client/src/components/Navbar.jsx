@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
-import Announcement from "./Announcement"
 import SearchIcon from "@mui/icons-material/Search"
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
 import Badge from "@mui/material/Badge"
@@ -10,7 +9,7 @@ const HeaderContainer = styled.div`
   position: fixed; /* fixes both Announcement + Navbar */
   top: 0;
   left: 0;
-  z-index: 1000;
+  z-index: 1200;
 `
 
 const NavbarContainer = styled.div`
@@ -92,7 +91,7 @@ const MenuItem = styled.div`
   }
 `
 
-function Header() {
+function Navbar() {
   const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
@@ -103,7 +102,6 @@ function Header() {
 
   return (
     <HeaderContainer>
-      <Announcement />
       <NavbarContainer scrolled={scrolled}>
         <Wrapper>
           <Left>
@@ -132,4 +130,4 @@ function Header() {
   )
 }
 
-export default Header
+export default Navbar
