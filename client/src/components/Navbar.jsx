@@ -114,7 +114,7 @@ function Header() {
             </SearchContainer>
           </Left>
           <Center>
-            <Logo>JIRO</Logo>
+            <Logo>VARA</Logo>
           </Center>
           <Right>
             <MenuItem>Home</MenuItem>

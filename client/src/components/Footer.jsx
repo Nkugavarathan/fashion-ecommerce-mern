@@ -3,6 +3,10 @@ import FacebookIcon from "@mui/icons-material/Facebook"
 import InstagramIcon from "@mui/icons-material/Instagram"
 import LinkedInIcon from "@mui/icons-material/LinkedIn"
 import PinterestIcon from "@mui/icons-material/Pinterest"
+import PhoneIcon from "@mui/icons-material/Phone"
+import MailIcon from "@mui/icons-material/Mail"
+import HomeIcon from "@mui/icons-material/Home"
+
 import styled from "styled-components"
 const Container = styled.div`
   display: flex;
@@ -47,16 +51,42 @@ const colors = {
 
 const Center = styled.div`
   flex: 1;
+  padding: 20px;
 `
-const Right = styled.div`
-  flex: 1;
+const Title = styled.h3`
+  margin-bottom: 20px;
 `
 
+const List = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+`
+const ListItem = styled.li`
+  width: 50%;
+  margin-bottom: 10px;
+`
+
+const Right = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+`
+const ContactItem = styled.span`
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+`
+const Payment = styled.div`
+  margin-top: 10px;
+`
 function Footer() {
   return (
     <Container>
       <Left>
-        <Logo>JIRO</Logo>
+        <Logo>VARA</Logo>
         <Description>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
           fuga itaque minima iure ex ad facilis unde, cumque deleniti aut
@@ -78,8 +108,33 @@ function Footer() {
           </SocialIcon>
         </SocialContainer>
       </Left>
-      <Center></Center>
-      <Right></Right>
+      <Center>
+        <Title>Useful Links</Title>
+        <List>
+          <ListItem>Home</ListItem>
+          <ListItem>Women Fashions</ListItem>
+          <ListItem>My Account</ListItem>
+          <ListItem>Order Tracking</ListItem>
+          <ListItem>Wishlist</ListItem>
+          <ListItem>Terms</ListItem>
+        </List>
+      </Center>
+      <Right>
+        <Title>Contact</Title>
+        <ContactItem>
+          <HomeIcon style={{ marginRight: "10px" }} /> No 10, HighLevel Road
+          ,Nugegoda.
+        </ContactItem>
+        <ContactItem>
+          <PhoneIcon style={{ marginRight: "10px" }} />
+          +771234567
+        </ContactItem>
+        <ContactItem>
+          <MailIcon style={{ marginRight: "10px" }} />
+          contactvara@gmail.com
+        </ContactItem>
+        <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
+      </Right>
     </Container>
   )
 }
