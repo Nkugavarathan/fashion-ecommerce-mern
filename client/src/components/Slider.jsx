@@ -3,6 +3,8 @@ import styled from "styled-components"
 import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined"
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined"
 import { sliderItems } from "../data"
+import { mobile, tablet } from "../responsive"
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;

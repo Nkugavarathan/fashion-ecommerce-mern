@@ -4,7 +4,7 @@ import styled from "styled-components"
 import Navbar from "../components/Navbar"
 import Announcement from "../components/Announcement"
 import Footer from "../components/Footer"
-import { mobile } from "../responsive"
+
 import RemoveIcon from "@mui/icons-material/Remove"
 import AddIcon from "@mui/icons-material/Add"
 
@@ -14,7 +14,6 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   padding: 20px 40px;
-  ${mobile({ padding: "10px" })}
 `
 
 const Title = styled.h1`
@@ -27,7 +26,6 @@ const Top = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  ${mobile({ flexDirection: "column", gap: "10px" })}
 `
 
 const TopButton = styled.button`
@@ -46,9 +44,7 @@ const TopButton = styled.button`
   }
 `
 
-const TopTexts = styled.div`
-  ${mobile({ display: "none" })}
-`
+const TopTexts = styled.div``
 
 const TopText = styled.span`
   text-decoration: underline;
@@ -60,7 +56,6 @@ const Bottom = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 20px;
-  ${mobile({ flexDirection: "column" })}
 `
 
 const Info = styled.div`
@@ -71,7 +66,6 @@ const Product = styled.div`
   padding: 20px 0;
   display: flex;
   justify-content: space-between;
-  ${mobile({ flexDirection: "column", gap: "20px" })}
 `
 
 const ProductDetails = styled.div`
@@ -88,7 +82,6 @@ const Details = styled.div`
 
 const ProductImage = styled.img`
   height: 60vh;
-  ${mobile({ height: "40vh", objectFit: "cover" })}
 `
 
 const ProductName = styled.h3``

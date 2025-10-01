@@ -6,6 +6,7 @@ import PinterestIcon from "@mui/icons-material/Pinterest"
 import PhoneIcon from "@mui/icons-material/Phone"
 import MailIcon from "@mui/icons-material/Mail"
 import HomeIcon from "@mui/icons-material/Home"
+import { mobile, tablet } from "../responsive"
 
 import styled from "styled-components"
 const Container = styled.div`

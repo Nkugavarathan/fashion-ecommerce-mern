@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
+import { mobile, tablet } from "../responsive"
 
 import SearchIcon from "@mui/icons-material/Search"
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"

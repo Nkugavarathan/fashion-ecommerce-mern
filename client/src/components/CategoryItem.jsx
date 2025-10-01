@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { mobile, tablet } from "../responsive"
 
 const Container = styled.div`
   flex: 1;
