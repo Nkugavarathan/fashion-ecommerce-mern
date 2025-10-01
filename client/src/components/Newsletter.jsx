@@ -10,15 +10,26 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+
+  ${mobile(`
+    height: auto;
+    padding: 20px;
+  `)}
 `
+
 const Title = styled.h1`
   font-size: 70px;
   margin-bottom: 20px;
+
+  ${tablet(`
+    font-size: 50px;
+  `)}
+
+  ${mobile(`
+    font-size: 36px;
+  `)}
 `
-const Description = styled.div`
-  font-size: 20px;
-  margin-bottom: 20px;
-`
+
 const InputContainer = styled.div`
   width: 50%;
   height: 40px;
@@ -26,7 +37,19 @@ const InputContainer = styled.div`
   justify-content: space-between;
   background-color: white;
   border: 1px solid gray;
+
+  ${mobile(`
+    width: 90%;
+    flex-direction: column;
+    height: auto;
+  `)}
 `
+
+const Description = styled.div`
+  font-size: 20px;
+  margin-bottom: 20px;
+`
+
 const Input = styled.input`
   border: none;
   flex: 8;

@@ -9,6 +9,14 @@ const Container = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+
+  ${tablet(`
+    justify-content: center;
+  `)}
+
+  ${mobile(`
+    justify-content: center;
+  `)}
 `
 
 function Products() {

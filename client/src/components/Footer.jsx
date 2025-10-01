@@ -11,12 +11,38 @@ import { mobile, tablet } from "../responsive"
 import styled from "styled-components"
 const Container = styled.div`
   display: flex;
+  flex-wrap: wrap;
+
+  ${mobile(`
+    flex-direction: column;
+  `)}
 `
+
 const Left = styled.div`
   flex: 1;
-  display: flex;
-  flex-direction: column;
   padding: 20px;
+
+  ${mobile(`
+    padding: 10px;
+  `)}
+`
+
+const Center = styled.div`
+  flex: 1;
+  padding: 20px;
+
+  ${mobile(`
+    display: none;
+  `)}
+`
+
+const Right = styled.div`
+  flex: 1;
+  padding: 20px;
+
+  ${mobile(`
+    background-color: #fff8f8;
+  `)}
 `
 
 const Logo = styled.h1``
@@ -50,10 +76,6 @@ const colors = {
   pinterest: "#bd081c",
 }
 
-const Center = styled.div`
-  flex: 1;
-  padding: 20px;
-`
 const Title = styled.h3`
   margin-bottom: 20px;
 `
@@ -70,11 +92,6 @@ const ListItem = styled.li`
   margin-bottom: 10px;
 `
 
-const Right = styled.div`
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-`
 const ContactItem = styled.span`
   margin-bottom: 10px;
   display: flex;

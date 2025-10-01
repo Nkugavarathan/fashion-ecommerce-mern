@@ -26,12 +26,18 @@ const Container = styled.div`
   flex: 1;
   margin: 5px;
   min-width: 280px;
+  max-width: 320px;
   height: 350px;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f5fbfd;
   position: relative;
+
+  ${mobile(`
+    width: 90%;
+    height: 300px;
+  `)};
 
   &:hover ${Info} {
     opacity: 1;
