@@ -10,7 +10,8 @@ import { mobile, tablet } from "../responsive"
 const Container = styled.div`
   width: 100%;
   position: fixed;
-  top: 40px;
+  top: ${(props) => (props.isHome ? "40px" : 0)};
+
   left: 0;
   z-index: 1100;
 `
@@ -171,7 +172,7 @@ const MenuItem = styled.div`
   }
 `
 
-function Navbar() {
+function Navbar({ isHome }) {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -182,7 +183,7 @@ function Navbar() {
   }, [])
 
   return (
-    <Container>
+    <Container isHome={isHome}>
       <NavbarContainer scrolled={scrolled}>
         <Wrapper>
           <Left>

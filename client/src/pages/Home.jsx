@@ -10,7 +10,7 @@ export default function Home() {
   return (
     <div>
       <Announcement />
-      <Navbar />
+      <Navbar isHome />
       <Slider />
       <Categories />
       <Products />
