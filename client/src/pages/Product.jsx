@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import Navbar from "./../components/Navbar"
 import Newsletter from "./../components/Newsletter"
+import { mobile, tablet } from "../responsive"
 
 import Footer from "./../components/Footer"
 
@@ -12,20 +13,72 @@ const Wrapper = styled.div`
   margin-top: 100px;
   padding: 30px;
   display: flex;
+
+  ${tablet(`
+    flex-direction: column;
+    padding: 20px;
+  `)}
+
+  ${mobile(`
+    flex-direction: column;
+    padding: 10px;
+  `)}
 `
-const ImageContainer = styled.div`
-  flex: 1;
-`
+
 const Image = styled.img`
-  width: 80%;
+  width: 100%;
   height: 90vh;
   object-fit: cover;
+
+  ${tablet(`
+    height: 60vh;
+  `)}
+
+  ${mobile(`
+    height: 40vh;
+  `)}
 `
+
 const InfoContainer = styled.div`
   flex: 1;
   width: 100%;
   padding: 0 50px;
+
+  ${tablet(`
+    padding: 20px 0;
+  `)}
+
+  ${mobile(`
+    padding: 10px 0;
+  `)}
 `
+
+const FilterContainer = styled.div`
+  width: 100%;
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+
+  ${mobile(`
+    flex-direction: column;
+    gap: 10px;
+  `)}
+`
+
+const AddContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+
+  ${mobile(`
+    flex-direction: column;
+    gap: 10px;
+  `)}
+`
+const ImageContainer = styled.div`
+  flex: 1;
+`
+
 const Title = styled.h1`
   font-weight: 200;
   font-size: 30px;
@@ -38,12 +91,6 @@ const Price = styled.span`
   font-size: 20px;
 `
 
-const FilterContainer = styled.div`
-  width: 50%;
-  margin: 20px 0;
-  display: flex;
-  justify-content: space-between;
-`
 const Filter = styled.div`
   display: flex;
   align-items: center;
@@ -63,11 +110,6 @@ const FilterColor = styled.div`
 const FilterSize = styled.select``
 const FilterSizeOption = styled.option``
 
-const AddContainer = styled.div`
-  width: 50%;
-  display: flex;
-  justify-content: space-between;
-`
 const AmountContainer = styled.div`
   display: flex;
   align-items: center;

@@ -4,6 +4,7 @@ import styled from "styled-components"
 import Navbar from "../components/Navbar"
 import Announcement from "../components/Announcement"
 import Footer from "../components/Footer"
+import { mobile, tablet } from "../responsive"
 
 import RemoveIcon from "@mui/icons-material/Remove"
 import AddIcon from "@mui/icons-material/Add"
@@ -14,6 +15,65 @@ const Container = styled.div`
 
 const Wrapper = styled.div`
   padding: 20px 40px;
+
+  ${tablet(`
+    padding: 15px 20px;
+  `)}
+
+  ${mobile(`
+    padding: 10px;
+  `)}
+`
+
+const Bottom = styled.div`
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  ${tablet(`
+    flex-direction: column;
+  `)}
+
+  ${mobile(`
+    flex-direction: column;
+  `)}
+`
+
+const Product = styled.div`
+  padding: 20px 0;
+  display: flex;
+  justify-content: space-between;
+
+  ${mobile(`
+    flex-direction: column;
+    gap: 10px;
+  `)}
+`
+
+const ProductImage = styled.img`
+  height: 60vh;
+
+  ${tablet(`
+    height: 40vh;
+  `)}
+
+  ${mobile(`
+    height: 30vh;
+    object-fit: cover;
+  `)}
+`
+
+const Summary = styled.div`
+  flex: 1;
+  border: 0.5px solid lightgray;
+  border-radius: 10px;
+  padding: 20px;
+  height: fit-content;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+
+  ${mobile(`
+    margin-top: 20px;
+  `)}
 `
 
 const Title = styled.h1`
@@ -52,20 +112,8 @@ const TopText = styled.span`
   margin: 0 10px;
 `
 
-const Bottom = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-`
-
 const Info = styled.div`
   flex: 3;
-`
-
-const Product = styled.div`
-  padding: 20px 0;
-  display: flex;
-  justify-content: space-between;
 `
 
 const ProductDetails = styled.div`
@@ -78,10 +126,6 @@ const Details = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-`
-
-const ProductImage = styled.img`
-  height: 60vh;
 `
 
 const ProductName = styled.h3``
@@ -122,15 +166,6 @@ const Hr = styled.hr`
   background-color: #eee;
   border: none;
   height: 1px;
-`
-
-const Summary = styled.div`
-  flex: 1;
-  border: 0.5px solid lightgray;
-  border-radius: 10px;
-  padding: 20px;
-  height: 50vh;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 `
 
 const SummaryTitle = styled.h1`
