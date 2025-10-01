@@ -1,5 +1,6 @@
 import React from "react"
 import styled from "styled-components"
+import { mobile, tablet } from "../responsive"
 
 const Container = styled.div`
   width: 100vw;
@@ -8,26 +9,36 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+
+  ${mobile(`
+    height: auto;
+    padding: 20px 0;
+  `)}
 `
+
 const Wrapper = styled.div`
   padding: 20px;
   width: 20%;
   background-color: #f5f3f3ff;
+
+  ${tablet(`
+    width: 40%;
+  `)}
+
+  ${mobile(`
+    width: 80%;
+  `)}
 `
-const Title = styled.h1`
-  font-weight: 300;
-  text-align: center;
-`
-const Form = styled.form`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-`
+
 const Input = styled.input`
   flex: 1;
   min-width: 40%;
   margin: 20px 10px 0 0;
   padding: 10px;
+
+  ${mobile(`
+    margin: 10px 0;
+  `)}
 `
 
 const Button = styled.button`
@@ -38,11 +49,26 @@ const Button = styled.button`
   background-color: white;
   transition: all 0.2s linear;
   margin: 20px auto 0 auto;
+
   &:hover {
     background-color: teal;
     color: white;
     cursor: pointer;
   }
+
+  ${mobile(`
+    width: 100%;
+  `)}
+`
+
+const Title = styled.h1`
+  font-weight: 300;
+  text-align: center;
+`
+const Form = styled.form`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
 `
 
 const Link = styled.a`

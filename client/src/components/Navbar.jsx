@@ -20,7 +20,7 @@ const NavbarContainer = styled.div`
   transition: all 0.3s ease;
   backdrop-filter: ${(props) => (props.scrolled ? "blur(10px)" : "none")};
   background-color: ${(props) =>
-    props.scrolled ? "rgba(255, 255, 255, 0.8)" : "transparent"};
+    props.scrolled ? "rgba(255, 255, 255, 0.8)" : "#e4e4e4ff"};
   box-shadow: ${(props) =>
     props.scrolled ? "0 2px 4px rgba(0,0,0,0.1)" : "none"};
 `
