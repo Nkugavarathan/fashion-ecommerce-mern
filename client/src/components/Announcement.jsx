@@ -2,16 +2,17 @@ import React from "react"
 import styled from "styled-components"
 
 const Container = styled.div`
-  text-align: center;
   font-size: 16px;
   font-weight: 500;
-  background: linear-gradient(to right, teal, darkcyan);
-  color: white;
-  padding: 10px 0;
   letter-spacing: 1px;
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 1100; /* higher than navbar */
+  width: 100%;
+  z-index: 1300; /* higher than navbar */
+  background: linear-gradient(to right, teal, darkcyan);
+  padding: 10px 0;
+  color: white;
+  text-align: center;
 `
 
 function Announcement() {

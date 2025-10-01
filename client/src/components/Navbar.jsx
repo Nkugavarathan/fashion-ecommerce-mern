@@ -7,9 +7,9 @@ import Badge from "@mui/material/Badge"
 const HeaderContainer = styled.div`
   width: 100%;
   position: fixed; /* fixes both Announcement + Navbar */
-  top: 0;
+  top: 40px;
   left: 0;
-  z-index: 1200;
+  z-index: 1100;
 `
 
 const NavbarContainer = styled.div`
