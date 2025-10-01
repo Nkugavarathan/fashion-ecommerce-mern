@@ -1,19 +1,19 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e", // beach summer
+    img: "./assets/images/slider1.jpg", // beach summer
     title: "SUMMER SALE",
     desc: "Elevate your summer wardrobe with exclusive offers crafted for trendsetters.",
   },
   {
     id: 2,
-    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e",
+    img: "./assets/images/slider2.jpg",
     title: "AUTUMN COLLECTION",
     desc: "Discover cozy layers and timeless styles for your autumn days.",
   },
   {
     id: 3,
-    img: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e", // snowy mountains
+    img: "./assets/images/slider3.jpg", // snowy mountains
     title: "WINTER ESSENTIALS",
     desc: "Stay warm and stylish with our premium winter collection.",
   },

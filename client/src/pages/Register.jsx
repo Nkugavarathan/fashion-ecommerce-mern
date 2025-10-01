@@ -39,7 +39,7 @@ const Button = styled.button`
   background-color: white;
   transition: all 0.2s linear;
   margin: 20px auto 0 auto;
-  &: hover {
+  &:hover {
     background-color: teal;
     color: white;
     cursor: pointer;
