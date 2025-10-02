@@ -16,7 +16,7 @@ const schema = new Schema(
       unique: true,
     },
     isAdmin: {
-      type: boolean,
+      type: Boolean,
       default: false,
     },
   },
