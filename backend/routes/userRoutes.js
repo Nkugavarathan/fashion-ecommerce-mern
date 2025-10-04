@@ -1,7 +1,8 @@
 import express from "express"
-import { protect } from "./../middleware/authMiddleware.js"
-import User from "../models/userModel.js"
+import { admin, protect } from "./../middleware/authMiddleware.js"
+
 import {
+  deleteUser,
   getAllUser,
   getUserById,
   updateUser,
@@ -15,4 +16,5 @@ router.get("/:id", getUserById)
 
 router.put("/:id", protect, updateUser)
 
+router.delete("/:id", protect, admin, deleteUser)
 export default router

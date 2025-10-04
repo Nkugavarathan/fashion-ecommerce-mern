@@ -7,11 +7,14 @@ export const registerUser = async (req, res) => {
   try {
     const salt = await bcrypt.genSalt(10)
     const hashedPassword = await bcrypt.hash(req.body.password, salt)
+    const isAdmin =
+      typeof req.body.isAdmin === "boolean" ? req.body.isAdmin : false
 
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
       password: hashedPassword,
+      isAdmin: isAdmin,
     })
 
     const savedUser = await newUser.save()
@@ -88,5 +91,20 @@ export const updateUser = async (req, res) => {
     }
   } catch (err) {
     return res.status(500).json({ error: err.message })
+  }
+}
+
+//delete user
+export const deleteUser = async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id)
+    if (!user) {
+      return res.status(404).json({ message: "User not found" })
+    }
+
+    res.status(200).json({ message: `Deleted User ${req.params.id}` })
+  } catch (error) {
+    console.error("Delete error:", error)
+    res.status(400).json({ message: "Couldn't delete it. Something's wrong." })
   }
 }
