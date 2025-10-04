@@ -9,7 +9,7 @@ const schema = new Schema(
       required: [true, "please add username"], // ✅ Custom error message if 'text' is missing
       unique: true, // ✅ Ensures no duplicate 'text' values
     },
-
+    email: { type: String, required: true, unique: true },
     password: {
       type: String,
       required: [true, "please add pasword"], // ✅ Custom error message if 'text' is missing
