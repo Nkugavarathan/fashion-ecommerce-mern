@@ -44,7 +44,7 @@ export const loginUser = async (req, res) => {
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
       process.env.JWT_SEC,
-      { expiresIn: "3d" }
+      { expiresIn: "30d" }
     )
 
     res.status(200).json({ user, token: accessToken })
@@ -55,8 +55,11 @@ export const loginUser = async (req, res) => {
 
 // get all users
 export const getAllUser = async (req, res) => {
+  const query = req.query.new
   try {
-    const users = await User.find()
+    const users = query
+      ? await User.find().sort({ _id: -1 }).limit(5)
+      : await User.find()
     res.status(200).json(users)
   } catch (err) {
     res.status(500).json(err)
@@ -107,4 +110,14 @@ export const deleteUser = async (req, res) => {
     console.error("Delete error:", error)
     res.status(400).json({ message: "Couldn't delete it. Something's wrong." })
   }
+}
+
+//get user stats
+export const getUserStats = async (req, res) => {
+  const date = new Date()
+  const lastyear = new Date()(date.setFullYear(date.getFullYear() - 1))
+
+  try {
+    const data = await User.aggregate([{ $match: { $gte: lastyear } }])
+  } catch (error) {}
 }
