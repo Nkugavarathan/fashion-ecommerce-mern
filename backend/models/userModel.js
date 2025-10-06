@@ -20,7 +20,7 @@ const schema = new Schema(
       default: false,
     },
   },
-  { timestamps: true } // ✅ Automatically adds 'createdAt' and 'updatedAt' fields
+  { timestamps: true } // ✅ Automatically adds 'createdAt' and updatedAt' fields
 )
 
 // ✅ Create the model from the schema
