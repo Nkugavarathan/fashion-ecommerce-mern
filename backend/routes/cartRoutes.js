@@ -14,7 +14,7 @@ router.post("/create", protect, createCart)
 router.put("/:id", protect, upadateCart)
 
 //getusercart
-router.get("/:userid", protect, getCartById)
+router.get("/:userId", protect, getCartById)
 
 router.delete("/:id", protect, deleteCart)
 
