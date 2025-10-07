@@ -6,18 +6,19 @@ import {
   getCartById,
   upadateCart,
 } from "../controllers/cartController"
+import { admin, protect } from "./../middleware/authMiddleware.js"
 
 const router = express.Router()
 
-router.post("/create", protect, createCart)
+router.post("/", protect, createCart)
 
 router.put("/:id", protect, upadateCart)
 
 //getusercart
-router.get("/:userId", protect, getCartById)
+router.get("/find/:userId", protect, getCartById)
 
 router.delete("/:id", protect, deleteCart)
 
 //getall
-router.get("/", getAll)
+router.get("/", protect, admin, getAll)
 export default router

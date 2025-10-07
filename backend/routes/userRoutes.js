@@ -15,7 +15,8 @@ router.get("/stats", getUserStats)
 
 // get all users
 router.get("/", protect, admin, getAllUser)
-router.get("/:id", getUserById)
+
+router.get("/find/:id", getUserById)
 
 router.put("/:id", protect, admin, updateUser)
 

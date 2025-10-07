@@ -12,7 +12,7 @@ const router = express.Router()
 
 router.post("/", protect, admin, createProduct)
 router.put("/:id", protect, admin, upadateProduct)
-router.get("/:id", getProductById)
+router.get("/find/:id", getProductById)
 router.get("/", getAllProducts)
 router.delete("/:id", protect, admin, deleteProduct)
 

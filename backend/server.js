@@ -4,6 +4,9 @@ import dotenv from "dotenv"
 import userRoute from "./routes/userRoutes.js"
 import authRoute from "./routes/authRoute.js"
 import productRoutes from "./routes/productRoutes.js"
+import cartRoutes from "./routes/cartRoutes.js"
+import orderRoutes from "./routes/orderRoutes.js"
+
 // work dotenv
 dotenv.config()
 
@@ -17,8 +20,10 @@ app.use(express.json())
 app.use("/api/users", userRoute)
 
 app.use("/api/auth", authRoute)
+app.use("/api/products", productRoutes)
+app.use("/api/carts", cartRoutes)
 app
-  .use("/api/products", productRoutes)
+  .use("/api/orders", orderRoutes)
 
   //run
   .listen(port, () => {
