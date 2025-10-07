@@ -4,7 +4,7 @@ import {
   getAll,
   monthlyIncome,
   upadateOrder,
-} from "./../controllers/orderController"
+} from "./../controllers/orderController.js"
 import { admin, protect } from "./../middleware/authMiddleware.js"
 
 const router = express.Router()

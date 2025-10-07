@@ -5,7 +5,7 @@ import {
   getAll,
   getCartById,
   upadateCart,
-} from "../controllers/cartController"
+} from "../controllers/cartController.js"
 import { admin, protect } from "./../middleware/authMiddleware.js"
 
 const router = express.Router()

@@ -21,6 +21,5 @@ const productSchema = new Schema(
   { timestamps: true }
 )
 
-const productModel = model("Product", productSchema)
-
-export default productModel
+const Product = model("Product", productSchema)
+export default Product
