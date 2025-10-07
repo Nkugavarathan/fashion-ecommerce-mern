@@ -11,10 +11,12 @@ import {
 
 const router = express.Router()
 
+router.get("/stats", getUserStats)
+
 // get all users
 router.get("/", protect, admin, getAllUser)
 router.get("/:id", getUserById)
-router.get("/stats", getUserStats)
+
 router.put("/:id", protect, admin, updateUser)
 
 router.delete("/:id", protect, admin, deleteUser)
