@@ -53,13 +53,13 @@ export const loginUser = async (req, res) => {
   }
 }
 
-// get all users
+// get all users - latest 5 users
 export const getAllUser = async (req, res) => {
   const query = req.query.new
   try {
     const users = query
-      ? await User.find().sort({ _id: -1 }).limit(5)
-      : await User.find()
+      ? await User.find().sort({ _id: -1 }).limit(5) // Latest 5 user
+      : await User.find() // all user
     res.status(200).json(users)
   } catch (err) {
     res.status(500).json(err)
@@ -119,5 +119,7 @@ export const getUserStats = async (req, res) => {
 
   try {
     const data = await User.aggregate([{ $match: { $gte: lastyear } }])
-  } catch (error) {}
+  } catch (error) {
+    res.status(400).json(error)
+  }
 }
