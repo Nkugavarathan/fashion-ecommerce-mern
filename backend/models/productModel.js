@@ -16,7 +16,7 @@ const productSchema = new Schema(
     categories: { type: Array },
     size: { type: String },
     color: { type: String },
-    pirce: { type: String, required: true },
+    price: { type: String, required: true },
   },
   { timestamps: true }
 )
