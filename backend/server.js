@@ -6,6 +6,7 @@ import authRoute from "./routes/authRoute.js"
 import productRoutes from "./routes/productRoutes.js"
 import cartRoutes from "./routes/cartRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
+import cors from "cors"
 
 // work dotenv
 dotenv.config()
@@ -15,7 +16,7 @@ const app = express()
 const port = process.env.PORT || 5000
 // mongoose
 connectDB()
-
+app.use(cors())
 app.use(express.json())
 app.use("/api/users", userRoute)
 
