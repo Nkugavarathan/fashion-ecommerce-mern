@@ -1,80 +1,115 @@
 import { Link } from "react-router-dom"
-import "./product.css"
+import { Publish } from "@mui/icons-material"
 import Chart from "../../components/chart/Chart"
 import { productData } from "../../dummyData"
-import { Publish } from "@mui/icons-material"
 
 export default function Product() {
   return (
-    <div className="product">
-      <div className="productTitleContainer">
-        <h1 className="productTitle">Product</h1>
+    <div className="flex-[4] p-6">
+      {/* Title Section */}
+      <div className="flex items-center justify-between mb-6">
+        <h1 className="text-2xl font-bold text-gray-800">Product</h1>
         <Link to="/newproduct">
-          <button className="productAddButton">Create</button>
+          <button className="bg-teal-600 hover:bg-teal-700 text-white text-base px-4 py-2 rounded-md">
+            Create
+          </button>
         </Link>
       </div>
-      <div className="productTop">
-        <div className="productTopLeft">
+
+      {/* Top Section */}
+      <div className="flex flex-col lg:flex-row gap-6">
+        {/* Left - Chart */}
+        <div className="flex-1 bg-white p-4 rounded-lg shadow-md">
           <Chart data={productData} dataKey="Sales" title="Sales Performance" />
         </div>
-        <div className="productTopRight">
-          <div className="productInfoTop">
+
+        {/* Right - Product Info */}
+        <div className="flex-1 bg-white p-6 rounded-lg shadow-md">
+          <div className="flex items-center mb-4">
             <img
               src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
               alt=""
-              className="productInfoImg"
+              className="w-12 h-12 rounded-full object-cover mr-4"
             />
-            <span className="productName">Apple Airpods</span>
+            <span className="text-lg font-semibold">Apple Airpods</span>
           </div>
-          <div className="productInfoBottom">
-            <div className="productInfoItem">
-              <span className="productInfoKey">id:</span>
-              <span className="productInfoValue">123</span>
+
+          <div className="space-y-2">
+            <div className="flex justify-between w-40 text-gray-700">
+              <span className="font-medium">ID:</span>
+              <span className="font-light">123</span>
             </div>
-            <div className="productInfoItem">
-              <span className="productInfoKey">sales:</span>
-              <span className="productInfoValue">5123</span>
+            <div className="flex justify-between w-40 text-gray-700">
+              <span className="font-medium">Sales:</span>
+              <span className="font-light">5123</span>
             </div>
-            <div className="productInfoItem">
-              <span className="productInfoKey">active:</span>
-              <span className="productInfoValue">yes</span>
+            <div className="flex justify-between w-40 text-gray-700">
+              <span className="font-medium">Active:</span>
+              <span className="font-light">Yes</span>
             </div>
-            <div className="productInfoItem">
-              <span className="productInfoKey">in stock:</span>
-              <span className="productInfoValue">no</span>
+            <div className="flex justify-between w-40 text-gray-700">
+              <span className="font-medium">In Stock:</span>
+              <span className="font-light">No</span>
             </div>
           </div>
         </div>
       </div>
-      <div className="productBottom">
-        <form className="productForm">
-          <div className="productFormLeft">
-            <label>Product Name</label>
-            <input type="text" placeholder="Apple AirPod" />
-            <label>In Stock</label>
-            <select name="inStock" id="idStock">
+
+      {/* Bottom Section */}
+      <div className="bg-white p-6 rounded-lg shadow-md mt-6">
+        <form className="flex flex-col lg:flex-row justify-between gap-6">
+          {/* Left Form */}
+          <div className="flex flex-col flex-1">
+            <label className="text-gray-600 font-semibold mb-2">
+              Product Name
+            </label>
+            <input
+              type="text"
+              placeholder="Apple AirPod"
+              className="border-b border-gray-300 outline-none mb-4 p-2 focus:border-blue-500"
+            />
+
+            <label className="text-gray-600 font-semibold mb-2">In Stock</label>
+            <select
+              name="inStock"
+              id="idStock"
+              className="border border-gray-300 rounded-md p-2 mb-4 focus:ring-2 focus:ring-blue-500"
+            >
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
-            <label>Active</label>
-            <select name="active" id="active">
+
+            <label className="text-gray-600 font-semibold mb-2">Active</label>
+            <select
+              name="active"
+              id="active"
+              className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
+            >
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
           </div>
-          <div className="productFormRight">
-            <div className="productUpload">
+
+          {/* Right Form */}
+          <div className="flex flex-col flex-1 justify-around">
+            <div className="flex items-center mb-4">
               <img
                 src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
                 alt=""
-                className="productUploadImg"
+                className="w-24 h-24 rounded-lg object-cover mr-4"
               />
-              <label for="file">
+              <label htmlFor="file" className="cursor-pointer text-blue-600">
                 <Publish />
               </label>
-              <input type="file" id="file" style={{ display: "none" }} />
+              <input type="file" id="file" className="hidden" />
             </div>
-            <button className="productButton">Update</button>
+
+            <button
+              type="submit"
+              className="bg-blue-800 hover:bg-blue-900 text-white font-semibold py-2 px-6 rounded-md transition-all duration-200"
+            >
+              Update
+            </button>
           </div>
         </form>
       </div>
