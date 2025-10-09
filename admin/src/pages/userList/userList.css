@@ -6,24 +6,34 @@
   display: flex;
   align-items: center;
 }
-
-.userListImg {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-right: 10px;
-}
-
-.userListEdit{
-    border: none;
-    border-radius: 10px;
-    padding: 5px 10px;
-    background-color: #3bb077;
-    color: white;
+.userListImg{
+  width: 40px;
+    height: 40px;
+    border-radius: 50%;
     cursor: pointer;
-    margin-right: 20px;
+    margin-right:10px;
 }
+.userListEdit {
+  border: none;
+  border-radius: 6px;
+  padding: 6px 16px;
+  background-color: #3bb077;
+  color: white;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.userListEdit:hover {
+  background-color: #36a06a;
+}
+
+
+.userListEdit:hover {
+  background-color: #36a06a;
+}
+
 
 .userListDelete{
     color: red;
