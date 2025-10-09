@@ -9,6 +9,7 @@ import User from "./pages/user/User"
 import NewUser from "./pages/newuser/NewUser"
 import Product from "./pages/product/Product"
 import ProductList from "./pages/productlist/ProductList"
+import NewProduct from "./pages/newproduct/NewProduct"
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/newUser" element={<NewUser />} />
           <Route path="/products" element={<ProductList />} />
           <Route path="/products/:productId" element={<Product />} />
+          <Route path="/newproduct" element={<NewProduct />} />
         </Routes>
       </div>
     </>
