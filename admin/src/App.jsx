@@ -6,8 +6,8 @@ import "./App.css"
 import Home from "./pages/Home/Home"
 import UserList from "./pages/userList/Userlist"
 import User from "./pages/user/User"
-import NewUser from "./pages/newuser/newUser"
-
+import NewUser from "./pages/newuser/NewUser"
+import Product from "./pages/product/Product"
 function App() {
   return (
     <>
@@ -20,6 +20,7 @@ function App() {
           <Route path="/users" element={<UserList />} />
           <Route path="/users/:userId" element={<User />} />
           <Route path="/newUser" element={<NewUser />} />
+          <Route path="/product" element={<Product />} />
         </Routes>
       </div>
     </>

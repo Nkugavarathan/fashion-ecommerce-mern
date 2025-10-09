@@ -4,7 +4,7 @@ import React from "react"
 function NewUser() {
   return (
     <div
-      className="flex-[4] p-6 bg-gray-50 rounded-lg shadow-md ms-3"
+      className="flex-[4] p-6 bg-gray-50 rounded-lg shadow-md ms-3 h-[70vh]"
       style={{ flex: 4 }}
     >
       <h2 className="text-2xl font-bold mb-6 text-gray-800">New User</h2>
@@ -93,7 +93,7 @@ function NewUser() {
         </div>
 
         {/* Active */}
-        <div className="flex flex-col flex-1 min-w-[250px]">
+        <div className="flex flex-col flex-1 w-[200px] ">
           <label className="mb-2 text-gray-500 font-semibold">Active</label>
           <select className="h-10 border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-400">
             <option value="yes">Yes</option>

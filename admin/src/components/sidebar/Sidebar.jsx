@@ -23,7 +23,7 @@ function Sidebar() {
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
             <Link to="/">
-              <li className="sidebarListItem active">
+              <li className="sidebarListItem ">
                 <LineStyle className="sidebarIcon" />
                 Home
               </li>
@@ -41,10 +41,13 @@ function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <li className="sidebarListItem">
-              <PermIdentity className="sidebarIcon" />
-              Users
-            </li>
+            <Link to="/users">
+              <li className="sidebarListItem">
+                <PermIdentity className="sidebarIcon" />
+                Users
+              </li>
+            </Link>
+
             <li className="sidebarListItem">
               <Storefront className="sidebarIcon" />
               Products
