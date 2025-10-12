@@ -14,9 +14,10 @@ const productSchema = new Schema(
     },
     image: { type: String, required: true },
     categories: { type: Array },
-    size: { type: String },
-    color: { type: String },
+    size: { type: Array },
+    color: { type: Array },
     price: { type: String, required: true },
+    inStock: { type: Boolean, default: true },
   },
   { timestamps: true }
 )

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { popularProducts } from "../data"
 import ProductItem from "./ProductItem"
@@ -19,7 +19,12 @@ const Container = styled.div`
   `)}
 `
 
-function Products() {
+function Products({ category, filters, sort }) {
+  // console.log(category, filters, sort)
+  const [products, setProdcuts] = useState([])
+  const [filteredProducts, setFilterdProducts] = useState([])
+
+  useEffect(() => {}, [category])
   return (
     <Container>
       {popularProducts.map((item) => (
