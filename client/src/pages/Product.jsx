@@ -135,6 +135,7 @@ const Button = styled.button`
     cursor: pointer;
   }
 `
+// addto cart
 
 function Product() {
   return (

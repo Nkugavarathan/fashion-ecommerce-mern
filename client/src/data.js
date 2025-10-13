@@ -24,25 +24,25 @@ export const categories = [
     id: 1,
     img: "https://i.pinimg.com/736x/b7/90/d7/b790d77a97a5684c0897713564d8f5c2.jpg", // Shirt Style
     title: "SHIRT STYLE",
-    cat: "shirt",
+    category: "shirt",
   },
   {
     id: 2,
     img: "https://i.pinimg.com/originals/7e/c6/80/7ec680fcd1e966ab66e2861f49c553cb.jpg", // Long wear Love
     title: "Long wear Love",
-    cat: "longwear",
+    category: "longwear",
   },
   {
     id: 3,
     img: "https://hips.hearstapps.com/hmg-prod/images/003-1524600874.jpg?crop=1xw:1xh;center,top&resize=980:*", // Light Jackets
     title: "Light Jackets",
-    cat: "jacket",
+    category: "jacket",
   },
   {
     id: 4,
     img: "https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=800&q=80", // Casual Essentials
     title: "Casual Essentials",
-    cat: "casual",
+    category: "casual",
   },
 ]
 

@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 
-import ProductItem from "./ProductItem"
+import Product from "../pages/Product"
 import { mobile, tablet } from "../responsive"
 import axios from "axios"
+import { popularProducts } from "../data"
 
 const Container = styled.div`
   padding: 10px;
@@ -19,9 +20,9 @@ const Container = styled.div`
     justify-content: center;
   `)}
 `
-
+//displays filter products
 function Products({ category, filters, sort }) {
-  // console.log(category, filters, sort)
+  console.log(category, filters, sort)
   const [products, setProdcuts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
 
@@ -33,7 +34,7 @@ function Products({ category, filters, sort }) {
             ? `http://localhost:4000/api/products?category=${category}`
             : "http://localhost:4000/api/products"
         )
-        // console.log(res)
+        console.log(res)
         setProdcuts(res.data)
       } catch (error) {}
     }
@@ -65,7 +66,7 @@ function Products({ category, filters, sort }) {
 
   return (
     <Container>
-      {cat
+      {category
         ? filteredProducts.map((item) => <Product item={item} key={item.id} />)
         : products
             .slice(0, 8)

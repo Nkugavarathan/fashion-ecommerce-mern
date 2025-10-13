@@ -73,7 +73,7 @@ const Icon = styled.div`
     transform: scale(1.1);
   }
 `
-
+// while hover product  that hover setups
 function ProductItem({ item }) {
   return (
     <Container>

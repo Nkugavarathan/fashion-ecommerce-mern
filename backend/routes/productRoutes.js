@@ -6,6 +6,7 @@ import {
   upadateProduct,
   deleteProduct,
   getProductById,
+  createMultipleProducts,
 } from "../controllers/productControlloer.js"
 
 const router = express.Router()
@@ -15,5 +16,5 @@ router.put("/:id", protect, admin, upadateProduct)
 router.get("/find/:id", getProductById)
 router.get("/", getAllProducts)
 router.delete("/:id", protect, admin, deleteProduct)
-
+router.post("/bulk", createMultipleProducts)
 export default router

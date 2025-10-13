@@ -53,13 +53,14 @@ const FilterText = styled.div`
 
 const Option = styled.option``
 
+// filter,and sort product page
 function ProductList() {
   const { category } = useParams()
 
   const [filters, setFilters] = useState([])
   const [sort, setSort] = useState("newest")
   const handleFilters = (e) => {
-    const value = event.target.value
+    const value = e.target.value
     setFilters({ ...filters, [e.target.name]: value })
   }
 
@@ -102,8 +103,6 @@ function ProductList() {
         </Filter>
       </FilterContainer>
       <Products category={category} filters={filters} sort={sort} />
-      <Newsletter />
-      <Footer />
     </Container>
   )
 }
