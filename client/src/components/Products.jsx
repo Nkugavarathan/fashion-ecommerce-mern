@@ -4,7 +4,9 @@ import styled from "styled-components"
 import Product from "../pages/Product"
 import { mobile, tablet } from "../responsive"
 import axios from "axios"
-import { popularProducts } from "../data"
+
+import ProductItem from "./ProductItem"
+import { popularProducts } from "./../data"
 
 const Container = styled.div`
   padding: 10px;
@@ -66,11 +68,17 @@ function Products({ category, filters, sort }) {
 
   return (
     <Container>
-      {category
-        ? filteredProducts.map((item) => <Product item={item} key={item.id} />)
+      {/* {category
+        ? filteredProducts.map((item) => (
+            <ProductItem item={item} key={item._id} />
+          ))
         : products
             .slice(0, 8)
-            .map((item) => <Product item={item} key={item.id} />)}
+            .map((item) => <ProductItem item={item} key={item._id} />)} */}
+
+      {popularProducts.map((item) => (
+        <ProductItem item={item} key={item.id} />
+      ))}
     </Container>
   )
 }

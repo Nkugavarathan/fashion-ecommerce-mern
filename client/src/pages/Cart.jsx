@@ -206,7 +206,7 @@ function Cart() {
   return (
     <Container>
       <Navbar />
-      <Announcement />
+
       <Wrapper>
         <Title>Cart</Title>
         <Top>

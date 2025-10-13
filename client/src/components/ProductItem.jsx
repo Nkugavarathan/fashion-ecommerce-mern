@@ -31,7 +31,7 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #f5fbfd;
+  background-color: #d1e6ed;
   position: relative;
 
   ${mobile(`
@@ -73,11 +73,11 @@ const Icon = styled.div`
     transform: scale(1.1);
   }
 `
-// while hover product  that hover setups
+// each product
 function ProductItem({ item }) {
   return (
     <Container>
-      <Circle />
+      {/* <Circle /> */}
       <Image src={item.img} />
       <Info>
         <Icon>
