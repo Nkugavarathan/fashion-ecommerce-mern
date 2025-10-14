@@ -53,7 +53,7 @@ function Products({ category, filters, sort }) {
           )
         )
       )
-  }, [category, filters, sort])
+  }, [products, category, filters, sort])
 
   useEffect(() => {
     if (sort === "newest") {

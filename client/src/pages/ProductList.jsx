@@ -52,6 +52,17 @@ const FilterText = styled.div`
 `
 
 const Option = styled.option``
+const Button = styled.button`
+  padding: 10px 15px;
+  border: none;
+  background-color: #222;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  &:hover {
+    background-color: #555;
+  }
+`
 
 // filter,and sort product page
 function ProductList() {
@@ -68,10 +79,19 @@ function ProductList() {
     setFilters({ ...filters, [e.target.name]: value })
   }
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   setFilters({})
+  //   setSort("newest")
+  // }, [])
+
+  const handleClearFilters = () => {
     setFilters({})
     setSort("newest")
-  }, [])
+    // Reset the dropdowns to default
+    document.querySelectorAll("select").forEach((select) => {
+      select.selectedIndex = 0
+    })
+  }
 
   return (
     <Container>
@@ -80,22 +100,27 @@ function ProductList() {
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>
-          <Select name="color" onChange={handleFilters}>
-            <Option disabled>Color</Option>
+          <Select name="color" defaultValue="" onChange={handleFilters}>
+            <Option value="" disabled>
+              Color
+            </Option>
             <Option>white</Option>
             <Option>red</Option>
             <Option>blue</Option>
             <Option>yellow</Option>
             <Option>green</Option>
           </Select>
-          <Select name="size" onChange={handleFilters}>
-            <Option disabled>Size</Option>
+          <Select name="size" defaultValue="" onChange={handleFilters}>
+            <Option value="" disabled>
+              Size
+            </Option>
             <Option>XS</Option>
             <Option>S</Option>
             <Option>M</Option>
             <Option>L</Option>
             <Option>XL</Option>
           </Select>
+          <Button onClick={handleClearFilters}>Clear Filters</Button>
         </Filter>
         <Filter>
           <FilterText>Sort Products:</FilterText>
