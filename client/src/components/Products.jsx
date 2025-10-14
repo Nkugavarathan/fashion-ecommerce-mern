@@ -29,6 +29,7 @@ function Products({ category, filters, sort }) {
   const [products, setProdcuts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
 
+  // fetch products from backend according to category
   useEffect(() => {
     const getProducts = async () => {
       try {
@@ -44,6 +45,7 @@ function Products({ category, filters, sort }) {
     getProducts() // call fn
   }, [category])
 
+  //  fetched data is filter
   useEffect(() => {
     category &&
       setFilteredProducts(

@@ -96,7 +96,7 @@ function ProductList() {
   return (
     <Container>
       <Navbar />
-      <Title>Dresses </Title>
+      <Title>{category} </Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products:</FilterText>

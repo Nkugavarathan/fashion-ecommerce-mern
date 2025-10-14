@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import Navbar from "./../components/Navbar"
 import Newsletter from "./../components/Newsletter"
@@ -8,6 +8,7 @@ import Footer from "./../components/Footer"
 
 import RemoveIcon from "@mui/icons-material/Remove"
 import AddIcon from "@mui/icons-material/Add"
+import { useParams } from "react-router-dom"
 const Container = styled.div``
 const Wrapper = styled.div`
   margin-top: 100px;
@@ -138,6 +139,10 @@ const Button = styled.button`
 // addto cart
 
 function Product() {
+  const { id } = useParams()
+  const [product, setProduct] = useState({})
+
+  useEffect()
   return (
     <Container>
       <Navbar />
