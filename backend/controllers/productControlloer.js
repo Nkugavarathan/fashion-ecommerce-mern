@@ -10,6 +10,8 @@ export const createProduct = async (req, res) => {
     res.status(500).json(error)
   }
 }
+
+//create multiple product at onetime
 export const createMultipleProducts = async (req, res) => {
   try {
     const products = await Product.insertMany(req.body)
@@ -42,48 +44,52 @@ export const upadateProduct = async (req, res) => {
 export const getAllProducts = async (req, res) => {
   const qNew = req.query.new // ?new=true
   const qCategory = req.query.category // ?category=shirt
-  const qSize = req.query.size // ?size=m
-  const qColor = req.query.color // ?color=red
-  const qPriceGte = req.query.priceGte // ?priceGte=100
-  const qPriceLte = req.query.priceLte // ?priceLte=500
+  // const qSize = req.query.size // ?size=m
+  // const qColor = req.query.color // ?color=red
+  // const qPriceGte = req.query.priceGte // ?priceGte=100
+  // const qPriceLte = req.query.priceLte // ?priceLte=500
 
   try {
     let filter = {}
 
     // Category filter
+    if (qNew) {
+      productsQuery = await Product.find().sort({ createdAt: -1 }).limit(5)
+    }
     if (qCategory) {
       filter.categories = { $in: [qCategory] }
     }
 
-    // Size filter
-    if (qSize) {
-      filter.size = qSize
-    }
+    // // Size filter
+    // if (qSize) {
+    //   filter.size = qSize
+    // }
 
-    // Color filter
-    if (qColor) {
-      filter.color = qColor
-    }
+    // // Color filter
+    // if (qColor) {
+    //   filter.color = qColor
+    // }
 
     // Price range filter
-    if (qPriceGte || qPriceLte) {
-      filter.price = {}
-      if (qPriceGte) filter.price.$gte = Number(qPriceGte)
-      if (qPriceLte) filter.price.$lte = Number(qPriceLte)
-    }
+    // if (qPriceGte || qPriceLte) {
+    //   filter.price = {}
+    //   if (qPriceGte) filter.price.$gte = Number(qPriceGte)
+    //   if (qPriceLte) filter.price.$lte = Number(qPriceLte)
+    // }
 
     let productsQuery = Product.find(filter)
 
     // Latest products
-    if (qNew) {
-      productsQuery = productsQuery.sort({ createdAt: -1 }).limit(5)
-    }
 
-    const products = await productsQuery
+    let products = await productsQuery
 
     if (products.length === 0) {
-      return res.status(200).json({ message: "No products found." })
+      // return res.status(200).json({ message: "No products found." })
+      products = Product.find() // find all product when category item doent exist
+    } else {
+      // products = Product.find()
     }
+
     res.status(200).json(products)
   } catch (err) {
     res.status(500).json(err)

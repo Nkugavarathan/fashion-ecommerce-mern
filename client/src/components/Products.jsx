@@ -25,6 +25,7 @@ const Container = styled.div`
 //displays filter products
 function Products({ category, filters, sort }) {
   console.log(category, filters, sort)
+
   const [products, setProdcuts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
 
@@ -40,7 +41,7 @@ function Products({ category, filters, sort }) {
         setProdcuts(res.data)
       } catch (error) {}
     }
-    getProducts()
+    getProducts() // call fn
   }, [category])
 
   useEffect(() => {
@@ -68,17 +69,17 @@ function Products({ category, filters, sort }) {
 
   return (
     <Container>
-      {/* {category
+      {category
         ? filteredProducts.map((item) => (
             <ProductItem item={item} key={item._id} />
           ))
         : products
             .slice(0, 8)
-            .map((item) => <ProductItem item={item} key={item._id} />)} */}
+            .map((item) => <ProductItem item={item} key={item._id} />)}
 
-      {popularProducts.map((item) => (
+      {/* {popularProducts.map((item) => (
         <ProductItem item={item} key={item.id} />
-      ))}
+      ))} */}
     </Container>
   )
 }

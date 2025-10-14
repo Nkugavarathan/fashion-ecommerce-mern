@@ -57,10 +57,14 @@ const Option = styled.option``
 function ProductList() {
   const { category } = useParams()
 
+  //size,color
   const [filters, setFilters] = useState([])
+
+  // newest,asc,desc
   const [sort, setSort] = useState("newest")
   const handleFilters = (e) => {
     const value = e.target.value
+    //spread operator
     setFilters({ ...filters, [e.target.name]: value })
   }
 
