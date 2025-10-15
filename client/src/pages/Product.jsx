@@ -9,6 +9,9 @@ import Footer from "./../components/Footer"
 import RemoveIcon from "@mui/icons-material/Remove"
 import AddIcon from "@mui/icons-material/Add"
 import { useParams } from "react-router-dom"
+// import { publicRequest } from "./../requestMethod"
+import axios from "axios"
+
 const Container = styled.div``
 const Wrapper = styled.div`
   margin-top: 100px;
@@ -141,41 +144,52 @@ const Button = styled.button`
 function Product() {
   const { id } = useParams()
   const [product, setProduct] = useState({})
+  const [quantity, setQuantity] = useState(1)
+  const [color, setColor] = useState(null)
+  const [size, setSize] = useState(null)
+  useEffect(() => {
+    const getProduct = async () => {
+      try {
+        // const res = await publicRequest.get(`products/find/${id}`)
+        const res = await axios.get(
+          `http://localhost:4000/api/products/find/${id}`
+        )
+        // console.log("SIngle product detail", res)
+        setProduct(res.data)
+      } catch (error) {
+        console.log("SIngle product detail error")
+      }
+    }
+    getProduct()
+  })
 
-  useEffect()
+  const decreaseQuantity = () => quantity > 1 && setQuantity(quantity - 1)
+
   return (
     <Container>
       <Navbar />
 
       <Wrapper>
         <ImageContainer>
-          <Image src="https://i.pinimg.com/736x/b7/90/d7/b790d77a97a5684c0897713564d8f5c2.jpg" />
+          <Image src={product.image} />
         </ImageContainer>
         <InfoContainer>
-          <Title>Denim</Title>
-          <Description>
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Debitis
-            libero cupiditate nihil saepe molestias, rerum voluptate eligendi
-            harum numquam beatae sit odit dignissimos tenetur culpa illum alias
-            architecto omnis! Omnis.
-          </Description>
-          <Price>Price Rs 500</Price>
+          <Title>{product.title}</Title>
+          <Description>{product.description}</Description>
+          <Price>Price Rs {product.price}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              <FilterColor color="black" />
-              <FilterColor color="darkblue" />
-              <FilterColor color="gray" />
+              {product.color.map((c) => (
+                <FilterColor color={c} key={c} onClick={() => setColor(c)} />
+              ))}
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
-              <FilterSize>
-                <FilterSizeOption>XS</FilterSizeOption>
-                <FilterSizeOption>S</FilterSizeOption>
-                <FilterSizeOption>M</FilterSizeOption>
-                <FilterSizeOption>L</FilterSizeOption>
-                <FilterSizeOption>XL</FilterSizeOption>
-                <FilterSizeOption>XXL</FilterSizeOption>
+              <FilterSize onChange={(e) => setSize(e.target.value)}>
+                {product.size.map((s) => (
+                  <FilterSizeOption key={s}> {s}</FilterSizeOption>
+                ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
@@ -191,8 +205,9 @@ function Product() {
                   backgroundColor: "#ddd2d2ff",
                   cursor: "pointer",
                 }}
+                onClick={() => setQuantity(quantity + 1)}
               />
-              <Amount>1</Amount>
+              <Amount>{quantity}</Amount>
               <AddIcon
                 style={{
                   height: 20,
@@ -202,6 +217,7 @@ function Product() {
                   backgroundColor: "#ddd2d2ff",
                   cursor: "pointer",
                 }}
+                onClick={decreaseQuantity}
               />
             </AmountContainer>
             <Button>Add To Cart</Button>
