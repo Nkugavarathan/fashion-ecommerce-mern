@@ -6,6 +6,7 @@ import MenuIcon from "@mui/icons-material/Menu"
 import CloseIcon from "@mui/icons-material/Close"
 import Badge from "@mui/material/Badge"
 import { mobile, tablet } from "../responsive"
+import { useSelector } from "react-redux"
 
 const Container = styled.div`
   width: 100%;
@@ -182,6 +183,8 @@ function Navbar({ isHome }) {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+  const quantity = useSelector((state) => state.cart.quantity)
+
   return (
     <Container isHome={isHome}>
       <NavbarContainer scrolled={scrolled}>
@@ -221,7 +224,7 @@ function Navbar({ isHome }) {
           <MenuItem onClick={() => setMenuOpen(false)}>Sign In</MenuItem>
           <MenuItem onClick={() => setMenuOpen(false)}>Register</MenuItem>
           <MenuItem onClick={() => setMenuOpen(false)}>
-            <Badge badgeContent={4} color="primary">
+            <Badge badgeContent={quantity} color="primary">
               <ShoppingCartOutlinedIcon />
             </Badge>
           </MenuItem>

@@ -12,6 +12,8 @@ import { useParams } from "react-router-dom"
 // import { publicRequest } from "./../requestMethod"
 import axios from "axios"
 
+import { useDispatch } from "react-redux"
+import { addProduct } from "../redux/cartRedux"
 const Container = styled.div``
 const Wrapper = styled.div`
   margin-top: 100px;
@@ -168,6 +170,12 @@ function SingleProduct() {
   const decreaseQuantity = () => quantity > 1 && setQuantity(quantity - 1)
   const increaseQuantity = () => setQuantity(quantity + 1)
 
+  const dispatch = useDispatch()
+
+  const addToCart = () => {
+    dispatch(addProduct({ ...product, quantity, color, size }))
+  }
+
   return (
     <Container>
       <Navbar />
@@ -221,7 +229,7 @@ function SingleProduct() {
                 onClick={increaseQuantity}
               />
             </AmountContainer>
-            <Button>Add To Cart</Button>
+            <Button onClick={addToCart}>Add To Cart</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
