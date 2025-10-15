@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
-import Navbar from "./../components/Navbar"
-import Newsletter from "./../components/Newsletter"
+import Navbar from "../components/Navbar"
+import Newsletter from "../components/Newsletter"
 import { mobile, tablet } from "../responsive"
 
-import Footer from "./../components/Footer"
+import Footer from "../components/Footer"
 
 import RemoveIcon from "@mui/icons-material/Remove"
 import AddIcon from "@mui/icons-material/Add"
@@ -139,9 +139,9 @@ const Button = styled.button`
     cursor: pointer;
   }
 `
-// addto cart
+// addto cart fetch single product while click search icon
 
-function Product() {
+function SingleProduct() {
   const { id } = useParams()
   const [product, setProduct] = useState({})
   const [quantity, setQuantity] = useState(1)
@@ -154,21 +154,23 @@ function Product() {
         const res = await axios.get(
           `http://localhost:4000/api/products/find/${id}`
         )
-        // console.log("SIngle product detail", res)
+        console.log("SIngle product detail", res)
         setProduct(res.data)
       } catch (error) {
-        console.log("SIngle product detail error")
+        console.log(error)
       }
     }
     getProduct()
-  })
+  }, [id])
+
+  if (!product._id) return <p>Loading...</p>
 
   const decreaseQuantity = () => quantity > 1 && setQuantity(quantity - 1)
+  const increaseQuantity = () => setQuantity(quantity + 1)
 
   return (
     <Container>
       <Navbar />
-
       <Wrapper>
         <ImageContainer>
           <Image src={product.image} />
@@ -180,20 +182,19 @@ function Product() {
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
-              {product.color.map((c) => (
+              {(product.color ?? []).map((c) => (
                 <FilterColor color={c} key={c} onClick={() => setColor(c)} />
               ))}
             </Filter>
             <Filter>
               <FilterTitle>Size</FilterTitle>
               <FilterSize onChange={(e) => setSize(e.target.value)}>
-                {product.size.map((s) => (
+                {(product.size ?? []).map((s) => (
                   <FilterSizeOption key={s}> {s}</FilterSizeOption>
                 ))}
               </FilterSize>
             </Filter>
           </FilterContainer>
-
           <AddContainer>
             <AmountContainer>
               <RemoveIcon
@@ -205,7 +206,7 @@ function Product() {
                   backgroundColor: "#ddd2d2ff",
                   cursor: "pointer",
                 }}
-                onClick={() => setQuantity(quantity + 1)}
+                onClick={decreaseQuantity}
               />
               <Amount>{quantity}</Amount>
               <AddIcon
@@ -217,18 +218,17 @@ function Product() {
                   backgroundColor: "#ddd2d2ff",
                   cursor: "pointer",
                 }}
-                onClick={decreaseQuantity}
+                onClick={increaseQuantity}
               />
             </AmountContainer>
             <Button>Add To Cart</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-
       <Newsletter />
       <Footer />
     </Container>
   )
 }
 
-export default Product
+export default SingleProduct

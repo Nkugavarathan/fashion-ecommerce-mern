@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 
-import Product from "../pages/Product"
+import Product from "../pages/SingleProduct"
 import { mobile, tablet } from "../responsive"
 import axios from "axios"
 

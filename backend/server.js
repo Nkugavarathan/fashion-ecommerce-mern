@@ -22,6 +22,7 @@ app.use("/api/users", userRoute)
 
 app.use("/api/auth", authRoute)
 app.use("/api/products", productRoutes)
+
 app.use("/api/carts", cartRoutes)
 app
   .use("/api/orders", orderRoutes)
