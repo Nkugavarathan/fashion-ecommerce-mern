@@ -1,4 +1,4 @@
-import { createSlice } from "react-redux"
+import { createSlice } from "@reduxjs/toolkit"
 
 const cartSlice = createSlice({
   name: "cart",
@@ -13,6 +13,15 @@ const cartSlice = createSlice({
       state.products.push(action.payload)
       state.total += action.payload.price * action.payload.quantity
     },
+    // addProduct(state, action) {
+    //   const product = action.payload
+    //   if (product?.price && product?.quantity) {
+    //     state.quantity += 1
+    //     state.products.push(product)
+    //     state.total += product.price * product.quantity
+    //   } else {
+    //     console.warn("Invalid product payload:", product)
+    //   }
   },
 })
 export const { addProduct } = cartSlice.actions

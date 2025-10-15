@@ -7,6 +7,7 @@ import CloseIcon from "@mui/icons-material/Close"
 import Badge from "@mui/material/Badge"
 import { mobile, tablet } from "../responsive"
 import { useSelector } from "react-redux"
+import { Link } from "react-router-dom"
 
 const Container = styled.div`
   width: 100%;
@@ -209,9 +210,11 @@ function Navbar({ isHome }) {
             <MenuItem>Sign In</MenuItem>
             <MenuItem>Register</MenuItem>
             <MenuItem>
-              <Badge badgeContent={4} color="primary">
-                <ShoppingCartOutlinedIcon />
-              </Badge>
+              <Link to="/cart">
+                <Badge badgeContent={quantity} color="primary">
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+              </Link>
             </MenuItem>
           </Right>
         </Wrapper>
@@ -224,9 +227,11 @@ function Navbar({ isHome }) {
           <MenuItem onClick={() => setMenuOpen(false)}>Sign In</MenuItem>
           <MenuItem onClick={() => setMenuOpen(false)}>Register</MenuItem>
           <MenuItem onClick={() => setMenuOpen(false)}>
-            <Badge badgeContent={quantity} color="primary">
-              <ShoppingCartOutlinedIcon />
-            </Badge>
+            <Link to="/cart">
+              <Badge badgeContent={quantity} color="primary">
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+            </Link>
           </MenuItem>
         </MobileMenu>
       </NavbarContainer>
