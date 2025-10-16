@@ -1,8 +1,11 @@
 import express from "express"
 import Stripe from "stripe"
 
-const stripe = Stripe.process.env.STRIPE_KEY
 const router = express.Router()
+// seceret stripe key
+const KEY = process.env.STRIPE_KEY
+const stripe = Stripe(KEY)
+
 router.post("/payment", (req, res) => {
   stripe.charges.create(
     {

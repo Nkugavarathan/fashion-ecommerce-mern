@@ -1,5 +1,5 @@
 // src/pages/Cart.jsx
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
 import Announcement from "../components/Announcement"
@@ -10,6 +10,13 @@ import RemoveIcon from "@mui/icons-material/Remove"
 import AddIcon from "@mui/icons-material/Add"
 
 import { useSelector } from "react-redux"
+import StripeCheckout from "react-stripe-checkout"
+import { useEffect } from "react"
+import { userRequest } from "../requestMethod"
+import { useNavigate } from "react-router-dom"
+
+const KEY = process.env.STRIPE_KEY
+
 const Container = styled.div`
   padding-top: 110px;
 `
@@ -204,8 +211,29 @@ const Button = styled.button`
 `
 
 function Cart() {
+  const navigate = useNavigate()
   const cart = useSelector((state) => state.cart)
 
+  const [stripeToken, setStripeToken] = useState(null)
+  const onToken = (token) => {
+    setStripeToken(token)
+  }
+  console.log(stripeToken)
+
+  useEffect(() => {
+    const makeRequest = async () => {
+      try {
+        const res = await userRequest("/checkout/payment", {
+          tokenId: stripeToken,
+          amount: cart.total * 100,
+        })
+        navigate("/success", { state: { data: res.data } })
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    makeRequest()
+  }, [stripeToken, cart.total])
   return (
     <Container>
       <Navbar />
@@ -257,34 +285,6 @@ function Cart() {
             ))}
 
             <Hr />
-            {/* <Product>
-              <ProductDetails>
-                <ProductImage
-                  src="https://i.pinimg.com/736x/b7/90/d7/b790d77a97a5684c0897713564d8f5c2.jpg"
-                  alt="Shoes"
-                />
-                <Details>
-                  <ProductName>
-                    <b>Product:</b> Shoes
-                  </ProductName>
-                  <ProductId>
-                    <b>ID:</b> 099493434
-                  </ProductId>
-                  <ProductColor color="teal" />
-                  <ProductSize>
-                    <b>Size:</b> 23.3
-                  </ProductSize>
-                </Details>
-              </ProductDetails>
-              <PriceDetail>
-                <ProductAmountContainer>
-                  <AddIcon />
-                  <ProductAmount>2</ProductAmount>
-                  <RemoveIcon />
-                </ProductAmountContainer>
-                <ProductPrice>$30</ProductPrice>
-              </PriceDetail>
-            </Product> */}
           </Info>
 
           <Summary>
@@ -305,7 +305,18 @@ function Cart() {
               <SummaryItemText>Total</SummaryItemText>
               <SummaryItemPrice>${cart.total}</SummaryItemPrice>
             </SummaryItem>
-            <Button>CHECKOUT NOW</Button>
+            <StripeCheckout
+              name="Lama Shop"
+              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              billingAddress
+              shippingAddress
+              description={`Your total is $${cart.total}`}
+              amount={cart.total * 100}
+              token={onToken}
+              stripeKey={KEY}
+            >
+              <Button>CHECKOUT NOW</Button>
+            </StripeCheckout>
           </Summary>
         </Bottom>
       </Wrapper>
