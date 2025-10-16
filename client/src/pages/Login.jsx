@@ -1,6 +1,10 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import { mobile, tablet } from "../responsive"
+import { useDispatch, useSelector } from "react-redux"
+import { login } from "../redux/apiCalls"
+
+import { useNavigate } from "react-router-dom"
 
 const Container = styled.div`
   width: 100vw;
@@ -59,6 +63,11 @@ const Button = styled.button`
   ${mobile(`
     width: 100%;
   `)}
+
+  &:disabled {
+    color: green;
+    cursor: not-allowed;
+  }
 `
 
 const Title = styled.h1`
@@ -80,16 +89,69 @@ const Link = styled.a`
   cursor: pointer;
 `
 
+const BackButton = styled.button`
+  display: inline-block;
+  padding: 8px 14px;
+  margin: 10px auto 18px auto;
+  background-color: transparent;
+  color: teal;
+  border: 2px solid teal;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
+
+  &:hover {
+    background-color: teal;
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.15);
+  }
+
+  ${mobile(`
+    width: 100%;
+    margin: 12px 0;
+  `)}
+`
+
 function Login() {
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const { isFetching, error } = useSelector((state) => state.user)
+
+  const dispatch = useDispatch()
+
+  const handleSubmit = (e) => {
+    e.preventDefault() // fixed typo
+    login(dispatch, { username, password })
+  }
+
+  const navigate = useNavigate()
   return (
     <Container>
       <Wrapper>
         <Title>Login Account</Title>
-        <Form>
-          <Input placeholder="username" />
-          <Input placeholder="password" />
-          <Button>Login</Button>
-          <Link>Do not you remeber password</Link>
+        <BackButton onClick={() => navigate("/")}>Back to Home</BackButton>
+        <Form onSubmit={handleSubmit}>
+          <Input
+            placeholder="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input
+            placeholder="password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button type="submit" disabled={isFetching}>
+            {isFetching ? "Logging in..." : "Login"}
+          </Button>
+          <Link>Do not you remember password</Link>
           <Link>Create a new Account</Link>
         </Form>
       </Wrapper>

@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 
 import { mobile, tablet } from "../responsive"
+import { useNavigate } from "react-router-dom"
 
 const Container = styled.div`
   width: 100vw;
@@ -79,12 +80,42 @@ const Agreement = styled.span`
   font-size: 16px;
   margin: 20px 0;
 `
+const BackButton = styled.button`
+  display: inline-block;
+  padding: 8px 14px;
+  margin: 10px auto 18px auto;
+  background-color: transparent;
+  color: teal;
+  border: 2px solid teal;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-align: center;
 
+  &:hover {
+    background-color: teal;
+    color: #fff;
+  }
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.15);
+  }
+
+  ${mobile(`
+    width: 100%;
+    margin: 12px 0;
+  `)}
+`
 function Register() {
+  const navigate = useNavigate()
   return (
     <Container>
       <Wrapper>
         <Title>Create An Account</Title>
+        <BackButton onClick={() => navigate("/")}>Back to Home</BackButton>
+
         <Form>
           <Input placeholder="firstname" />
           <Input placeholder="lastname" />

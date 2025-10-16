@@ -8,7 +8,7 @@ import Cart from "./pages/Cart"
 import { Routes, Route, Navigate } from "react-router-dom"
 import Success from "./pages/Success"
 function App() {
-  const user = true
+  const user = false
   return (
     <div>
       <Routes>
@@ -20,7 +20,8 @@ function App() {
 
         <Route
           path="/login"
-          element={user ? <Navigate to="/" replace /> : <Login />}
+          // element={user ? <Navigate to="/" replace /> : <Login />}
+          element={<Login />}
         />
         <Route
           path="/register"

@@ -161,13 +161,16 @@ const MobileMenu = styled.div`
   z-index: 1000;
 `
 
-const MenuItem = styled.div`
+const MenuItem = styled(Link)`
   cursor: pointer;
   font-size: 15px;
   font-weight: 500;
   color: #333;
   padding: 10px 0;
   transition: color 0.3s ease;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
 
   &:hover {
     color: teal;
@@ -206,15 +209,13 @@ function Navbar({ isHome }) {
             </WrapperOne>
           </Center>
           <Right>
-            <MenuItem>Home</MenuItem>
-            <MenuItem>Sign In</MenuItem>
-            <MenuItem>Register</MenuItem>
-            <MenuItem>
-              <Link to="/cart">
-                <Badge badgeContent={quantity} color="primary">
-                  <ShoppingCartOutlinedIcon />
-                </Badge>
-              </Link>
+            <MenuItem to="/">Home</MenuItem>
+            <MenuItem to="/login">Login</MenuItem>
+            <MenuItem to="/register">Register</MenuItem>
+            <MenuItem to="/cart">
+              <Badge badgeContent={quantity} color="primary">
+                <ShoppingCartOutlinedIcon />
+              </Badge>
             </MenuItem>
           </Right>
         </Wrapper>
@@ -223,15 +224,19 @@ function Navbar({ isHome }) {
             <Input placeholder="Search" />
             <SearchIcon style={{ fontSize: 20, color: "gray" }} />
           </SearchContainer>
-          <MenuItem onClick={() => setMenuOpen(false)}>Home</MenuItem>
-          <MenuItem onClick={() => setMenuOpen(false)}>Sign In</MenuItem>
-          <MenuItem onClick={() => setMenuOpen(false)}>Register</MenuItem>
-          <MenuItem onClick={() => setMenuOpen(false)}>
-            <Link to="/cart">
-              <Badge badgeContent={quantity} color="primary">
-                <ShoppingCartOutlinedIcon />
-              </Badge>
-            </Link>
+          <MenuItem to="/" onClick={() => setMenuOpen(false)}>
+            Home
+          </MenuItem>
+          <MenuItem to="/login" onClick={() => setMenuOpen(false)}>
+            Sign In
+          </MenuItem>
+          <MenuItem to="/register" onClick={() => setMenuOpen(false)}>
+            Register
+          </MenuItem>
+          <MenuItem to="/cart" onClick={() => setMenuOpen(false)}>
+            <Badge badgeContent={quantity} color="primary">
+              <ShoppingCartOutlinedIcon />
+            </Badge>
           </MenuItem>
         </MobileMenu>
       </NavbarContainer>
