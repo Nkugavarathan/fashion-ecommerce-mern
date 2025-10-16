@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["cart"], // persist cart; add "user" if you want to persist user
+  whitelist: ["cart", "user"],
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

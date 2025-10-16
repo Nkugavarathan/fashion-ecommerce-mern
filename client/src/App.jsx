@@ -7,8 +7,9 @@ import Login from "./pages/Login"
 import Cart from "./pages/Cart"
 import { Routes, Route, Navigate } from "react-router-dom"
 import Success from "./pages/Success"
+import { useSelector } from "react-redux"
 function App() {
-  const user = false
+  const user = useSelector((state) => state.user.currentUser)
   return (
     <div>
       <Routes>
@@ -20,8 +21,7 @@ function App() {
 
         <Route
           path="/login"
-          // element={user ? <Navigate to="/" replace /> : <Login />}
-          element={<Login />}
+          element={user ? <Navigate to="/" replace /> : <Login />}
         />
         <Route
           path="/register"
