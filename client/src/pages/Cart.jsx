@@ -226,6 +226,7 @@ function Cart() {
               <Product>
                 <ProductDetails>
                   <ProductImage
+                    //product.image
                     src="https://i.pinimg.com/736x/b7/90/d7/b790d77a97a5684c0897713564d8f5c2.jpg"
                     alt="Shoes"
                   />
