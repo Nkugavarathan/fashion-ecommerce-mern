@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useLocation, useNavigate } from "react-router-dom"
-import { userRequest } from "../requestMethods"
+import { userRequest } from "../requestMethod.js"
 
 const Success = () => {
   const location = useLocation()

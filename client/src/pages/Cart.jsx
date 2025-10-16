@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar"
 import Announcement from "../components/Announcement"
 import Footer from "../components/Footer"
 import { mobile, tablet } from "../responsive"
-
+import axios from "axios"
 import RemoveIcon from "@mui/icons-material/Remove"
 import AddIcon from "@mui/icons-material/Add"
 
@@ -15,8 +15,8 @@ import { useEffect } from "react"
 import { userRequest } from "../requestMethod"
 import { useNavigate } from "react-router-dom"
 
-const KEY = process.env.STRIPE_KEY
-
+const KEY = import.meta.env.VITE_STRIPE_KEY
+console.log("key" + KEY)
 const Container = styled.div`
   padding-top: 110px;
 `
@@ -212,21 +212,25 @@ const Button = styled.button`
 
 function Cart() {
   const navigate = useNavigate()
+
   const cart = useSelector((state) => state.cart)
 
   const [stripeToken, setStripeToken] = useState(null)
   const onToken = (token) => {
     setStripeToken(token)
   }
-  console.log(stripeToken)
+  console.log("token" + stripeToken)
 
   useEffect(() => {
     const makeRequest = async () => {
       try {
-        const res = await userRequest("/checkout/payment", {
-          tokenId: stripeToken,
-          amount: cart.total * 100,
-        })
+        const res = await axios.post(
+          "http://localhost:4000/api/checkout/payment",
+          {
+            tokenId: stripeToken.id,
+            amount: cart.total * 100,
+          }
+        )
         navigate("/success", { state: { data: res.data } })
       } catch (error) {
         console.log(error)
@@ -251,7 +255,7 @@ function Cart() {
         <Bottom>
           <Info>
             {cart.products.map((product) => (
-              <Product>
+              <Product key={product._id}>
                 <ProductDetails>
                   <ProductImage
                     //product.image
@@ -306,8 +310,7 @@ function Cart() {
               <SummaryItemPrice>${cart.total}</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
-              name="Lama Shop"
-              image="https://avatars.githubusercontent.com/u/1486366?v=4"
+              name="Vara Shop"
               billingAddress
               shippingAddress
               description={`Your total is $${cart.total}`}

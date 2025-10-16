@@ -6,6 +6,7 @@ import Register from "./pages/Register"
 import Login from "./pages/Login"
 import Cart from "./pages/Cart"
 import { Routes, Route, Navigate } from "react-router-dom"
+import Success from "./pages/Success"
 function App() {
   const user = true
   return (
@@ -25,6 +26,7 @@ function App() {
           path="/register"
           element={user ? <Navigate to="/" replace /> : <Register />}
         />
+        <Route path="/success" element={<Success />} />
       </Routes>
     </div>
   )
