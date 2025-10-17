@@ -6,8 +6,9 @@ import { mobile, tablet } from "../responsive"
 import SearchIcon from "@mui/icons-material/Search"
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"
 import { Link } from "react-router-dom"
-// import { useDispatch } from "react-redux"
-// import { addProduct } from "../redux/cartRedux"
+// add imports
+import { useDispatch } from "react-redux"
+import { addProduct } from "../redux/cartRedux"
 const Info = styled.div`
   opacity: 0;
   width: 100%;
@@ -77,17 +78,18 @@ const Icon = styled.div`
 `
 // each product
 function ProductItem({ item }) {
-  // const dispatch = useDispatch()
-  // console.log("item", item)
+  const dispatch = useDispatch()
+  // when user clicks cart icon, add product with quantity 1 (or existing quantity)
+  const handleAddToCart = () => {
+    dispatch(addProduct({ ...item, quantity: 1 }))
+  }
   return (
     <Container>
       {/* <Circle /> */}
       <Image src={item.img} />
       <Info>
-        <Icon>
-          <ShoppingCartOutlinedIcon
-          // onClick={() => dispatch(addProduct({ ...item }))}
-          />
+        <Icon onClick={handleAddToCart}>
+          <ShoppingCartOutlinedIcon />
         </Icon>
         <Icon>
           <Link to={`/product/${item._id}`} style={{ color: "black" }}>

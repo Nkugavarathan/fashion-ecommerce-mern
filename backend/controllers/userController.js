@@ -10,6 +10,7 @@ export const registerUser = async (req, res) => {
     const isAdmin =
       typeof req.body.isAdmin === "boolean" ? req.body.isAdmin : false
 
+    //create new user
     const newUser = new User({
       username: req.body.username,
       email: req.body.email,
@@ -17,6 +18,7 @@ export const registerUser = async (req, res) => {
       isAdmin: isAdmin,
     })
 
+    //saved user
     const savedUser = await newUser.save()
 
     // Generate token
