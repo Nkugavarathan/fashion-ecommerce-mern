@@ -1,5 +1,5 @@
 import React from "react"
-import { Routes, Route } from "react-router-dom"
+import { Routes, Route, useLocation } from "react-router-dom"
 import Topbar from "./components/topbar/Topbar"
 import Sidebar from "./components/sidebar/Sidebar"
 import "./App.css"
@@ -11,12 +11,16 @@ import Product from "./pages/product/Product"
 import ProductList from "./pages/productlist/ProductList"
 import NewProduct from "./pages/newproduct/NewProduct"
 import Login from "./pages/Login"
+
 function App() {
+  const location = useLocation()
+  const isLoginPage = location.pathname === "/login"
+
   return (
     <>
       <Topbar />
       <div className="container">
-        <Sidebar />
+        {!isLoginPage && <Sidebar />}
 
         <Routes>
           <Route path="/" element={<Home />} />
