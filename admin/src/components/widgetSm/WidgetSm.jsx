@@ -7,8 +7,12 @@ export default function WidgetSm() {
   const [users, setUsers] = useState([])
   useEffect(() => {
     const getUsers = async () => {
-      const res = await userRequest.get("/users/?new=true")
-      setUsers(res.data)
+      try {
+        const res = await userRequest.get("/users/?new=true")
+        setUsers(res.data)
+      } catch (error) {
+        console.log(error)
+      }
     }
     getUsers()
   }, [])
