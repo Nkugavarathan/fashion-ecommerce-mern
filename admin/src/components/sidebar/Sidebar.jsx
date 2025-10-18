@@ -22,7 +22,7 @@ function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Dashboard</h3>
           <ul className="sidebarList">
-            <Link to="/">
+            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
               <li className="sidebarListItem ">
                 <LineStyle className="sidebarIcon" />
                 Home
@@ -41,13 +41,19 @@ function Sidebar() {
         <div className="sidebarMenu">
           <h3 className="sidebarTitle">Quick Menu</h3>
           <ul className="sidebarList">
-            <Link to="/users">
+            <Link
+              to="/users"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <li className="sidebarListItem">
                 <PermIdentity className="sidebarIcon" />
                 Users
               </li>
             </Link>
-            <Link to="/products">
+            <Link
+              to="/products"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
               <li className="sidebarListItem">
                 <Storefront className="sidebarIcon" />
                 Products

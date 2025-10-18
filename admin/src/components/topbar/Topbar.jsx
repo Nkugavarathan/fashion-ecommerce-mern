@@ -1,41 +1,8 @@
-// import React from "react"
-// import "./topbar.css"
-// import { NotificationsNone, Language, Settings } from "@mui/icons-material"
-
-// export default function Topbar() {
-//   return (
-//     <div className="topbar">
-//       <div className="topbarWrapper">
-//         <div className="topLeft">
-//           <span className="logo">Admin</span>
-//         </div>
-//         <div className="topRight">
-//           <div className="topbarIconContainer">
-//             <NotificationsNone />
-//             <span className="topIconBadge">2</span>
-//           </div>
-//           <div className="topbarIconContainer">
-//             <Language />
-//             <span className="topIconBadge">2</span>
-//           </div>
-//           <div className="topbarIconContainer">
-//             <Settings />
-//           </div>
-//           <img
-//             src="https://tse4.mm.bing.net/th/id/OIP.Kk4i-k-7bOfsgPv0SJtj5AHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
-//             alt=""
-//             className="topAvatar"
-//           />
-//         </div>
-//       </div>
-//     </div>
-//   )
-// }
-
 import React, { useState } from "react"
 import { NotificationsNone, Language, Settings } from "@mui/icons-material"
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline"
-
+import "./topbar.css"
+import { Link } from "react-router-dom"
 export default function Topbar() {
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -43,10 +10,11 @@ export default function Topbar() {
     <div className="w-full bg-white sticky top-0 z-[999] shadow-md">
       <div className="h-[50px] px-4 flex items-center justify-between">
         {/* Left: Logo */}
-        <span className="font-bold text-[24px] sm:text-[28px] md:text-[30px] text-blue-900 cursor-pointer">
-          Admin
-        </span>
-
+        <Link to="/">
+          <span className="font-bold text-[24px] sm:text-[28px] md:text-[30px] text-blue-900 cursor-pointer">
+            Admin Dashboard
+          </span>
+        </Link>
         {/* Right section for desktop */}
         <div className="hidden sm:flex items-center gap-4">
           <div className="relative cursor-pointer text-gray-600">
@@ -73,7 +41,6 @@ export default function Topbar() {
             className="w-10 h-10 rounded-full cursor-pointer"
           />
         </div>
-
         {/* Hamburger for mobile */}
         <div className="sm:hidden flex items-center">
           <button onClick={() => setMenuOpen(!menuOpen)}>
