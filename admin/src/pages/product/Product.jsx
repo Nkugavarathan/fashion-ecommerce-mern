@@ -1,162 +1,169 @@
-import { Link } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import { Publish } from "@mui/icons-material"
-import Chart from "../../components/chart/Chart"
-import { productData } from "../../dummyData"
-import { useParams } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { updateProduct } from "../../redux/apiCalls"
+import { useState } from "react"
+
 export default function Product() {
   const { productId } = useParams()
+  const dispatch = useDispatch()
+
+  // Get product from Redux store
   const product = useSelector((state) =>
     state.product.products.find((item) => item._id === productId)
   )
-  console.log(product)
 
-  const handleUpdate = (e) => {
+  // Local state for form inputs
+  const [title, setTitle] = useState(product?.title || "")
+  const [price, setPrice] = useState(product?.price || "")
+  const [inStock, setInStock] = useState(product?.inStock ? "yes" : "no")
+  const [image, setImage] = useState(product?.image || null)
+  const [file, setFile] = useState(null)
+
+  // const handleUpdate = (e) => {
+  //   e.preventDefault()
+
+  //   // Create FormData if image file selected
+  //   let updatedProduct = {
+  //     ...product,
+  //     title,
+  //     price,
+  //     inStock: inStock === "yes",
+  //   }
+
+  //   if (file) {
+  //     // You can handle file upload in your backend
+  //     // For now, preview image URL used for testing
+  //     updatedProduct.image = URL.createObjectURL(file)
+  //   }
+
+  //   updateProduct(productId, updatedProduct, dispatch)
+  //   alert("✅ Product updated successfully!")
+  // }
+  const handleUpdate = async (e) => {
     e.preventDefault()
-    const updatedProduct = {
-      ...product,
-      title: e.target.title.value,
-      inStock: e.target.inStock.value === "yes",
+
+    const formData = new FormData()
+    formData.append("title", title)
+    formData.append("price", price)
+    formData.append("inStock", inStock === "yes")
+    if (file) {
+      formData.append("image", file)
     }
-    updateProduct(productId, updatedProduct, dispatch)
+
+    updateProduct(productId, formData, dispatch)
+    alert("✅ Product updated successfully!")
   }
+
   return (
     <div className="flex-[4] p-6">
-      {/* Title Section */}
+      {/* Header */}
       <div className="flex items-center justify-between mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Product</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Edit Product</h1>
         <Link to="/newproduct">
-          <button className="bg-teal-600 hover:bg-teal-700 text-white text-base px-4 py-2 rounded-md">
-            Create
+          <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md">
+            Create New
           </button>
         </Link>
       </div>
 
-      {/* Top Section */}
+      {/* Product Info */}
       <div className="flex flex-col lg:flex-row gap-6">
-        {/* Left - Chart */}
-        <div className="flex-1 bg-white p-4 rounded-lg shadow-md">
-          <Chart data={productData} dataKey="Sales" title="Sales Performance" />
-        </div>
-
-        {/* Right - Product Info */}
         <div className="flex-1 bg-white p-6 rounded-lg shadow-md">
-          {/* <div className="flex items-center mb-4">
-            <img
-              src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-              alt=""
-              className="w-12 h-12 rounded-full object-cover mr-4"
-            />
-            <span className="text-lg font-semibold">Apple Airpods</span>
-          </div> */}
-
-          {/* <div className="space-y-2">
-            <div className="flex justify-between w-40 text-gray-700">
-              <span className="font-medium">ID:</span>
-              <span className="font-light">123</span>
-            </div>
-            <div className="flex justify-between w-40 text-gray-700">
-              <span className="font-medium">Sales:</span>
-              <span className="font-light">5123</span>
-            </div>
-            <div className="flex justify-between w-40 text-gray-700">
-              <span className="font-medium">Active:</span>
-              <span className="font-light">Yes</span>
-            </div>
-            <div className="flex justify-between w-40 text-gray-700">
-              <span className="font-medium">In Stock:</span>
-              <span className="font-light">No</span>
-            </div>
-          </div> */}
-
           <div className="flex items-center mb-4">
             <img
-              src={product.image}
-              alt={product.title}
-              className="w-12 h-12 rounded-full object-cover mr-4"
+              src={image || "https://via.placeholder.com/150"}
+              alt={title}
+              className="w-20 h-20 rounded-lg object-cover mr-4"
             />
-            <span className="text-lg font-semibold">{product.title}</span>
+            <div>
+              <h2 className="text-xl font-semibold">{title}</h2>
+              <p className="text-gray-500">ID: {product?._id}</p>
+            </div>
           </div>
 
-          <div className="space-y-2">
-            <div className="flex justify-between w-40 text-gray-700">
-              <span className="font-medium">ID:</span>
-              <span className="font-light">{product._id}</span>
-            </div>
-            <div className="flex justify-between w-40 text-gray-700">
-              <span className="font-medium">Price:</span>
-              <span className="font-light">{product.price}</span>
-            </div>
-            <div className="flex justify-between w-40 text-gray-700">
-              <span className="font-medium">In Stock:</span>
-              <span className="font-light">
-                {product.inStock ? "Yes" : "No"}
-              </span>
-            </div>
+          <div className="text-gray-700 space-y-1">
+            <p>
+              <span className="font-semibold">Price:</span> {price}
+            </p>
+            <p>
+              <span className="font-semibold">In Stock:</span>{" "}
+              {inStock === "yes" ? "Yes" : "No"}
+            </p>
           </div>
         </div>
-      </div>
 
-      {/* Bottom Section */}
-      <div className="bg-white p-6 rounded-lg shadow-md mt-6">
-        <form className="flex flex-col lg:flex-row justify-between gap-6">
-          {/* Left Form */}
-          <div className="flex flex-col flex-1">
-            <label className="text-gray-600 font-semibold mb-2">
-              Product Name
-            </label>
-            <input
-              type="text"
-              defaultValue={product.title}
-              className="border-b border-gray-300 outline-none mb-4 p-2 focus:border-blue-500"
-            />
-
-            <label className="text-gray-600 font-semibold mb-2">In Stock</label>
-            <select
-              name="inStock"
-              id="inStock"
-              defaultValue={product.inStock ? "yes" : "no"}
-              className="border border-gray-300 rounded-md p-2 mb-4 focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-
-            <label className="text-gray-600 font-semibold mb-2">Active</label>
-            <select
-              name="active"
-              id="active"
-              className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="yes">Yes</option>
-              <option value="no">No</option>
-            </select>
-          </div>
-
-          {/* Right Form */}
-          <div className="flex flex-col flex-1 justify-around">
-            <div className="flex items-center mb-4">
-              <img
-                src="https://images.pexels.com/photos/7156886/pexels-photo-7156886.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500"
-                alt=""
-                className="w-24 h-24 rounded-lg object-cover mr-4"
+        {/* Update Form */}
+        <div className="flex-1 bg-white p-6 rounded-lg shadow-md">
+          <form
+            onSubmit={handleUpdate}
+            className="flex flex-col gap-4 text-gray-700"
+          >
+            <div>
+              <label className="font-semibold">Product Name</label>
+              <input
+                type="text"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full border border-gray-300 rounded-md p-2 mt-1 focus:ring-2 focus:ring-blue-500"
+                required
               />
-              <label htmlFor="file" className="cursor-pointer text-blue-600">
-                <Publish />
-              </label>
-              <input type="file" id="file" className="hidden" />
+            </div>
+
+            <div>
+              <label className="font-semibold">Price (LKR)</label>
+              <input
+                type="number"
+                value={price}
+                onChange={(e) => setPrice(e.target.value)}
+                className="w-full border border-gray-300 rounded-md p-2 mt-1 focus:ring-2 focus:ring-blue-500"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="font-semibold">In Stock</label>
+              <select
+                value={inStock}
+                onChange={(e) => setInStock(e.target.value)}
+                className="w-full border border-gray-300 rounded-md p-2 mt-1 focus:ring-2 focus:ring-blue-500"
+              >
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+            </div>
+
+            <div>
+              <label className="font-semibold">Product Image</label>
+              <div className="flex items-center gap-3 mt-1">
+                <img
+                  src={file ? URL.createObjectURL(file) : image}
+                  alt="Preview"
+                  className="w-16 h-16 object-cover rounded-md"
+                />
+                <label
+                  htmlFor="file"
+                  className="cursor-pointer text-blue-600 flex items-center gap-1"
+                >
+                  <Publish /> Upload
+                </label>
+                <input
+                  type="file"
+                  id="file"
+                  className="hidden"
+                  onChange={(e) => setFile(e.target.files[0])}
+                />
+              </div>
             </div>
 
             <button
               type="submit"
-              className="bg-blue-800 hover:bg-blue-900 text-white font-semibold py-2 px-6 rounded-md transition-all duration-200"
-              onClick={handleUpdate}
+              className="bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-6 rounded-md mt-4"
             >
               Update
             </button>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   )

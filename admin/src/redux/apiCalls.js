@@ -50,15 +50,28 @@ export const deleteProduct = async (id, dispatch) => {
   }
 }
 
-export const updateProduct = async (id, product, dispatch) => {
+// export const updateProduct = async (id, product, dispatch) => {
+//   dispatch(updateProductStart())
+//   try {
+//     // update
+//     dispatch(updateProductSuccess({ id, product }))
+//   } catch (err) {
+//     dispatch(updateProductFailure())
+//   }
+// }
+export const updateProduct = async (id, formData, dispatch) => {
   dispatch(updateProductStart())
   try {
-    // update
-    dispatch(updateProductSuccess({ id, product }))
+    const res = await userRequest.put(`/products/${id}`, formData, {
+      headers: { "Content-Type": "multipart/form-data" },
+    })
+    dispatch(updateProductSuccess({ id, product: res.data }))
   } catch (err) {
+    console.log(err)
     dispatch(updateProductFailure())
   }
 }
+
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart())
   try {
