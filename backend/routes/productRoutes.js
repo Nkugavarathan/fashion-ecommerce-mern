@@ -14,7 +14,7 @@ const router = express.Router()
 router.post("/", protect, admin, createProduct)
 router.put("/:id", protect, admin, upadateProduct)
 router.get("/find/:id", getProductById)
-router.get("/", admin, protect, getAllProducts)
+router.get("/", getAllProducts)
 router.delete("/:id", protect, admin, deleteProduct)
 
 router.post("/bulk", createMultipleProducts)

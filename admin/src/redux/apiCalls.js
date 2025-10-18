@@ -15,6 +15,8 @@ import {
   addProductStart,
   addProductSuccess,
 } from "./productRedux"
+
+//login
 export const login = async (dispatch, user) => {
   console.log("Login started...")
   dispatch(loginStart(user))
