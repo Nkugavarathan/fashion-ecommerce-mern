@@ -16,5 +16,5 @@ router.get("/income", monthlyIncome)
 router.delete("/:id", protect, admin)
 
 //get all ordeer
-router.get("/", protect, admin, getAll)
+router.get("/", getAll)
 export default router
