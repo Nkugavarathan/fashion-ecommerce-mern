@@ -14,7 +14,7 @@ const router = express.Router()
 router.get("/stats", getUserStats)
 
 // get all users
-router.get("/", protect, admin, getAllUser)
+router.get("/", getAllUser)
 
 router.get("/find/:id", getUserById)
 

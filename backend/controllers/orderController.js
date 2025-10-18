@@ -1,5 +1,5 @@
 import Order from "../models/orderModel.js"
-
+import User from "../models/userModel.js"
 //create order
 export const createOrder = async (req, res) => {
   const newOrder = new Order(req.body)
@@ -31,10 +31,32 @@ export const upadateOrder = async (req, res) => {
 }
 
 // get all
+// export const getAll = async (req, res) => {
+//   try {
+//     const orders = await Order.find()
+//     res.status(200).json(orders)
+//   } catch (error) {
+//     res.status(500).json(error)
+//   }
+// }
+
 export const getAll = async (req, res) => {
   try {
-    const orders = await Order.find()
-    res.status(200).json(orders)
+    const orders = await Order.find().sort({ createdAt: -1 }) // latest first
+
+    // attach user info
+    const ordersWithUser = await Promise.all(
+      orders.map(async (order) => {
+        const user = await User.findById(order.userId)
+        return {
+          ...order._doc,
+          username: user?.username || "Unknown",
+          image: user?.image || "https://via.placeholder.com/40",
+        }
+      })
+    )
+
+    res.status(200).json(ordersWithUser)
   } catch (error) {
     res.status(500).json(error)
   }
