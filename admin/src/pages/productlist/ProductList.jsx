@@ -1,15 +1,21 @@
 import "./productList.css"
 import { DataGrid } from "@mui/x-data-grid"
 import { DeleteOutline } from "@mui/icons-material"
-import { productRows } from "../../dummyData"
+// import { productRows } from "../../dummyData"
 import { Link } from "react-router-dom"
-import { useState } from "react"
-
+import { useState, useEffect } from "react"
+import { deleteProduct, getProducts } from "../../redux/apiCalls"
+import { useDispatch, useSelector } from "react-redux"
 export default function ProductList() {
-  const [data, setData] = useState(productRows)
+  const dispatch = useDispatch()
+  const products = useSelector((state) => state.product.products)
+
+  useEffect(() => {
+    getProducts(dispatch)
+  }, [dispatch])
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id))
+    deleteProduct(id, dispatch)
   }
 
   const columns = [
@@ -61,7 +67,7 @@ export default function ProductList() {
   return (
     <div className="productList">
       <DataGrid
-        rows={data}
+        rows={products}
         disableSelectionOnClick
         columns={columns}
         pageSize={8}

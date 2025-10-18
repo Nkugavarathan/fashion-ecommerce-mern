@@ -10,12 +10,13 @@ import {
   REGISTER,
 } from "redux-persist"
 import storage from "redux-persist/lib/storage"
-
+import productReducer from "./productRedux"
 import userReducer from "./userRedux"
 
 // combine reducers so persist can target root slices
 const rootReducer = combineReducers({
   user: userReducer,
+  product: productReducer,
 })
 
 // persist configuration — adjust whitelist to persist only needed slices
