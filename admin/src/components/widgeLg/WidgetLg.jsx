@@ -16,7 +16,7 @@ export default function WidgetLg() {
     }
     getOrders()
   }, [])
-  console.log(orders)
+  // console.log(orders)
 
   const Button = ({ type }) => {
     const capitalizedType =
