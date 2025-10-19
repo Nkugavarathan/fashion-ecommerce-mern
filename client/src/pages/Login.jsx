@@ -1,161 +1,73 @@
 import React, { useState } from "react"
-import styled from "styled-components"
-import { mobile, tablet } from "../responsive"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "../redux/apiCalls"
-
 import { useNavigate } from "react-router-dom"
-
-const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
-  background-color: #ec79c0ff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  ${mobile(`
-    height: auto;
-    padding: 20px 0;
-  `)}
-`
-
-const Wrapper = styled.div`
-  padding: 20px;
-  width: 20%;
-  background-color: #f5f3f3ff;
-
-  ${tablet(`
-    width: 40%;
-  `)}
-
-  ${mobile(`
-    width: 80%;
-  `)}
-`
-
-const Input = styled.input`
-  flex: 1;
-  min-width: 40%;
-  margin: 20px 10px 0 0;
-  padding: 10px;
-
-  ${mobile(`
-    margin: 10px 0;
-  `)}
-`
-
-const Button = styled.button`
-  width: 40%;
-  font-weight: 100;
-  border: 2px solid teal;
-  padding: 10px;
-  background-color: white;
-  transition: all 0.2s linear;
-  margin: 20px auto 0 auto;
-
-  &:hover {
-    background-color: teal;
-    color: white;
-    cursor: pointer;
-  }
-
-  ${mobile(`
-    width: 100%;
-  `)}
-
-  &:disabled {
-    color: green;
-    cursor: not-allowed;
-  }
-`
-
-const Title = styled.h1`
-  font-weight: 300;
-  text-align: center;
-`
-const Form = styled.form`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-`
-
-const Link = styled.a`
-  display: block;
-  margin: 10px auto 5px auto;
-  font-size: 14px;
-  color: teal;
-  text-decoration: underline;
-  cursor: pointer;
-`
-
-const BackButton = styled.button`
-  display: inline-block;
-  padding: 8px 14px;
-  margin: 10px auto 18px auto;
-  background-color: transparent;
-  color: teal;
-  border: 2px solid teal;
-  border-radius: 6px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.15s ease;
-  text-align: center;
-
-  &:hover {
-    background-color: teal;
-    color: #fff;
-  }
-
-  &:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.15);
-  }
-
-  ${mobile(`
-    width: 100%;
-    margin: 12px 0;
-  `)}
-`
 
 function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
-  const { isFetching, error } = useSelector((state) => state.user)
-
+  const { isFetching } = useSelector((state) => state.user)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const handleSubmit = (e) => {
-    e.preventDefault() // fixed typo
+    e.preventDefault()
     login(dispatch, { username, password })
   }
 
-  const navigate = useNavigate()
   return (
-    <Container>
-      <Wrapper>
-        <Title>Login Account</Title>
-        <BackButton onClick={() => navigate("/")}>Back to Home</BackButton>
-        <Form onSubmit={handleSubmit}>
-          <Input
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      {/* Card */}
+      <div className="bg-white shadow-lg rounded-xl w-full max-w-sm p-8">
+        <h2 className="text-2xl font-semibold text-center mb-6">Admin Login</h2>
+
+        <button
+          onClick={() => navigate("/")}
+          className="border-2 border-teal-600 text-teal-600 px-4 py-2 rounded-md font-medium mb-6 w-full hover:bg-teal-600 hover:text-white transition-all"
+        >
+          Back to Home
+        </button>
+
+        <form onSubmit={handleSubmit} className="flex flex-col">
+          <label className="text-sm font-medium text-gray-700 mb-1">
+            Username
+          </label>
+          <input
+            type="text"
             placeholder="username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            className="border border-gray-300 rounded-md px-3 py-2 mb-4 focus:outline-none focus:ring-2 focus:ring-teal-400"
           />
-          <Input
-            placeholder="password"
+
+          <label className="text-sm font-medium text-gray-700 mb-1">
+            Password
+          </label>
+          <input
             type="password"
+            placeholder="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="border border-gray-300 rounded-md px-3 py-2 mb-6 focus:outline-none focus:ring-2 focus:ring-teal-400"
           />
-          <Button type="submit" disabled={isFetching}>
+
+          <button
+            type="submit"
+            disabled={isFetching}
+            className="w-full bg-teal-600 text-white py-2 rounded-md font-medium hover:bg-teal-700 transition-all disabled:opacity-50"
+          >
             {isFetching ? "Logging in..." : "Login"}
-          </Button>
-          <Link>Do not you remember password</Link>
-          <Link>Create a new Account</Link>
-        </Form>
-      </Wrapper>
-    </Container>
+          </button>
+
+          <a className="text-sm text-teal-600 mt-4 underline cursor-pointer text-center">
+            Forgot your password?
+          </a>
+          <a className="text-sm text-teal-600 mt-2 underline cursor-pointer text-center">
+            Create a new account
+          </a>
+        </form>
+      </div>
+    </div>
   )
 }
 
