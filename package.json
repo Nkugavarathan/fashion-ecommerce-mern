@@ -1,6 +1,24 @@
 {
-  "dependencies": {
-    "@tailwindcss/vite": "^4.1.14",
-    "tailwindcss": "^4.1.14"
+  "name": "ecommerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+ "scripts": {
+  "start:all": "concurrently -n \"CLIENT,ADMIN,SERVER\" -c \"blue,magenta,green\" \"npm run dev --prefix client\" \"npm run dev --prefix admin\" \"npm start --prefix server\""
+}
+,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nkugavarathan/E-Commerce-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nkugavarathan/E-Commerce-website/issues"
+  },
+  "homepage": "https://github.com/Nkugavarathan/E-Commerce-website#readme",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
 }

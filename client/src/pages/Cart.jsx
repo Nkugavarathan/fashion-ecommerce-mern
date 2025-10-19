@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
-import Announcement from "../components/Announcement"
+
 import Footer from "../components/Footer"
 import { mobile, tablet } from "../responsive"
 import axios from "axios"

@@ -9,11 +9,12 @@ import { mobile, tablet } from "../responsive"
 import { useSelector } from "react-redux"
 import { Link } from "react-router-dom"
 
+//  top: ${(props) => (props.isHome ? "40px" : 0)};
+
 const Container = styled.div`
   width: 100%;
   position: fixed;
-  top: ${(props) => (props.isHome ? "40px" : 0)};
-
+  top: 0;
   left: 0;
   z-index: 1100;
 `

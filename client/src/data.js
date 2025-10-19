@@ -1,19 +1,19 @@
 export const sliderItems = [
   {
     id: 1,
-    img: "./assets/images/slider1.jpg", // beach summer
-    title: "SUMMER SALE",
-    desc: "Elevate your summer wardrobe with exclusive offers crafted for trendsetters.",
+    image: "../public/images/summer.jpg",
+    title: "SUMMER BREEZE",
+    desc: "Light, airy, and effortlessly chic—our summer dresses are made for sunlit strolls and spontaneous getaways.",
   },
   {
     id: 2,
-    img: "./assets/images/slider2.jpg",
-    title: "AUTUMN COLLECTION",
-    desc: "Discover cozy layers and timeless styles for your autumn days.",
+    image: "../public/images/style.jpg",
+    title: "SEASON OF STYLE",
+    desc: "Layer up with confidence. Discover dresses that blend comfort and charm for every autumn moment.",
   },
   {
     id: 3,
-    img: "./assets/images/slider3.jpg", // snowy mountains
+    image: "../public/images/slider3.png",
     title: "WINTER ESSENTIALS",
     desc: "Stay warm and stylish with our premium winter collection.",
   },
@@ -22,19 +22,19 @@ export const sliderItems = [
 export const categories = [
   {
     id: 1,
-    img: "https://i.pinimg.com/736x/b7/90/d7/b790d77a97a5684c0897713564d8f5c2.jpg", // Shirt Style
+    img: "../public/images/shirt.jpg", // Shirt Style
     title: "SHIRT STYLE",
     category: "shirt",
   },
   {
     id: 2,
-    img: "https://i.pinimg.com/originals/7e/c6/80/7ec680fcd1e966ab66e2861f49c553cb.jpg", // Long wear Love
+    img: "../public/images/summer.jpg", // Long wear Love
     title: "Long wear Love",
     category: "longwear",
   },
   {
     id: 3,
-    img: "https://hips.hearstapps.com/hmg-prod/images/003-1524600874.jpg?crop=1xw:1xh;center,top&resize=980:*", // Light Jackets
+    img: "../public/images/jacket.jpg", // Light Jackets
     title: "Light Jackets",
     category: "jacket",
   },
