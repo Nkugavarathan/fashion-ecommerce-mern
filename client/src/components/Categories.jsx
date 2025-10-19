@@ -2,6 +2,8 @@ import React from "react"
 import { mobile, tablet } from "../responsive"
 import { categories } from "../data"
 import CategoryItem from "./CategoryItem"
+import MenCategory from "./MenCategory"
+import WomenCategory from "./WomenCategory"
 import styled from "styled-components"
 
 const Container = styled.div`
@@ -27,7 +29,16 @@ function Categories() {
       <h2 style={{ textAlign: "center", color: "teal", fontWeight: "bold" }}>
         Our Categories
       </h2>
-      <Container>
+      <Container className="gap-6">
+        {/* Tailwind-styled special category cards */}
+        <div className="w-full md:w-[480px] lg:w-[350px] p-2">
+          <MenCategory />
+        </div>
+        <div className="w-full md:w-[480px] lg:w-[350px] p-2">
+          <WomenCategory />
+        </div>
+
+        {/* Existing category items from data */}
         {categories.map((item) => (
           <CategoryItem item={item} key={item.id} />
         ))}

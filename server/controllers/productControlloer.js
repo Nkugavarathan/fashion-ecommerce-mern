@@ -1,13 +1,57 @@
 import Product from "../models/productModel.js"
 
 //create product
+// export const createProduct = async (req, res) => {
+//   const newProduct = new Product(req.body)
+//   try {
+//     const savedProduct = await newProduct.save()
+//     res.status(200).json(savedProduct)
+//   } catch (error) {
+//     res.status(500).json(error)
+//   }
+// }
+
 export const createProduct = async (req, res) => {
-  const newProduct = new Product(req.body)
   try {
-    const savedProduct = await newProduct.save()
-    res.status(200).json(savedProduct)
-  } catch (error) {
-    res.status(500).json(error)
+    const data = { ...req.body }
+
+    // if multer stored a file, set the public URL
+    if (req.file) {
+      data.image = `${req.protocol}://${req.get("host")}/uploads/${
+        req.file.filename
+      }`
+    }
+
+    // categories may be sent as JSON string
+    if (data.categories && typeof data.categories === "string") {
+      try {
+        data.categories = JSON.parse(data.categories)
+      } catch {
+        data.categories = data.categories
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+      }
+    }
+
+    // normalize inStock to boolean
+    if (typeof data.inStock === "string") {
+      data.inStock = data.inStock === "true" || data.inStock === "1"
+    } else {
+      data.inStock = Boolean(data.inStock)
+    }
+
+    // gender/main category field name used in frontend was "gender"
+    if (data.gender) data.category = data.gender // optional: map to your schema field
+
+    const newProduct = new Product(data)
+    const saved = await newProduct.save()
+    res.status(201).json(saved)
+  } catch (err) {
+    console.error("createProduct error:", err)
+    res
+      .status(500)
+      .json({ message: "Create product failed", error: err.message })
   }
 }
 
@@ -37,33 +81,65 @@ export const createMultipleProducts = async (req, res) => {
 // get all Products - latest 5 proProducts
 
 // ...existing code...
+// export const updateProduct = async (req, res) => {
+//   try {
+//     // copy fields from body
+//     const updatedFields = { ...req.body }
+
+//     // If multer uploaded a file, set served URL
+//     if (req.file) {
+//       // server serves /uploads via express.static in server.js
+//       updatedFields.image = `${req.protocol}://${req.get("host")}/uploads/${
+//         req.file.filename
+//       }`
+//     }
+
+//     const updatedProduct = await Product.findByIdAndUpdate(
+//       req.params.id,
+//       { $set: updatedFields },
+//       { new: true }
+//     )
+
+//     if (!updatedProduct) {
+//       return res.status(404).json({ message: "Product not found" })
+//     }
+
+//     res.status(200).json(updatedProduct)
+//   } catch (err) {
+//     console.error("Update error:", err)
+//     res.status(500).json({ message: "Error updating product", error: err })
+//   }
+// }
+
 export const updateProduct = async (req, res) => {
   try {
-    // copy fields from body
-    const updatedFields = { ...req.body }
-
-    // If multer uploaded a file, set served URL
+    const data = { ...req.body }
     if (req.file) {
-      // server serves /uploads via express.static in server.js
-      updatedFields.image = `${req.protocol}://${req.get("host")}/uploads/${
+      data.image = `${req.protocol}://${req.get("host")}/uploads/${
         req.file.filename
       }`
     }
-
-    const updatedProduct = await Product.findByIdAndUpdate(
+    if (data.categories && typeof data.categories === "string") {
+      try {
+        data.categories = JSON.parse(data.categories)
+      } catch {
+        data.categories = data.categories
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+      }
+    }
+    if (typeof data.inStock === "string")
+      data.inStock = data.inStock === "true" || data.inStock === "1"
+    const updated = await Product.findByIdAndUpdate(
       req.params.id,
-      { $set: updatedFields },
+      { $set: data },
       { new: true }
     )
-
-    if (!updatedProduct) {
-      return res.status(404).json({ message: "Product not found" })
-    }
-
-    res.status(200).json(updatedProduct)
+    res.status(200).json(updated)
   } catch (err) {
-    console.error("Update error:", err)
-    res.status(500).json({ message: "Error updating product", error: err })
+    console.error("updateProduct error:", err)
+    res.status(500).json({ message: "Update failed", error: err.message })
   }
 }
 

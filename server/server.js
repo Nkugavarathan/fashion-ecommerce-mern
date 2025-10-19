@@ -32,8 +32,9 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
 
 // ✅ Serve static uploaded images
-app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
+// app.use("/uploads", express.static(path.join(__dirname, "/uploads")))
 
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")))
 // ✅ API Routes
 app.use("/api/users", userRoute)
 app.use("/api/auth", authRoute)

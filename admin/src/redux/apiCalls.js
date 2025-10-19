@@ -84,9 +84,13 @@ export const updateProduct = async (productId, updatedProduct, dispatch) => {
 export const addProduct = async (product, dispatch) => {
   dispatch(addProductStart())
   try {
-    const res = await userRequest.post(`/products`, product)
+    // userRequest includes token; let axios set headers (FormData)
+    const res = await userRequest.post("/products", product)
     dispatch(addProductSuccess(res.data))
+    return res.data
   } catch (err) {
+    console.error("Add product failed:", err.response?.data || err.message)
     dispatch(addProductFailure())
+    throw err
   }
 }
