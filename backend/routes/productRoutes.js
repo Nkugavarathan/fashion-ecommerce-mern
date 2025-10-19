@@ -3,16 +3,20 @@ import { admin, protect } from "./../middleware/authMiddleware.js"
 import {
   getAllProducts,
   createProduct,
-  upadateProduct,
+  updateProduct,
   deleteProduct,
   getProductById,
   createMultipleProducts,
 } from "../controllers/productControlloer.js"
+import { upload } from "../middleware/uploadMiddleware.js"
 
 const router = express.Router()
 
-router.post("/", protect, admin, createProduct)
-router.put("/:id", protect, admin, upadateProduct)
+// create product (with optional image)
+router.post("/", upload.single("image"), createProduct)
+
+// update product (with optional image)
+router.put("/:id", upload.single("image"), updateProduct)
 router.get("/find/:id", getProductById)
 router.get("/", getAllProducts)
 router.delete("/:id", protect, admin, deleteProduct)

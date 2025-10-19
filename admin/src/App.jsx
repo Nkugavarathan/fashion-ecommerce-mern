@@ -79,7 +79,7 @@ function App() {
           <Route path="/users/:userId" element={<User />} />
           <Route path="/newUser" element={<NewUser />} />
           <Route path="/products" element={<ProductList />} />
-          <Route path="/product/:productId" element={<Product />} />
+          <Route path="/products/:productId" element={<Product />} />
           <Route path="/newproduct" element={<NewProduct />} />
           <Route path="/login" element={<Login />} />
         </Routes>

@@ -50,24 +50,33 @@ export const deleteProduct = async (id, dispatch) => {
   }
 }
 
-// export const updateProduct = async (id, product, dispatch) => {
+// export const updateProduct = async (productId, updatedProduct, dispatch) => {
 //   dispatch(updateProductStart())
 //   try {
-//     // update
-//     dispatch(updateProductSuccess({ id, product }))
+//     const res = await publicRequest.put(
+//       `/products/${productId}`,
+//       updatedProduct,
+//       {
+//         headers: {
+//           "Content-Type": "multipart/form-data",
+//         },
+//       }
+//     )
+//     dispatch(updateProductSuccess(res.data))
 //   } catch (err) {
+//     console.error("Update product failed:", err)
 //     dispatch(updateProductFailure())
 //   }
 // }
-export const updateProduct = async (id, formData, dispatch) => {
+
+export const updateProduct = async (productId, updatedProduct, dispatch) => {
   dispatch(updateProductStart())
   try {
-    const res = await userRequest.put(`/products/${id}`, formData, {
-      headers: { "Content-Type": "multipart/form-data" },
-    })
-    dispatch(updateProductSuccess({ id, product: res.data }))
+    // use userRequest (auth) and let axios set Content-Type when FormData is used
+    const res = await userRequest.put(`/products/${productId}`, updatedProduct)
+    dispatch(updateProductSuccess(res.data))
   } catch (err) {
-    console.log(err)
+    console.error("Update product failed:", err)
     dispatch(updateProductFailure())
   }
 }

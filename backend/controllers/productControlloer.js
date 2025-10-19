@@ -21,26 +21,52 @@ export const createMultipleProducts = async (req, res) => {
   }
 }
 
-//update
+// export const updateProduct = async (req, res) => {
+//   try {
+//     const updatedProduct = await Product.findByIdAndUpdate(
+//       req.params.id,
+//       { $set: req.body }, // no need for multer if URL
+//       { new: true }
+//     )
+//     res.status(200).json(updatedProduct)
+//   } catch (err) {
+//     res.status(500).json(err)
+//   }
+// }
 
-export const upadateProduct = async (req, res) => {
+// get all Products - latest 5 proProducts
+
+// ...existing code...
+export const updateProduct = async (req, res) => {
   try {
+    // copy fields from body
+    const updatedFields = { ...req.body }
+
+    // If multer uploaded a file, set served URL
+    if (req.file) {
+      // server serves /uploads via express.static in server.js
+      updatedFields.image = `${req.protocol}://${req.get("host")}/uploads/${
+        req.file.filename
+      }`
+    }
+
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
-      {
-        $set: req.body,
-      },
-      {
-        new: true,
-      }
+      { $set: updatedFields },
+      { new: true }
     )
+
+    if (!updatedProduct) {
+      return res.status(404).json({ message: "Product not found" })
+    }
+
     res.status(200).json(updatedProduct)
-  } catch (error) {
-    res.status(500).json(error)
+  } catch (err) {
+    console.error("Update error:", err)
+    res.status(500).json({ message: "Error updating product", error: err })
   }
 }
 
-// get all Products - latest 5 proProducts
 export const getAllProducts = async (req, res) => {
   const qNew = req.query.new // ?new=true
   const qCategory = req.query.category // ?category=shirt

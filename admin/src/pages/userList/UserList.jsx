@@ -1,4 +1,3 @@
-import "./userList.css"
 import { DataGrid } from "@mui/x-data-grid"
 import { DeleteOutline } from "@mui/icons-material"
 import { userRows } from "../../dummydata.js"
@@ -18,55 +17,49 @@ export default function UserList() {
       field: "user",
       headerName: "User",
       width: 200,
-      renderCell: (params) => {
-        return (
-          <div className="userListUser">
-            <img className="userListImg" src={params.row.avatar} alt="" />
-            {params.row.username}
-          </div>
-        )
-      },
+      renderCell: (params) => (
+        <div className="flex items-center">
+          <img
+            className="w-10 h-10 rounded-full cursor-pointer mr-2"
+            src={params.row.avatar}
+            alt=""
+          />
+          {params.row.username}
+        </div>
+      ),
     },
     { field: "email", headerName: "Email", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
-    {
-      field: "transaction",
-      headerName: "Transaction Volume",
-      width: 160,
-    },
+    { field: "status", headerName: "Status", width: 120 },
+    { field: "transaction", headerName: "Transaction Volume", width: 160 },
     {
       field: "action",
       headerName: "Action",
       width: 150,
-      renderCell: (params) => {
-        return (
-          <>
-            <Link
-              to={`/user/${params.row.id}`}
-              style={{ textDecoration: "none" }}
-            >
-              <button className="userListEdit">Edit</button>
-            </Link>
-
-            <DeleteOutline
-              className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
-            />
-          </>
-        )
-      },
+      renderCell: (params) => (
+        <div className="flex items-center">
+          <Link to={`/user/${params.row.id}`}>
+            <button className="bg-green-600 text-white px-4 py-1 rounded-md text-sm font-medium hover:bg-green-700 mr-4">
+              Edit
+            </button>
+          </Link>
+          <DeleteOutline
+            className="text-red-600 cursor-pointer"
+            onClick={() => handleDelete(params.row.id)}
+          />
+        </div>
+      ),
     },
   ]
 
   return (
-    <div className="userList">
-      {/* <Link to="/newUser">
-        <button className="userAddButton">Create</button>
-      </Link> */}
+    <div className="flex-[4] p-4">
+      <div className="flex justify-end mb-4">
+        <Link to="/newUser">
+          <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md">
+            Create New
+          </button>
+        </Link>
+      </div>
       <DataGrid
         rows={data}
         disableSelectionOnClick
