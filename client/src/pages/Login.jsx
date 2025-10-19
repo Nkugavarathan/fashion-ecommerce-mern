@@ -89,18 +89,31 @@ function Login() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   try {
+  //     const data = await login(dispatch, { username, password })
+  //     // data = { user, token }
+  //     if (data?.user?.isAdmin) {
+  //       navigate("/admin")
+  //     } else {
+  //       navigate("/")
+  //     }
+  //   } catch (err) {
+  //     // error handled in Redux slice; show quick alert
+  //     alert("Login failed: " + (err.response?.data?.message || err.message))
+  //   }
+  // }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
       const data = await login(dispatch, { username, password })
-      // data = { user, token }
-      if (data?.user?.isAdmin) {
-        navigate("/admin")
-      } else {
-        navigate("/")
-      }
+      if (!data) throw new Error("No data returned")
+      // data.user.isAdmin should be available
+      if (data.user?.isAdmin) navigate("/admin")
+      else navigate("/")
     } catch (err) {
-      // error handled in Redux slice; show quick alert
       alert("Login failed: " + (err.response?.data?.message || err.message))
     }
   }

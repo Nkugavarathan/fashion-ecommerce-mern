@@ -6,155 +6,72 @@ import PinterestIcon from "@mui/icons-material/Pinterest"
 import PhoneIcon from "@mui/icons-material/Phone"
 import MailIcon from "@mui/icons-material/Mail"
 import HomeIcon from "@mui/icons-material/Home"
-import { mobile, tablet } from "../responsive"
+// import { mobile, tablet } from "../responsive"
 
-import styled from "styled-components"
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-
-  ${mobile(`
-    flex-direction: column;
-  `)}
-`
-
-const Left = styled.div`
-  flex: 1;
-  padding: 20px;
-
-  ${mobile(`
-    padding: 10px;
-  `)}
-`
-
-const Center = styled.div`
-  flex: 1;
-  padding: 20px;
-
-  ${mobile(`
-    display: none;
-  `)}
-`
-
-const Right = styled.div`
-  flex: 1;
-  padding: 20px;
-
-  ${mobile(`
-    background-color: #fff8f8;
-  `)}
-`
-
-const Logo = styled.h1``
-const Description = styled.p`
-  margin: 20px 0;
-`
-const SocialContainer = styled.div`
-  display: flex;
-`
-
-const SocialIcon = styled.span`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: ${(props) => props.bgcolor};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 10px;
-  transition: transform 0.3s ease;
-  &: hover {
-    color: white;
-    cursor: pointer;
-    transform: scale(1.2);
-  }
-`
-const colors = {
-  facebook: "#3b5998",
-  instagram: "#e1306c",
-  linkedin: "#0077b5",
-  pinterest: "#bd081c",
-}
-
-const Title = styled.h3`
-  margin-bottom: 20px;
-`
-
-const List = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-`
-const ListItem = styled.li`
-  width: 50%;
-  margin-bottom: 10px;
-`
-
-const ContactItem = styled.span`
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-`
-const Payment = styled.div`
-  margin-top: 10px;
-`
-function Footer() {
+export default function Footer() {
   return (
-    <Container>
-      <Left>
-        <Logo>VARA</Logo>
-        <Description>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-          fuga itaque minima iure ex ad facilis unde, cumque deleniti aut
-          laudantium magni dolores ipsa, a dolorem, esse sint quo
-          exercitationem?
-        </Description>
-        <SocialContainer>
-          <SocialIcon bgcolor={colors.facebook}>
-            <FacebookIcon />
-          </SocialIcon>
-          <SocialIcon bgcolor={colors.instagram}>
-            <InstagramIcon />
-          </SocialIcon>
-          <SocialIcon bgcolor={colors.linkedin}>
-            <LinkedInIcon />
-          </SocialIcon>
-          <SocialIcon bgcolor={colors.pinterest}>
-            <PinterestIcon />
-          </SocialIcon>
-        </SocialContainer>
-      </Left>
-      <Center>
-        <Title>Useful Links</Title>
-        <List>
-          <ListItem>Home</ListItem>
-          <ListItem>Women Fashions</ListItem>
-          <ListItem>My Account</ListItem>
-          <ListItem>Order Tracking</ListItem>
-          <ListItem>Wishlist</ListItem>
-          <ListItem>Terms</ListItem>
-        </List>
-      </Center>
-      <Right>
-        <Title>Contact</Title>
-        <ContactItem>
-          <HomeIcon style={{ marginRight: "10px" }} /> No 10, HighLevel Road
-          ,Nugegoda.
-        </ContactItem>
-        <ContactItem>
-          <PhoneIcon style={{ marginRight: "10px" }} />
-          +771234567
-        </ContactItem>
-        <ContactItem>
-          <MailIcon style={{ marginRight: "10px" }} />
-          contactvara@gmail.com
-        </ContactItem>
-        <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
-      </Right>
-    </Container>
+    <footer className="bg-gray-100 text-gray-700 px-6 py-10">
+      <div className="flex flex-wrap gap-8 justify-between">
+        {/* Left Section */}
+        <div className="flex-1 min-w-[250px]">
+          <h1 className="text-2xl font-bold text-teal-600 mb-4">VARA</h1>
+          <p className="mb-4 text-sm">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
+            fuga itaque minima iure ex ad facilis unde, cumque deleniti aut
+            laudantium magni dolores ipsa, a dolorem, esse sint quo
+            exercitationem?
+          </p>
+          <div className="flex gap-3">
+            <span className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white hover:scale-110 transition">
+              <FacebookIcon />
+            </span>
+            <span className="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center text-white hover:scale-110 transition">
+              <InstagramIcon />
+            </span>
+            <span className="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center text-white hover:scale-110 transition">
+              <LinkedInIcon />
+            </span>
+            <span className="w-10 h-10 rounded-full bg-red-600 flex items-center justify-center text-white hover:scale-110 transition">
+              <PinterestIcon />
+            </span>
+          </div>
+        </div>
+
+        {/* Center Section */}
+        <div className="flex-1 min-w-[250px] hidden md:block">
+          <h3 className="text-lg font-semibold mb-4">Useful Links</h3>
+          <ul className="flex flex-wrap gap-y-2 text-sm">
+            <li className="w-1/2">Home</li>
+            <li className="w-1/2">Women Fashions</li>
+            <li className="w-1/2">My Account</li>
+            <li className="w-1/2">Order Tracking</li>
+            <li className="w-1/2">Wishlist</li>
+            <li className="w-1/2">Terms</li>
+          </ul>
+        </div>
+
+        {/* Right Section */}
+        <div className="flex-1 min-w-[250px]">
+          <h3 className="text-lg font-semibold mb-4">Contact</h3>
+          <div className="flex items-center gap-2 mb-2 text-sm">
+            <HomeIcon />
+            <span>No 10, HighLevel Road, Nugegoda.</span>
+          </div>
+          <div className="flex items-center gap-2 mb-2 text-sm">
+            <PhoneIcon />
+            <span>+771234567</span>
+          </div>
+          <div className="flex items-center gap-2 mb-2 text-sm">
+            <MailIcon />
+            <span>contactvara@gmail.com</span>
+          </div>
+          <img
+            src="https://i.ibb.co/Qfvn4z6/payment.png"
+            alt="Payment Methods"
+            className="mt-4 w-40"
+          />
+        </div>
+      </div>
+    </footer>
   )
 }
-
-export default Footer
