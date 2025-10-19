@@ -14,17 +14,12 @@
 // ...existing code...
 import { loginFailure, loginStart, loginSuccess } from "./userRedux"
 import axios from "axios"
-import { userRequest } from "../requestMethod"
-// const API = axios.create({
-//   baseURL: "http://localhost:4000/api",
-//   // you can add timeout etc here
-// })
+import { publicRequest } from "../requestMethod"
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart())
   try {
-    const res = await userRequest.post("/auth/login", user)
-    // res.data expected: { user, token }
+    const res = await publicRequest.post("/auth/login", user)
     dispatch(loginSuccess(res.data))
     return res.data
   } catch (error) {
@@ -37,7 +32,7 @@ export const login = async (dispatch, user) => {
 
 export const registerUser = async (userData) => {
   try {
-    const res = await API.post("/auth/register", userData)
+    const res = await publicRequest.post("/auth/register", userData)
     return res.data // { user, token }
   } catch (error) {
     throw error

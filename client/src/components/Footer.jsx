@@ -42,10 +42,9 @@ export default function Footer() {
           <h3 className="text-lg font-semibold mb-4">Useful Links</h3>
           <ul className="flex flex-wrap gap-y-2 text-sm">
             <li className="w-1/2">Home</li>
-            <li className="w-1/2">Women Fashions</li>
+
             <li className="w-1/2">My Account</li>
-            <li className="w-1/2">Order Tracking</li>
-            <li className="w-1/2">Wishlist</li>
+
             <li className="w-1/2">Terms</li>
           </ul>
         </div>

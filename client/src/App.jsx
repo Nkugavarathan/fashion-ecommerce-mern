@@ -8,31 +8,24 @@ import Cart from "./pages/Cart"
 import { Routes, Route, Navigate } from "react-router-dom"
 import Success from "./pages/Success"
 import { useSelector } from "react-redux"
-import MenCategory from "./components/MenCategory"
-import WomenCategory from "./components/WomenCategory"
+
 function App() {
-  const user = useSelector((state) => state.user.currentUser)
+  // const user = useSelector((state) => state.user.currentUser)
   return (
     <div>
       <Routes>
         <Route index element={<Home />} />
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/product/:id" element={<SingleProduct />} />
-
         <Route path="/cart" element={<Cart />} />
+        <Route path="/login" element={<Login />} />
 
-        <Route
-          path="/login"
-          element={user ? <Navigate to="/" replace /> : <Login />}
-        />
-        <Route
-          path="/register"
-          element={user ? <Navigate to="/" replace /> : <Register />}
-        />
+        <Route path="/register" element={<Register />} />
         <Route path="/success" element={<Success />} />
       </Routes>
     </div>
   )
 }
-
+//user ? <Navigate to="/" replace /> :
+//user ? <Navigate to="/" replace /> :
 export default App

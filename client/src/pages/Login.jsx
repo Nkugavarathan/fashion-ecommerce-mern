@@ -105,16 +105,32 @@ function Login() {
   //   }
   // }
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   try {
+  //     const data = await login(dispatch, { username, password })
+  //     if (!data) throw new Error("No data returned")
+  //     // data.user.isAdmin should be available
+  //     if (data.user?.isAdmin) navigate("/admin")
+  //     // else navigate("/")
+  //   } catch (err) {
+  //     alert("Login failed: " + (err.response?.data?.message || err.message))
+  //   }
+  // }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
+    console.log("Submitting login for:", username)
+
     try {
       const data = await login(dispatch, { username, password })
-      if (!data) throw new Error("No data returned")
-      // data.user.isAdmin should be available
-      if (data.user?.isAdmin) navigate("/admin")
+      console.log("Login response:", data)
+
+      if (data?.user?.isAdmin) navigate("/admin")
       else navigate("/")
     } catch (err) {
-      alert("Login failed: " + (err.response?.data?.message || err.message))
+      console.error("Login error:", err)
+      alert("Login failed.")
     }
   }
 
