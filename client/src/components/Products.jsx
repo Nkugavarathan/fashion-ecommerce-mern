@@ -24,7 +24,7 @@ const Container = styled.div`
 `
 //displays filter products
 function Products({ category, filters, sort }) {
-  console.log(category, filters, sort)
+  // console.log(category, filters, sort)
 
   const [visibleCount, setVisibleCount] = useState(8)
   const [isExpanded, setIsExpanded] = useState(false)
@@ -104,6 +104,9 @@ function Products({ category, filters, sort }) {
     //   )}
     // </Container>
     <>
+      <h2 className="text-center text-teal-600 font-bold text-xl my-4">
+        Our Products
+      </h2>
       <Container>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {(category ? filteredProducts : products)
