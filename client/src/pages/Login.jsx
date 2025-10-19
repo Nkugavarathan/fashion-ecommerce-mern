@@ -2,7 +2,7 @@ import React, { useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { login } from "../redux/apiCalls"
 import { useNavigate } from "react-router-dom"
-
+import { Link } from "react-router-dom"
 function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
@@ -62,9 +62,12 @@ function Login() {
           <a className="text-sm text-teal-600 mt-4 underline cursor-pointer text-center">
             Forgot your password?
           </a>
-          <a className="text-sm text-teal-600 mt-2 underline cursor-pointer text-center">
+          <Link
+            to="/register"
+            className="text-sm text-teal-600 mt-2 underline cursor-pointer text-center"
+          >
             Create a new account
-          </a>
+          </Link>
         </form>
       </div>
     </div>

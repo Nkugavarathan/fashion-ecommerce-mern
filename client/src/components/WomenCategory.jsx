@@ -12,7 +12,7 @@ export default function WomenCategory() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
-          <h2 className="text-2xl md:text-3xl font-bold">Women</h2>
+          {/* <h2 className="text-2xl md:text-3xl font-bold">Women</h2> */}
           <p className="mt-2 text-sm md:text-base">
             Dresses, tops, casual & more
           </p>
