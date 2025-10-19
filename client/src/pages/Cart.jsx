@@ -227,13 +227,11 @@ function Cart() {
       <Wrapper>
         <Title>YOUR CART</Title>
         <Top>
-          <TopButton>Continue Shopping</TopButton>
-
+          <span></span>
           <TopTexts>
             <TopText>Your Bag ({cart.quantity})</TopText>
             <TopText>Your Wishlist (2)</TopText>
           </TopTexts>
-
           <div style={{ display: "flex", gap: "10px" }}>
             <TopButton type="filled">Checkout Now</TopButton>
 
@@ -253,7 +251,7 @@ function Cart() {
                 <ProductDetails>
                   <ProductImage
                     src={
-                      product.img ||
+                      product.image ||
                       "https://i.pinimg.com/736x/b7/90/d7/b790d77a97a5684c0897713564d8f5c2.jpg"
                     }
                   />
