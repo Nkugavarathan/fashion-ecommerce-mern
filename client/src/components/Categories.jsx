@@ -26,22 +26,26 @@ const Container = styled.div`
 function Categories() {
   return (
     <>
-      <h2 style={{ textAlign: "center", color: "teal", fontWeight: "bold" }}>
+      <h2 className="text-center text-teal-600 font-bold text-xl my-4">
         Our Categories
       </h2>
-      <Container className="gap-6">
-        {/* Tailwind-styled special category cards */}
+
+      {/* Main Categories Row */}
+      <Container className="flex flex-wrap justify-center gap-6 mb-10">
         <div className="w-full md:w-[480px] lg:w-[350px] p-2">
           <MenCategory />
         </div>
         <div className="w-full md:w-[480px] lg:w-[350px] p-2">
           <WomenCategory />
         </div>
+      </Container>
 
-        <h2 style={{ textAlign: "center", color: "teal", fontWeight: "bold" }}>
-          Our SubCategories
-        </h2>
-        {/* Existing category items from data */}
+      <h2 className="text-center text-teal-600 font-bold text-xl my-4">
+        Our SubCategories
+      </h2>
+
+      {/* Subcategories Row */}
+      <Container className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {categories.map((item) => (
           <CategoryItem item={item} key={item.id} />
         ))}

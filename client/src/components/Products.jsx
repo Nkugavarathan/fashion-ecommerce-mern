@@ -73,36 +73,6 @@ function Products({ category, filters, sort }) {
   }, [sort])
 
   return (
-    // <Container>
-    //   {category
-    //     ? filteredProducts.map((item) => (
-    //         <ProductItem item={item} key={item._id} />
-    //       ))
-    //     : products
-    //         .slice(0, 8)
-    //         .map((item) => <ProductItem item={item} key={item._id} />)}
-    // </Container>
-    // <Container>
-    //   <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-    //     {(category ? filteredProducts : products)
-    //       .slice(0, visibleCount)
-    //       .map((item) => (
-    //         <ProductItem item={item} key={item._id} />
-    //       ))}
-    //   </div>
-
-    //   {(category ? filteredProducts.length : products.length) >
-    //     visibleCount && (
-    //     <div className="flex justify-center mt-8">
-    //       <button
-    //         onClick={() => setVisibleCount((prev) => prev + 8)}
-    //         className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition"
-    //       >
-    //         Load More
-    //       </button>
-    //     </div>
-    //   )}
-    // </Container>
     <>
       <h2 className="text-center text-teal-600 font-bold text-xl my-4">
         Our Products
