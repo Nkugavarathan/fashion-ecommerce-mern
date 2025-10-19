@@ -37,11 +37,11 @@ export default function UserList() {
       width: 150,
       renderCell: (params) => (
         <div className="flex items-center">
-          <Link to={`/users/${params.row.userId}`}>
+          {/* <Link to={`/users/${params.row.id}`}>
             <button className="bg-green-600 text-white px-4 py-1 rounded-md text-sm font-medium hover:bg-green-700 mr-4">
               Edit
             </button>
-          </Link>
+          </Link> */}
           <DeleteOutline
             className="text-red-600 cursor-pointer"
             onClick={() => handleDelete(params.row.id)}
@@ -54,11 +54,11 @@ export default function UserList() {
   return (
     <div className="flex-[4] p-4">
       <div className="flex justify-end mb-4">
-        <Link to="/newUser">
+        {/* <Link to="/newUser">
           <button className="bg-teal-600 hover:bg-teal-700 text-white px-4 py-2 rounded-md">
             Create New
           </button>
-        </Link>
+        </Link> */}
       </div>
       <DataGrid
         rows={data}

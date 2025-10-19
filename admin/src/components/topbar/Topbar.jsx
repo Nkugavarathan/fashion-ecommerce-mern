@@ -17,19 +17,19 @@ export default function Topbar() {
         </Link>
         {/* Right section for desktop */}
         <div className="hidden sm:flex items-center gap-4">
-          <div className="relative cursor-pointer text-gray-600">
+          {/* <div className="relative cursor-pointer text-gray-600">
             <NotificationsNone />
             <span className="absolute -top-1 right-0 w-[15px] h-[15px] bg-red-600 text-white text-[10px] flex items-center justify-center rounded-full">
               2
             </span>
-          </div>
+          </div> */}
 
-          <div className="relative cursor-pointer text-gray-600">
+          {/* <div className="relative cursor-pointer text-gray-600">
             <Language />
             <span className="absolute -top-1 right-0 w-[15px] h-[15px] bg-red-600 text-white text-[10px] flex items-center justify-center rounded-full">
               2
             </span>
-          </div>
+          </div> */}
 
           <div className="relative cursor-pointer text-gray-600">
             <Settings />

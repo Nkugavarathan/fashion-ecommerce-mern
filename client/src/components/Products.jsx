@@ -41,7 +41,7 @@ function Products({ category, filters, sort }) {
             ? `http://localhost:4000/api/products?category=${category}`
             : "http://localhost:4000/api/products"
         )
-        // console.log(res)
+        console.log(res)
         setProdcuts(res.data)
       } catch (error) {}
     }
@@ -77,24 +77,25 @@ function Products({ category, filters, sort }) {
       <h2 className="text-center text-teal-600 font-bold text-xl my-4">
         Our Products
       </h2>
-      <Container>
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+
+      <div className="flex justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-7xl px-4 justify-items-center">
           {(category ? filteredProducts : products)
             .slice(0, visibleCount)
             .map((item) => (
               <ProductItem item={item} key={item._id} />
             ))}
         </div>
-      </Container>
+      </div>
 
       {(category ? filteredProducts.length : products.length) > 8 && (
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-6">
           <button
             onClick={() => {
               if (isExpanded) {
                 setVisibleCount(8)
                 setIsExpanded(false)
-                window.scrollTo({ top: 0, behavior: "smooth" }) // optional
+                window.scrollTo({ top: 0, behavior: "smooth" })
               } else {
                 setVisibleCount(
                   category ? filteredProducts.length : products.length

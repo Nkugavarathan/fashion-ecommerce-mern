@@ -37,47 +37,54 @@ export default function FeaturedInfo() {
     getOrders()
   }, [])
   return (
-    <div className="featured">
-      {/* REVENUE  */}
-      <div className="featuredItem">
-        <span className="featuredTitle">Revanue</span>
-
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">${income[1]?.total}</span>
-          <span className="featuredMoneyRate">
-            %{Math.floor(perc)}{" "}
+    <div className="flex flex-wrap gap-4 justify-between w-full">
+      {/* REVENUE */}
+      <div className="flex-1 min-w-[280px] bg-white p-4 rounded shadow">
+        <span className="text-lg font-semibold block mb-2">Revenue</span>
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-2xl font-bold text-gray-800">
+            ${income[1]?.total}
+          </span>
+          <span className="flex items-center text-sm text-gray-600">
+            %{Math.floor(perc)}
             {perc < 0 ? (
-              <ArrowDownward className="featuredIcon negative" />
+              <ArrowDownward className="text-red-500 ml-1" />
             ) : (
-              <ArrowUpward className="featuredIcon" />
+              <ArrowUpward className="text-green-500 ml-1" />
             )}
           </span>
         </div>
-        <span className="featuredSub">Compared to last month</span>
+        <span className="text-xs text-gray-500">Compared to last month</span>
       </div>
+
       {/* SALES */}
-      <div className="featuredItem">
-        <span className="featuredTitle">Sales</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">{totalOrders}</span>
-          <span className="featuredMoneyRate">
-            +2.4 <ArrowUpward className="featuredIcon" />
+      <div className="flex-1 min-w-[280px] bg-white p-4 rounded shadow">
+        <span className="text-lg font-semibold block mb-2">Sales</span>
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-2xl font-bold text-gray-800">
+            {totalOrders}
+          </span>
+          <span className="flex items-center text-sm text-gray-600">
+            +2.4 <ArrowUpward className="text-green-500 ml-1" />
           </span>
         </div>
-        <span className="featuredSub">Total Orders</span>
+        <span className="text-xs text-gray-500">Total Orders</span>
       </div>
+
       {/* COST */}
-      <div className="featuredItem">
-        <span className="featuredTitle">Cost</span>
-        <div className="featuredMoneyContainer">
-          <span className="featuredMoney">
-            ${(income[1]?.total || 0) * 0.4} {/* example: 40% of revenue */}
+      <div className="flex-1 min-w-[280px] bg-white p-4 rounded shadow">
+        <span className="text-lg font-semibold block mb-2">Cost</span>
+        <div className="flex items-center justify-between mb-1">
+          <span className="text-2xl font-bold text-gray-800">
+            ${(income[1]?.total || 0) * 0.4}
           </span>
-          <span className="featuredMoneyRate">
-            -1.4 <ArrowDownward className="featuredIcon negative" />
+          <span className="flex items-center text-sm text-gray-600">
+            -1.4 <ArrowDownward className="text-red-500 ml-1" />
           </span>
         </div>
-        <span className="featuredSub">Estimated Operational Cost</span>
+        <span className="text-xs text-gray-500">
+          Estimated Operational Cost
+        </span>
       </div>
     </div>
   )
