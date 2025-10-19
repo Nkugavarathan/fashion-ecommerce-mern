@@ -118,19 +118,36 @@ function Login() {
   //   }
   // }
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault()
+  //   console.log("Submitting login for:", username)
+
+  //   try {
+  //     const data = await login(dispatch, { username, password })
+  //     console.log("Login response:", data)
+
+  //     if (data?.user?.isAdmin) navigate("/http://localhost:5174/")
+  //     else navigate("/")
+  //   } catch (err) {
+  //     console.error("Login error:", err)
+  //     alert("Login failed.")
+  //   }
+  // }
+
   const handleSubmit = async (e) => {
     e.preventDefault()
-    console.log("Submitting login for:", username)
-
     try {
       const data = await login(dispatch, { username, password })
-      console.log("Login response:", data)
+      if (!data) throw new Error("No data returned")
 
-      if (data?.user?.isAdmin) navigate("/admin")
-      else navigate("/")
+      if (data.user?.isAdmin) {
+        // redirect to admin site (different port)
+        window.location.href = "http://localhost:5174/"
+      } else {
+        navigate("/")
+      }
     } catch (err) {
-      console.error("Login error:", err)
-      alert("Login failed.")
+      alert("Login failed: " + (err.response?.data?.message || err.message))
     }
   }
 
