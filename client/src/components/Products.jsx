@@ -41,7 +41,7 @@ function Products({ category, filters, sort }) {
             ? `http://localhost:4000/api/products?category=${category}`
             : "http://localhost:4000/api/products"
         )
-        console.log(res)
+        // console.log(res)
         setProdcuts(res.data)
       } catch (error) {}
     }

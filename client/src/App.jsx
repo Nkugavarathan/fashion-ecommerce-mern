@@ -8,6 +8,8 @@ import Cart from "./pages/Cart"
 import { Routes, Route, Navigate } from "react-router-dom"
 import Success from "./pages/Success"
 import { useSelector } from "react-redux"
+import MenCategory from "./components/MenCategory"
+import WomenCategory from "./components/WomenCategory"
 function App() {
   const user = useSelector((state) => state.user.currentUser)
   return (

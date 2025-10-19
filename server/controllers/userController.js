@@ -1,3 +1,4 @@
+// ...existing code...
 import User from "../models/userModel.js"
 import bcrypt from "bcrypt"
 import jwt from "jsonwebtoken"
@@ -28,7 +29,11 @@ export const registerUser = async (req, res) => {
       { expiresIn: "3d" }
     )
 
-    res.status(201).json({ user: savedUser, token: accessToken })
+    // remove password before sending
+    const { password, ...userWithoutPassword } =
+      savedUser._doc || savedUser.toObject()
+
+    res.status(201).json({ user: userWithoutPassword, token: accessToken })
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
@@ -38,10 +43,11 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const user = await User.findOne({ username: req.body.username })
-    if (!user) return res.status(404).json("User not found")
+    if (!user) return res.status(404).json({ message: "User not found" })
 
     const validPassword = await bcrypt.compare(req.body.password, user.password)
-    if (!validPassword) return res.status(401).json("Invalid password")
+    if (!validPassword)
+      return res.status(401).json({ message: "Invalid password" })
 
     const accessToken = jwt.sign(
       { id: user._id, isAdmin: user.isAdmin },
@@ -49,11 +55,67 @@ export const loginUser = async (req, res) => {
       { expiresIn: "30d" }
     )
 
-    res.status(200).json({ user, token: accessToken })
+    // remove password before sending
+    const { password, ...userWithoutPassword } = user._doc || user.toObject()
+
+    res.status(200).json({ user: userWithoutPassword, token: accessToken })
   } catch (err) {
     res.status(500).json({ error: err.message })
   }
 }
+
+// // REGISTER
+// export const registerUser = async (req, res) => {
+//   try {
+//     const salt = await bcrypt.genSalt(10)
+//     const hashedPassword = await bcrypt.hash(req.body.password, salt)
+//     const isAdmin =
+//       typeof req.body.isAdmin === "boolean" ? req.body.isAdmin : false
+
+//     //create new user
+//     const newUser = new User({
+//       username: req.body.username,
+//       email: req.body.email,
+//       password: hashedPassword,
+//       isAdmin: isAdmin,
+//     })
+
+//     //saved user
+//     const savedUser = await newUser.save()
+
+//     // Generate token
+//     const accessToken = jwt.sign(
+//       { id: savedUser._id, isAdmin: savedUser.isAdmin },
+//       process.env.JWT_SEC,
+//       { expiresIn: "3d" }
+//     )
+
+//     res.status(201).json({ user: savedUser, token: accessToken })
+//   } catch (err) {
+//     res.status(500).json({ error: err.message })
+//   }
+// }
+
+// // LOGIN
+// export const loginUser = async (req, res) => {
+//   try {
+//     const user = await User.findOne({ username: req.body.username })
+//     if (!user) return res.status(404).json("User not found")
+
+//     const validPassword = await bcrypt.compare(req.body.password, user.password)
+//     if (!validPassword) return res.status(401).json("Invalid password")
+
+//     const accessToken = jwt.sign(
+//       { id: user._id, isAdmin: user.isAdmin },
+//       process.env.JWT_SEC,
+//       { expiresIn: "30d" }
+//     )
+
+//     res.status(200).json({ user, token: accessToken })
+//   } catch (err) {
+//     res.status(500).json({ error: err.message })
+//   }
+// }
 
 // get all users - latest 5 users
 export const getAllUser = async (req, res) => {

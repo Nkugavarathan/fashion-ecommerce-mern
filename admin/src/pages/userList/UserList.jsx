@@ -37,7 +37,7 @@ export default function UserList() {
       width: 150,
       renderCell: (params) => (
         <div className="flex items-center">
-          <Link to={`/user/${params.row.id}`}>
+          <Link to={`/users/${params.row.userId}`}>
             <button className="bg-green-600 text-white px-4 py-1 rounded-md text-sm font-medium hover:bg-green-700 mr-4">
               Edit
             </button>
