@@ -104,11 +104,11 @@ function ProductList() {
             <Option value="" disabled>
               Color
             </Option>
-            <Option>white</Option>
             <Option>red</Option>
             <Option>blue</Option>
-            <Option>yellow</Option>
             <Option>green</Option>
+            <Option>black</Option>
+            <Option>white</Option>
           </Select>
           <Select name="size" defaultValue="" onChange={handleFilters}>
             <Option value="" disabled>

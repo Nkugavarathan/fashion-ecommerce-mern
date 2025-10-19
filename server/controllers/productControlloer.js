@@ -11,9 +11,57 @@ import Product from "../models/productModel.js"
 //   }
 // }
 
+// export const createProduct = async (req, res) => {
+//   try {
+//     const data = { ...req.body }
+
+//     if (data.desc) data.description = data.desc
+
+//     // if multer stored a file, set the public URL
+//     if (req.file) {
+//       data.image = `${req.protocol}://${req.get("host")}/uploads/${
+//         req.file.filename
+//       }`
+//     }
+
+//     // categories may be sent as JSON string
+//     if (data.categories && typeof data.categories === "string") {
+//       try {
+//         data.categories = JSON.parse(data.categories)
+//       } catch {
+//         data.categories = data.categories
+//           .split(",")
+//           .map((s) => s.trim())
+//           .filter(Boolean)
+//       }
+//     }
+
+//     // normalize inStock to boolean
+//     if (typeof data.inStock === "string") {
+//       data.inStock = data.inStock === "true" || data.inStock === "1"
+//     } else {
+//       data.inStock = Boolean(data.inStock)
+//     }
+
+//     // gender/main category field name used in frontend was "gender"
+//     if (data.gender) data.category = data.gender // optional: map to your schema field
+
+//     const newProduct = new Product(data)
+//     const saved = await newProduct.save()
+//     res.status(201).json(saved)
+//   } catch (err) {
+//     console.error("createProduct error:", err)
+//     res
+//       .status(500)
+//       .json({ message: "Create product failed", error: err.message })
+//   }
+// }
+
 export const createProduct = async (req, res) => {
   try {
     const data = { ...req.body }
+
+    if (data.desc) data.description = data.desc
 
     // if multer stored a file, set the public URL
     if (req.file) {
@@ -22,17 +70,37 @@ export const createProduct = async (req, res) => {
       }`
     }
 
-    // categories may be sent as JSON string
-    if (data.categories && typeof data.categories === "string") {
-      try {
-        data.categories = JSON.parse(data.categories)
-      } catch {
-        data.categories = data.categories
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean)
+    // helper to normalize fields that should be arrays
+    const normalizeArrayField = (fieldName) => {
+      if (!data[fieldName]) {
+        data[fieldName] = []
+        return
+      }
+      // if already an array (rare when FormData used incorrectly), keep it
+      if (Array.isArray(data[fieldName])) return
+      if (typeof data[fieldName] === "string") {
+        // try parse JSON string -> could be '["a","b"]' or plain "a"
+        try {
+          const parsed = JSON.parse(data[fieldName])
+          if (Array.isArray(parsed)) data[fieldName] = parsed
+          else if (parsed) data[fieldName] = [parsed]
+          else data[fieldName] = []
+        } catch {
+          // fallback: comma separated string -> ["a","b"]
+          data[fieldName] = data[fieldName]
+            .split(",")
+            .map((s) => s.trim())
+            .filter(Boolean)
+        }
+      } else {
+        // any other type, wrap to array
+        data[fieldName] = [data[fieldName]]
       }
     }
+
+    normalizeArrayField("categories")
+    normalizeArrayField("size")
+    normalizeArrayField("color")
 
     // normalize inStock to boolean
     if (typeof data.inStock === "string") {
@@ -41,8 +109,8 @@ export const createProduct = async (req, res) => {
       data.inStock = Boolean(data.inStock)
     }
 
-    // gender/main category field name used in frontend was "gender"
-    if (data.gender) data.category = data.gender // optional: map to your schema field
+    // map frontend 'gender' to product.category (optional)
+    if (data.gender && !data.category) data.category = data.gender
 
     const newProduct = new Product(data)
     const saved = await newProduct.save()

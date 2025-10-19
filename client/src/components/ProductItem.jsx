@@ -96,9 +96,9 @@ function ProductItem({ item }) {
             <SearchIcon />
           </Link>
         </Icon>
-        <Icon>
+        {/* <Icon>
           <FavoriteBorderOutlinedIcon />{" "}
-        </Icon>
+        </Icon> */}
       </Info>
     </Container>
   )

@@ -38,6 +38,9 @@ function Categories() {
           <WomenCategory />
         </div>
 
+        <h2 style={{ textAlign: "center", color: "teal", fontWeight: "bold" }}>
+          Our SubCategories
+        </h2>
         {/* Existing category items from data */}
         {categories.map((item) => (
           <CategoryItem item={item} key={item.id} />
