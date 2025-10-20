@@ -11,6 +11,9 @@ import { admin, protect } from "./../middleware/authMiddleware.js"
 const router = express.Router()
 
 router.post("/", protect, createOrder)
+router.get("/", protect, admin, getAll)
+router.get("/find/:userId", protect, getUserOrders)
+
 router.put("/:id", upadateOrder)
 router.post("/find/userId", protect, createOrder)
 router.get("/income", monthlyIncome)

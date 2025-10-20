@@ -20,7 +20,6 @@ export default function Profile() {
       setLoading(true)
       setError(null)
       try {
-        // prefer userRequest that injects token (requestMethod.js); fallback to axios with header
         let res
         if (userRequest) {
           res = await userRequest.get(`/orders/find/${currentUser._id}`)

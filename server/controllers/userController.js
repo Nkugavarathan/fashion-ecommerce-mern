@@ -140,41 +140,87 @@ export const getUserById = async (req, res) => {
 }
 
 // Update user
+// export const updateUser = async (req, res) => {
+//   try {
+//     // Only user himself or admin can update
+//     if (req.user.id === req.params.id || req.user.isAdmin) {
+//       const updatedUser = await User.findByIdAndUpdate(
+//         req.params.id,
+//         { $set: req.body }, // update only the fields provided
+//         { new: true } // return updated document
+//       )
+
+//       return res.status(200).json(updatedUser)
+//     } else {
+//       return res
+//         .status(403)
+//         .json({ message: "Not allowed to update this user" })
+//     }
+//   } catch (err) {
+//     return res.status(500).json({ error: err.message })
+//   }
+// }
+
+// existing registerUser / loginUser remain unchanged (keep them)
+
+// Update user profile (supports multipart/form-data with upload.single("image"))
 export const updateUser = async (req, res) => {
   try {
-    // Only user himself or admin can update
-    if (req.user.id === req.params.id || req.user.isAdmin) {
-      const updatedUser = await User.findByIdAndUpdate(
-        req.params.id,
-        { $set: req.body }, // update only the fields provided
-        { new: true } // return updated document
-      )
+    const userId = req.params.id
+    // req.body contains text fields; req.file may contain uploaded image
+    const updates = { ...req.body }
 
-      return res.status(200).json(updatedUser)
-    } else {
-      return res
-        .status(403)
-        .json({ message: "Not allowed to update this user" })
+    // If file uploaded, construct public URL
+    if (req.file) {
+      updates.image = `${req.protocol}://${req.get("host")}/uploads/${
+        req.file.filename
+      }`
     }
+
+    // If password is updated, hash it
+    if (updates.password) {
+      const salt = await bcrypt.genSalt(10)
+      updates.password = await bcrypt.hash(updates.password, salt)
+    }
+
+    // Ensure booleans and arrays are parsed if sent as strings
+    if (typeof updates.isAdmin === "string")
+      updates.isAdmin = updates.isAdmin === "true"
+
+    const updated = await User.findByIdAndUpdate(
+      userId,
+      { $set: updates },
+      { new: true }
+    )
+
+    if (!updated) return res.status(404).json({ message: "User not found" })
+
+    // remove password from response
+    const { password, ...userWithoutPassword } =
+      updated._doc || updated.toObject()
+    return res.status(200).json(userWithoutPassword)
   } catch (err) {
-    return res.status(500).json({ error: err.message })
+    console.error("updateUser error:", err)
+    return res
+      .status(500)
+      .json({ message: "Update user failed", error: err.message })
   }
 }
 
 //delete user
-export const deleteUser = async (req, res) => {
-  try {
-    const user = await User.findByIdAndDelete(req.params.id)
-    if (!user) {
-      return res.status(404).json({ message: "User not found" })
-    }
+// export const deleteUser = async (req, res) => {
+//   try {
+//     const user = await User.findByIdAndDelete(req.params.id)
+//     if (!user) {
+//       return res.status(404).json({ message: "User not found" })
+//     }
 
-    res.status(200).json({ message: `Deleted User ${req.params.id}` })
-  } catch (error) {
-    console.error("Delete error:", error)
-    res.status(400).json({ message: "Couldn't delete it. Something's wrong." })
-  }
-}
+//     res.status(200).json({ message: `Deleted User ${req.params.id}` })
+//   } catch (error) {
+//     console.error("Delete error:", error)
+//     res.status(400).json({ message: "Couldn't delete it. Something's wrong." })
+//   }
+// }
 
 //get user stats
 export const getUserStats = async (req, res) => {
