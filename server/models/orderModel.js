@@ -1,40 +1,29 @@
-import { model, Schema } from "mongoose"
+import { mongoose, model } from "mongoose"
 
-const orderSchema = new Schema(
+const OrderSchema = new mongoose.Schema(
   {
+    // do NOT mark userId as unique — a user can have many orders
     userId: {
-      type: String,
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
       required: true,
-      unique: true,
     },
 
     products: [
       {
-        productId: {
-          type: String,
-        },
-        quantity: {
-          type: Number,
-          default: 1,
-        },
+        productId: { type: String },
+        quantity: { type: Number, default: 1 },
+        price: { type: Number, default: 0 },
       },
     ],
-    amount: {
-      type: Number,
-      required: true,
-    },
-    address: {
-      type: Object,
-      required: true,
-    },
-    status: {
-      type: String,
-      default: "pending",
-    },
+    amount: { type: Number, required: true },
+    address: { type: Object, default: {} },
+    status: { type: String, default: "processing" },
+    payment: { type: Object, default: {} },
   },
   { timestamps: true }
 )
 
-const orderModel = model("Order", orderSchema)
+const orderModel = mongoose.model("Order", OrderSchema)
 
 export default orderModel

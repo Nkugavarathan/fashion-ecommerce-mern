@@ -1,6 +1,6 @@
 import { loginFailure, loginStart, loginSuccess } from "./userRedux"
 import axios from "axios"
-import { publicRequest } from "../requestMethod"
+import { publicRequest, userRequest } from "../requestMethod"
 
 export const login = async (dispatch, user) => {
   dispatch(loginStart())

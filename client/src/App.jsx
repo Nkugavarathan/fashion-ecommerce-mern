@@ -9,6 +9,7 @@ import { Routes, Route, Navigate } from "react-router-dom"
 import Success from "./pages/Success"
 import { useSelector } from "react-redux"
 import Profile from "./pages/Profile"
+import CartCheckout from "./pages/cartCheckout"
 
 function App() {
   // const user = useSelector((state) => state.user.currentUser)
@@ -18,7 +19,10 @@ function App() {
         <Route index element={<Home />} />
         <Route path="/products/:category" element={<ProductList />} />
         <Route path="/product/:id" element={<SingleProduct />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<Cart />}>
+          <Route path="checkout" element={<CartCheckout />} />
+        </Route>
+
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/success" element={<Success />} />

@@ -3,8 +3,9 @@ import {
   createOrder,
   getAll,
   monthlyIncome,
-  upadateOrder,
+  updateOrder,
   deleteOrder,
+  getUserOrders,
 } from "./../controllers/orderController.js"
 import { admin, protect } from "./../middleware/authMiddleware.js"
 
@@ -14,7 +15,7 @@ router.post("/", protect, createOrder)
 router.get("/", protect, admin, getAll)
 router.get("/find/:userId", protect, getUserOrders)
 
-router.put("/:id", upadateOrder)
+router.put("/:id", updateOrder)
 router.post("/find/userId", protect, createOrder)
 router.get("/income", monthlyIncome)
 router.delete("/:id", protect, admin, deleteOrder)

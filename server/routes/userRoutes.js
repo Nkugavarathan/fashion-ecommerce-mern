@@ -1,5 +1,6 @@
 import express from "express"
 import { admin, protect } from "./../middleware/authMiddleware.js"
+import { upload } from "../middleware/uploadMiddleware.js"
 
 import {
   deleteUser,
@@ -18,7 +19,8 @@ router.get("/", getAllUser)
 
 router.get("/find/:id", getUserById)
 
-router.put("/:id", protect, admin, updateUser)
+// Update profile (auth required and user must be same or admin)
+router.put("/:id", protect, upload.single("image"), updateUser)
 
 router.delete("/:id", protect, admin, deleteUser)
 export default router

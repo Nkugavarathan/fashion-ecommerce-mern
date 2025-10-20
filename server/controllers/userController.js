@@ -208,19 +208,19 @@ export const updateUser = async (req, res) => {
 }
 
 //delete user
-// export const deleteUser = async (req, res) => {
-//   try {
-//     const user = await User.findByIdAndDelete(req.params.id)
-//     if (!user) {
-//       return res.status(404).json({ message: "User not found" })
-//     }
+export const deleteUser = async (req, res) => {
+  try {
+    const user = await User.findByIdAndDelete(req.params.id)
+    if (!user) {
+      return res.status(404).json({ message: "User not found" })
+    }
 
-//     res.status(200).json({ message: `Deleted User ${req.params.id}` })
-//   } catch (error) {
-//     console.error("Delete error:", error)
-//     res.status(400).json({ message: "Couldn't delete it. Something's wrong." })
-//   }
-// }
+    res.status(200).json({ message: `Deleted User ${req.params.id}` })
+  } catch (error) {
+    console.error("Delete error:", error)
+    res.status(400).json({ message: "Couldn't delete it. Something's wrong." })
+  }
+}
 
 //get user stats
 export const getUserStats = async (req, res) => {

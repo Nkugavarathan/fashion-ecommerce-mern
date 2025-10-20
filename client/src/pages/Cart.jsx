@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Navbar from "../components/Navbar"
-
+import { Outlet } from "react-router-dom"
 import Footer from "../components/Footer"
 import { mobile, tablet } from "../responsive"
 import axios from "axios"
@@ -10,10 +10,11 @@ import RemoveIcon from "@mui/icons-material/Remove"
 import AddIcon from "@mui/icons-material/Add"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import StripeCheckout from "react-stripe-checkout"
+
 import { removeProduct, updateQuantity, clearCart } from "../redux/cartRedux"
 
-const KEY = import.meta.env.VITE_STRIPE_KEY
+// const KEY = import.meta.env.VITE_STRIPE_KEY
+import { Link } from "react-router-dom"
 
 // ---------- Styled Components ----------
 const Container = styled.div`
@@ -210,13 +211,14 @@ function Cart() {
             amount: cart.total * 100,
           }
         )
+        dispatch(clearCart())
         navigate("/success", { state: { data: res.data } })
       } catch (err) {
         console.log(err)
       }
     }
-    if (stripeToken) makeRequest()
-  }, [stripeToken, cart.total, navigate])
+    makeRequest()
+  }, [cart.total, navigate])
 
   const handleClearCart = () => {
     dispatch(clearCart())
@@ -230,11 +232,8 @@ function Cart() {
           <span></span>
           <TopTexts>
             <TopText>Your Bag ({cart.quantity})</TopText>
-            <TopText>Your Wishlist (2)</TopText>
           </TopTexts>
           <div style={{ display: "flex", gap: "10px" }}>
-            <TopButton type="filled">Checkout Now</TopButton>
-
             <TopButton
               style={{ borderColor: "red", color: "red" }}
               onClick={handleClearCart}
@@ -311,17 +310,12 @@ function Cart() {
               <SummaryItemPrice>${cart.total}</SummaryItemPrice>
             </SummaryItem>
 
-            <StripeCheckout
-              name="Vara Shop"
-              billingAddress
-              shippingAddress
-              description={`Your total is $${cart.total}`}
-              amount={cart.total * 100}
-              token={onToken}
-              stripeKey={KEY}
-            >
+            <Link to="checkout">
               <Button>CHECKOUT NOW</Button>
-            </StripeCheckout>
+            </Link>
+
+            {/* This is where CartCheckout will render */}
+            <Outlet />
           </Summary>
         </Bottom>
       </Wrapper>
