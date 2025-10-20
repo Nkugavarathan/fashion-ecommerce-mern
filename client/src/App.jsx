@@ -8,6 +8,7 @@ import Cart from "./pages/Cart"
 import { Routes, Route, Navigate } from "react-router-dom"
 import Success from "./pages/Success"
 import { useSelector } from "react-redux"
+import Profile from "./pages/Profile"
 
 function App() {
   // const user = useSelector((state) => state.user.currentUser)
@@ -19,9 +20,9 @@ function App() {
         <Route path="/product/:id" element={<SingleProduct />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/login" element={<Login />} />
-
         <Route path="/register" element={<Register />} />
         <Route path="/success" element={<Success />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </div>
   )

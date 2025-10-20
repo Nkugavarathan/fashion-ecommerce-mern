@@ -4,7 +4,7 @@ import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined"
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined"
 import { sliderItems } from "../data"
 import { mobile, tablet } from "../responsive"
-
+import { Link } from "react-router-dom"
 const Container = styled.div`
   width: 100%;
   height: 100vh;
@@ -199,7 +199,9 @@ function Slider() {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              <Button>SHOP NOW</Button>
+              {/* <Link to="/">
+                <Button>SHOP NOW</Button>
+              </Link> */}
             </InfoContainer>
           </Slide>
         ))}

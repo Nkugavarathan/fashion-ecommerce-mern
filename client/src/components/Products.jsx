@@ -6,7 +6,7 @@ import { mobile, tablet } from "../responsive"
 import axios from "axios"
 
 import ProductItem from "./ProductItem"
-import { popularProducts } from "./../data"
+// import { popularProducts } from "./../data"
 
 const Container = styled.div`
   padding: 10px;
