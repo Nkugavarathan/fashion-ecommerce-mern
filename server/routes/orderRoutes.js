@@ -1,7 +1,8 @@
 import express from "express"
 import {
   createOrder,
-  getAll,
+  getOrderById,
+  getAllOrders,
   monthlyIncome,
   updateOrder,
   deleteOrder,
@@ -11,15 +12,17 @@ import { admin, protect } from "./../middleware/authMiddleware.js"
 
 const router = express.Router()
 
+// create order (user)
 router.post("/", protect, createOrder)
-router.get("/", protect, admin, getAll)
+
+// get orders for a user
 router.get("/find/:userId", protect, getUserOrders)
 
-router.put("/:id", updateOrder)
-router.post("/find/userId", protect, createOrder)
-router.get("/income", monthlyIncome)
+// admin routes
+router.get("/", getAllOrders)
+router.get("/income", protect, admin, monthlyIncome)
+router.get("/:id", getOrderById)
+router.put("/:id", protect, admin, updateOrder)
 router.delete("/:id", protect, admin, deleteOrder)
 
-//get all ordeer
-router.get("/", getAll)
 export default router

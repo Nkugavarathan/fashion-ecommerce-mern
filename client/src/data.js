@@ -1,19 +1,19 @@
 export const sliderItems = [
   {
     id: 1,
-    image: "../public/images/summer.jpg",
+    image: "/images/summer.jpg",
     title: "SUMMER BREEZE",
     desc: "Light, airy, and effortlessly chic—our summer dresses are made for sunlit strolls and spontaneous getaways.",
   },
   {
     id: 2,
-    image: "../public/images/style.jpg",
+    image: "/images/style.jpg",
     title: "SEASON OF STYLE",
     desc: "Layer up with confidence. Discover dresses that blend comfort and charm for every autumn moment.",
   },
   {
     id: 3,
-    image: "../public/images/slider3.png",
+    image: "/images/slider3.png",
     title: "WINTER ESSENTIALS",
     desc: "Stay warm and stylish with our premium winter collection.",
   },
@@ -22,19 +22,19 @@ export const sliderItems = [
 export const categories = [
   {
     id: 1,
-    img: "../public/images/shirt.jpg", // Shirt Style
+    img: "/images/shirt.jpg", // Shirt Style
     title: "SHIRT STYLE",
     category: "shirt",
   },
   {
     id: 2,
-    img: "../public/images/summer.jpg", // Long wear Love
+    img: "/images/summer.jpg", // Long wear Love
     title: "Long wear Love",
     category: "longwear",
   },
   {
     id: 3,
-    img: "../public/images/jacket.jpg", // Light Jackets
+    img: "/images/jacket.jpg", // Light Jackets
     title: "Light Jackets",
     category: "jacket",
   },

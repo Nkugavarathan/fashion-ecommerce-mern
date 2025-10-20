@@ -13,6 +13,7 @@ import {
   ChatBubbleOutline,
   WorkOutline,
   Report,
+  ListAlt,
 } from "@mui/icons-material"
 import { Link } from "react-router-dom"
 function Sidebar() {
@@ -45,6 +46,15 @@ function Sidebar() {
                 <Storefront className="sidebarIcon" />
                 Products
               </li>
+            </Link>
+            <Link
+              to="/orders"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              <div className="sidebarItem">
+                <ListAlt fontSize="small" style={{ marginRight: 8 }} />
+                <span>Orders</span>
+              </div>
             </Link>
           </ul>
         </div>
