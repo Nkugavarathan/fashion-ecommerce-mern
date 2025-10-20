@@ -1,21 +1,125 @@
-import User from "../models/userModel.js"
+// import User from "../models/userModel.js"
+
+//import Order from "../models/orderModel.js"
+
+// export const createOrder = async (req, res) => {
+//   try {
+//     const { userId, products, amount, address, paymentInfo } = req.body
+//     if (!userId || !products || !amount) {
+//       return res.status(400).json({ message: "Missing required order fields" })
+//     }
+
+//     const newOrder = new Order({
+//       userId,
+//       products,
+//       amount,
+//       address: address || {},
+//       payment: {
+//         cardLast4: paymentInfo?.cardNumber?.slice(-4) || null,
+//         method: paymentInfo?.method || "card",
+//         paid: true,
+//       },
+//       status: "processing",
+//     })
+
+//     const saved = await newOrder.save()
+//     return res.status(201).json(saved)
+//   } catch (err) {
+//     console.error("createOrder error:", err)
+//     // handle duplicate key index error specifically
+//     if (err && err.code === 11000 && err.keyPattern && err.keyPattern.userId) {
+//       return res.status(409).json({
+//         message:
+//           "Duplicate index error on orders.userId — your orders collection currently has a unique index on userId. Drop that index to allow multiple orders per user.",
+//         details: err.keyValue,
+//       })
+//     }
+//     return res
+//       .status(500)
+//       .json({ message: "Create order failed", error: err.message })
+//   }
+// }
 
 import Order from "../models/orderModel.js"
+import Product from "../models/productModel.js"
 
 export const createOrder = async (req, res) => {
   try {
-    const { userId, products, amount, address, paymentInfo } = req.body
-    if (!userId || !products || !amount) {
+    let { userId, products, amount, address, paymentInfo } = req.body
+
+    if (!userId || !products) {
       return res.status(400).json({ message: "Missing required order fields" })
     }
 
+    // If products were sent as a JSON string (FormData), parse it
+    if (typeof products === "string") {
+      try {
+        products = JSON.parse(products)
+      } catch {
+        // try simple split fallback (comma separated)
+        products = products
+          .split(",")
+          .map((s) => s.trim())
+          .filter(Boolean)
+          .map((p) => ({ title: p, quantity: 1, price: 0 }))
+      }
+    }
+
+    // Normalize products array: ensure title, price, quantity are present.
+    // If productId provided but title/price missing, fetch product snapshot from products collection.
+    const normalized = await Promise.all(
+      products.map(async (p) => {
+        const qty = Number(p.quantity ?? p.qty ?? 1)
+        // if there is a productId, try to enrich from DB
+        if (p.productId) {
+          try {
+            const prod = await Product.findById(p.productId).lean()
+            return {
+              productId: p.productId,
+              title: p.title || prod?.title || prod?.name || "Unknown Product",
+              price: Number(p.price ?? prod?.price ?? 0),
+              quantity: qty,
+              image: p.image || prod?.image || "",
+            }
+          } catch (err) {
+            // fallback if product lookup fails
+            return {
+              productId: p.productId,
+              title: p.title || "Unknown Product",
+              price: Number(p.price ?? 0),
+              quantity: qty,
+              image: p.image || "",
+            }
+          }
+        }
+
+        // otherwise use provided snapshot (title/price)
+        return {
+          productId: p.productId || null,
+          title: p.title || "Unknown Product",
+          price: Number(p.price ?? 0),
+          quantity: qty,
+          image: p.image || "",
+        }
+      })
+    )
+
+    // Compute amount reliably from normalized products (price * qty)
+    const computedAmount = normalized.reduce(
+      (sum, it) => sum + Number(it.price || 0) * Number(it.quantity || 0),
+      0
+    )
+    amount = Number(amount) || computedAmount
+
     const newOrder = new Order({
       userId,
-      products,
+      products: normalized,
       amount,
       address: address || {},
       payment: {
-        cardLast4: paymentInfo?.cardNumber?.slice(-4) || null,
+        cardLast4: paymentInfo?.cardNumber
+          ? String(paymentInfo.cardNumber).slice(-4)
+          : paymentInfo?.cardLast4 || null,
         method: paymentInfo?.method || "card",
         paid: true,
       },
@@ -26,11 +130,10 @@ export const createOrder = async (req, res) => {
     return res.status(201).json(saved)
   } catch (err) {
     console.error("createOrder error:", err)
-    // handle duplicate key index error specifically
     if (err && err.code === 11000 && err.keyPattern && err.keyPattern.userId) {
       return res.status(409).json({
         message:
-          "Duplicate index error on orders.userId — your orders collection currently has a unique index on userId. Drop that index to allow multiple orders per user.",
+          "Duplicate index error on orders.userId — drop the unique index on userId to allow multiple orders per user.",
         details: err.keyValue,
       })
     }
@@ -40,24 +143,43 @@ export const createOrder = async (req, res) => {
   }
 }
 
-// Get orders for a user
-export const getUserOrders = async (req, res) => {
-  try {
-    const userId = req.params.userId
-    const orders = await Order.find({ userId }).sort({ createdAt: -1 })
-    return res.status(200).json(orders)
-  } catch (err) {
-    console.error("getUserOrders error:", err)
-    return res
-      .status(500)
-      .json({ message: "Could not fetch orders", error: err.message })
-  }
-}
-
-// (Optional) Admin: get all orders
+// Get all orders (admin) — populate user and enrich product snapshots
 export const getAllOrders = async (req, res) => {
   try {
-    const orders = await Order.find().sort({ createdAt: -1 })
+    // populate user basic fields
+    const orders = await Order.find()
+      .sort({ createdAt: -1 })
+      .populate("userId", "username email")
+      .lean()
+
+    // Enrich each order.products with product title/price if missing
+    for (const order of orders) {
+      if (!order.products || !order.products.length) continue
+      for (const p of order.products) {
+        // If title already present skip
+        if (p.title) continue
+        if (!p.productId) {
+          p.title = p.title || "Unknown Product"
+          p.price = Number(p.price || 0)
+          continue
+        }
+        try {
+          const prod = await Product.findById(p.productId).lean()
+          if (prod) {
+            p.title = p.title || prod.title || prod.name || "Unknown Product"
+            p.price = Number(p.price ?? prod.price ?? 0)
+            p.image = p.image || prod.image || ""
+          } else {
+            p.title = p.title || "Unknown Product"
+            p.price = Number(p.price || 0)
+          }
+        } catch {
+          p.title = p.title || "Unknown Product"
+          p.price = Number(p.price || 0)
+        }
+      }
+    }
+
     return res.status(200).json(orders)
   } catch (err) {
     console.error("getAllOrders error:", err)
@@ -66,6 +188,143 @@ export const getAllOrders = async (req, res) => {
       .json({ message: "Could not fetch orders", error: err.message })
   }
 }
+
+// Get single order by id (admin) — populate user and enrich products
+export const getOrderById = async (req, res) => {
+  try {
+    const id = req.params.id
+    const orderDoc = await Order.findById(id)
+      .populate("userId", "username email")
+      .lean()
+    if (!orderDoc) return res.status(404).json({ message: "Order not found" })
+
+    // enrich products same as above
+    if (orderDoc.products && orderDoc.products.length) {
+      for (const p of orderDoc.products) {
+        if (p.title) continue
+        if (!p.productId) {
+          p.title = p.title || "Unknown Product"
+          p.price = Number(p.price || 0)
+          continue
+        }
+        try {
+          const prod = await Product.findById(p.productId).lean()
+          if (prod) {
+            p.title = p.title || prod.title || prod.name || "Unknown Product"
+            p.price = Number(p.price ?? prod.price ?? 0)
+            p.image = p.image || prod.image || ""
+          } else {
+            p.title = p.title || "Unknown Product"
+            p.price = Number(p.price || 0)
+          }
+        } catch {
+          p.title = p.title || "Unknown Product"
+          p.price = Number(p.price || 0)
+        }
+      }
+    }
+
+    return res.status(200).json(orderDoc)
+  } catch (err) {
+    console.error("getOrderById error:", err)
+    return res
+      .status(500)
+      .json({ message: "Failed to fetch order", error: err.message })
+  }
+}
+
+// Get orders for a user (used by profile) — enrich products too
+export const getUserOrders = async (req, res) => {
+  try {
+    const userId = req.params.userId
+    const orders = await Order.find({ userId }).sort({ createdAt: -1 }).lean()
+
+    for (const order of orders) {
+      if (!order.products) continue
+      for (const p of order.products) {
+        if (p.title) continue
+        if (!p.productId) {
+          p.title = p.title || "Unknown Product"
+          p.price = Number(p.price || 0)
+          continue
+        }
+        try {
+          const prod = await Product.findById(p.productId).lean()
+          if (prod) {
+            p.title = p.title || prod.title || prod.name || "Unknown Product"
+            p.price = Number(p.price ?? prod.price ?? 0)
+            p.image = p.image || prod.image || ""
+          } else {
+            p.title = p.title || "Unknown Product"
+            p.price = Number(p.price || 0)
+          }
+        } catch {
+          p.title = p.title || "Unknown Product"
+          p.price = Number(p.price || 0)
+        }
+      }
+    }
+
+    return res.status(200).json(orders)
+  } catch (err) {
+    console.error("getUserOrders error:", err)
+    return res
+      .status(500)
+      .json({ message: "Could not fetch user orders", error: err.message })
+  }
+}
+
+// Get orders for a user
+// export const getUserOrders = async (req, res) => {
+//   try {
+//     const userId = req.params.userId
+//     const orders = await Order.find({ userId }).sort({ createdAt: -1 })
+//     return res.status(200).json(orders)
+//   } catch (err) {
+//     console.error("getUserOrders error:", err)
+//     return res
+//       .status(500)
+//       .json({ message: "Could not fetch orders", error: err.message })
+//   }
+// }
+
+// (Optional) Admin: get all orders
+// export const getAllOrders = async (req, res) => {
+//   // try {
+//   //   const orders = await Order.find().sort({ createdAt: -1 })
+//   //   return res.status(200).json(orders)
+//   // } catch (err) {
+//   //   console.error("getAllOrders error:", err)
+//   //   return res
+//   //     .status(500)
+//   //     .json({ message: "Could not fetch orders", error: err.message })
+//   // }
+
+//   try {
+//     const orders = await Order.find()
+//       .populate("userId", "username email") // optional: get username/email
+//       .populate("products.productId", "title") // get only product title
+//       .sort({ createdAt: -1 })
+
+//     res.status(200).json(orders)
+//   } catch (err) {
+//     res.status(500).json(err)
+//   }
+// }
+
+// export const getAllOrders = async (req, res) => {
+//   try {
+//     const orders = await Order.find()
+//       .populate("userId", "username email") // show user info
+//       .populate("products.productId", "title") // show product titles
+//       .sort({ createdAt: -1 })
+
+//     res.status(200).json(orders)
+//   } catch (err) {
+//     console.error("getAllOrders error:", err)
+//     res.status(500).json({ message: err.message })
+//   }
+// }
 
 // Update order status (admin)
 export const updateOrder = async (req, res) => {
@@ -150,16 +409,16 @@ export const deleteOrder = async (req, res) => {
 // }
 
 // Get single order by id (admin)
-export const getOrderById = async (req, res) => {
-  try {
-    const id = req.params.id
-    const order = await Order.findById(id)
-    if (!order) return res.status(404).json({ message: "Order not found" })
-    return res.status(200).json(order)
-  } catch (err) {
-    console.error("getOrderById error:", err)
-    return res
-      .status(500)
-      .json({ message: "Failed to fetch order", error: err.message })
-  }
-}
+// export const getOrderById = async (req, res) => {
+//   try {
+//     const id = req.params.id
+//     const order = await Order.findById(id)
+//     if (!order) return res.status(404).json({ message: "Order not found" })
+//     return res.status(200).json(order)
+//   } catch (err) {
+//     console.error("getOrderById error:", err)
+//     return res
+//       .status(500)
+//       .json({ message: "Failed to fetch order", error: err.message })
+//   }
+// }

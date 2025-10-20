@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import image from "../../public/images/men.jpg"
+import image from "/images/men.jpg"
 
 export default function MenCategory() {
   return (

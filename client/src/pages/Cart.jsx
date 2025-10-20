@@ -6,8 +6,8 @@ import { Outlet } from "react-router-dom"
 import Footer from "../components/Footer"
 import { mobile, tablet } from "../responsive"
 import axios from "axios"
-import RemoveIcon from "@mui/icons-material/Remove"
-import AddIcon from "@mui/icons-material/Add"
+import { Remove } from "@mui/icons-material"
+import { Add } from "@mui/icons-material"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 
@@ -269,12 +269,12 @@ function Cart() {
                 </ProductDetails>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <RemoveIcon
+                    <Remove
                       onClick={() => handleQuantity(product, "dec")}
                       style={{ cursor: "pointer" }}
                     />
                     <ProductAmount>{product.quantity}</ProductAmount>
-                    <AddIcon
+                    <Add
                       onClick={() => handleQuantity(product, "inc")}
                       style={{ cursor: "pointer" }}
                     />
