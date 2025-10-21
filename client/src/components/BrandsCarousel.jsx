@@ -1,11 +1,10 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
 
-// 10 popular clothing brand logos (you can replace links if needed)
 const brands = [
   {
     name: "Gucci",
-    img: "https://upload.wikimedia.org/wikipedia/commons/6/6e/Gucci_Logo.svg",
+    img: "https://cdn.freebiesupply.com/logos/large/2x/gucci-1-logo-png-transparent.png",
   },
   {
     name: "Adidas",
@@ -17,11 +16,7 @@ const brands = [
   },
   {
     name: "Puma",
-    img: "https://upload.wikimedia.org/wikipedia/commons/f/fd/Puma_Logo.svg",
-  },
-  {
-    name: "Levis",
-    img: "https://upload.wikimedia.org/wikipedia/commons/9/9d/Levis_logo.svg",
+    img: "https://cdn.freebiesupply.com/logos/large/2x/puma-logo-png-transparent.png",
   },
   {
     name: "Zara",
@@ -33,22 +28,18 @@ const brands = [
   },
   {
     name: "Calvin Klein",
-    img: "https://upload.wikimedia.org/wikipedia/commons/1/15/Calvin_klein_logo.svg",
+    img: "https://cdn.freebiesupply.com/logos/large/2x/calvin-klein-logo-png-transparent.png",
   },
   {
     name: "Tommy Hilfiger",
-    img: "https://upload.wikimedia.org/wikipedia/commons/4/44/Tommy_Hilfiger_Logo.svg",
-  },
-  {
-    name: "Louis Vuitton",
-    img: "https://upload.wikimedia.org/wikipedia/commons/6/6a/Louis_Vuitton_logo_and_wordmark.svg",
+    img: "https://cdn.freebiesupply.com/logos/large/2x/tommy-hilfiger-logo-png-transparent.png",
   },
 ]
 
 //  Animation for infinite scroll
 const scroll = keyframes`
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  to { transform: translateX(-40%); }
 `
 
 // ==================== Styled Components ====================
@@ -57,11 +48,6 @@ const Wrapper = styled.div`
   text-align: center;
   padding: 40px 0;
   background: #fafafa;
-  h2 {
-    font-size: 1.8rem;
-    font-weight: 600;
-    margin-bottom: 24px;
-  }
 `
 
 const Carousel = styled.div`
@@ -73,24 +59,26 @@ const Carousel = styled.div`
 const Slider = styled.div`
   display: flex;
   width: calc(200%);
-  animation: ${scroll} 25s linear infinite;
+  animation: ${scroll} 40s linear infinite;
+  will-change: transform;
 `
 
 const LogoBox = styled.div`
   flex: 0 0 auto;
-  width: 150px;
-  height: 80px;
-  margin: 0 20px;
+  width: 160px;
+  height: 90px;
+  margin: 0 25px;
   display: flex;
   align-items: center;
   justify-content: center;
   filter: grayscale(100%) opacity(0.8);
-  transition: all 0.3s ease;
+  transition: transform 0.3s ease, filter0.3s ease;
 
   img {
-    width: 100px;
+    width: 100%;
     height: auto;
     object-fit: contain;
+    max-height: ;80px
   }
 
   &:hover {
@@ -102,13 +90,17 @@ const LogoBox = styled.div`
 const BrandsCarousel = () => {
   return (
     <Wrapper>
-      <h2 className="text-center text-teal-600 font-bold text-xl my-4">
+      <h2 className="text-center text-teal-600 font-bold text-xl my-2">
         Our Brands
       </h2>
+      <p className="text-center text-gray-600 mt-2 max-w-xl mx-auto mb-5">
+        We proudly feature products from globally trusted brands. Quality,
+        style, and comfort—curated for you.
+      </p>
       <Carousel>
         <Slider>
-          {brands.concat(brands).map((brand, index) => (
-            <LogoBox key={index}>
+          {[...brands, ...brands].map((brand, i) => (
+            <LogoBox key={i}>
               <img src={brand.img} alt={brand.name} title={brand.name} />
             </LogoBox>
           ))}
