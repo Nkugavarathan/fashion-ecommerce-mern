@@ -46,8 +46,9 @@ const scroll = keyframes`
 
 const Wrapper = styled.div`
   text-align: center;
-  padding: 40px 0;
+  padding: 30px 0;
   background: #fafafa;
+  min-height: 50vh;
 `
 
 const Carousel = styled.div`
@@ -90,10 +91,10 @@ const LogoBox = styled.div`
 const BrandsCarousel = () => {
   return (
     <Wrapper>
-      <h2 className="text-center text-teal-600 font-bold text-xl my-2">
+      <h2 className="text-center text-teal-600 font-bold text-6xl my-2">
         Our Brands
       </h2>
-      <p className="text-center text-gray-600 mt-2 max-w-xl mx-auto mb-5">
+      <p className="text-center text-gray-600  text-2xl mx-auto mt-6 mb-25">
         We proudly feature products from globally trusted brands. Quality,
         style, and comfort—curated for you.
       </p>

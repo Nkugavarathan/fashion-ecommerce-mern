@@ -16,6 +16,7 @@ export default function Home() {
       <Categories />
       <Products />
       <BrandsCarousel />
+
       <Newsletter />
       <Footer />
     </div>
