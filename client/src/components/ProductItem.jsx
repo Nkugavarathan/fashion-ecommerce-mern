@@ -76,6 +76,7 @@ const Icon = styled.div`
     transform: scale(1.1);
   }
 `
+
 // each product
 function ProductItem({ item }) {
   const dispatch = useDispatch()

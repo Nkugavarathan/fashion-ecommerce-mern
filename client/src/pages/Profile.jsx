@@ -114,7 +114,7 @@
 //               ? new Date(order.createdAt).toLocaleString()
 //               : ""
 //             const orderId = order._id || order.id
-//             const total =
+//             const  =
 //               order.amount ?? order.total ?? order.price ?? order.cartTotal
 
 //             return (
@@ -456,7 +456,7 @@ export default function Profile() {
                   </OrderLeft>
                   <OrderRight>
                     <div style={{ fontWeight: 700 }}>
-                      ${Number(total).toFixed(2)}
+                      Rs {Number(total).toFixed(2)}
                     </div>
                     <Small>Status: {order.status || "processing"}</Small>
                     <Link

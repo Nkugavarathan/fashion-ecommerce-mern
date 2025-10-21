@@ -280,7 +280,7 @@ function Cart() {
                     />
                   </ProductAmountContainer>
                   <ProductPrice>
-                    ${product.price * product.quantity}
+                    Rs {product.price * product.quantity}
                   </ProductPrice>
                   <RemoveButton onClick={() => handleRemove(product._id)}>
                     Remove
@@ -295,7 +295,7 @@ function Cart() {
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>${cart.total}</SummaryItemPrice>
+              <SummaryItemPrice>Rs {cart.total}</SummaryItemPrice>
             </SummaryItem>
             {/* <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>

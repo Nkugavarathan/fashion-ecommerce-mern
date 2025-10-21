@@ -1,62 +1,5 @@
 import Product from "../models/productModel.js"
 
-//create product
-// export const createProduct = async (req, res) => {
-//   const newProduct = new Product(req.body)
-//   try {
-//     const savedProduct = await newProduct.save()
-//     res.status(200).json(savedProduct)
-//   } catch (error) {
-//     res.status(500).json(error)
-//   }
-// }
-
-// export const createProduct = async (req, res) => {
-//   try {
-//     const data = { ...req.body }
-
-//     if (data.desc) data.description = data.desc
-
-//     // if multer stored a file, set the public URL
-//     if (req.file) {
-//       data.image = `${req.protocol}://${req.get("host")}/uploads/${
-//         req.file.filename
-//       }`
-//     }
-
-//     // categories may be sent as JSON string
-//     if (data.categories && typeof data.categories === "string") {
-//       try {
-//         data.categories = JSON.parse(data.categories)
-//       } catch {
-//         data.categories = data.categories
-//           .split(",")
-//           .map((s) => s.trim())
-//           .filter(Boolean)
-//       }
-//     }
-
-//     // normalize inStock to boolean
-//     if (typeof data.inStock === "string") {
-//       data.inStock = data.inStock === "true" || data.inStock === "1"
-//     } else {
-//       data.inStock = Boolean(data.inStock)
-//     }
-
-//     // gender/main category field name used in frontend was "gender"
-//     if (data.gender) data.category = data.gender // optional: map to your schema field
-
-//     const newProduct = new Product(data)
-//     const saved = await newProduct.save()
-//     res.status(201).json(saved)
-//   } catch (err) {
-//     console.error("createProduct error:", err)
-//     res
-//       .status(500)
-//       .json({ message: "Create product failed", error: err.message })
-//   }
-// }
-
 export const createProduct = async (req, res) => {
   try {
     const data = { ...req.body }
@@ -218,6 +161,7 @@ export const getAllProducts = async (req, res) => {
   // const qColor = req.query.color // ?color=red
   // const qPriceGte = req.query.priceGte // ?priceGte=100
   // const qPriceLte = req.query.priceLte // ?priceLte=500
+  const qSearch = req.query.search
 
   try {
     let filter = {}
@@ -229,6 +173,12 @@ export const getAllProducts = async (req, res) => {
     if (qCategory) {
       filter.categories = { $in: [qCategory] }
     }
+
+    if (qSearch) {
+      filter.title = { $regex: qSearch, $options: "i" } // case-insensitive
+    }
+    // const products = await Product.find(filter)
+    // res.status(200).json(products)
 
     // // Size filter
     // if (qSize) {

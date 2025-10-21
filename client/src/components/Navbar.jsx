@@ -219,6 +219,9 @@ const DropdownItem = styled.button`
 `
 
 function Navbar({ isHome }) {
+  const [searchQuery, setSearchQuery] = useState("")
+  const [searchResults, setSearchResults] = useState([])
+
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [acctOpen, setAcctOpen] = useState(false)
@@ -279,7 +282,31 @@ function Navbar({ isHome }) {
           <Left>
             <Language>EN</Language>
             <SearchContainer>
-              <Input placeholder="Search" />
+              <Input
+                placeholder="Search"
+                value={searchQuery}
+                onChange={async (e) => {
+                  const query = e.target.value
+                  setSearchQuery(query)
+
+                  if (!query) {
+                    setSearchResults([])
+                    return
+                  }
+
+                  // Call backend API to get matching products
+                  try {
+                    const res = await axios.get(
+                      `http://localhost:4000/api/products?search=${query}`
+                    )
+                    setSearchResults(res.data)
+                  } catch (err) {
+                    console.log(err)
+                  }
+                }}
+              />
+              <SearchIcon style={{ fontSize: 20, color: "gray" }} />
+
               <SearchIcon style={{ fontSize: 20, color: "gray" }} />
             </SearchContainer>
           </Left>

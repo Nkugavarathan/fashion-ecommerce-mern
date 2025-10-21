@@ -94,7 +94,7 @@ export default function CartCheckout() {
           quantity: p.quantity,
           price: p.price,
         })),
-        amount: cart.total || 0,
+        amount: Number(cart.total) || 0,
         address: { name, email, address },
         payment: {
           cardLast4: cardNumber.slice(-4),
@@ -194,7 +194,9 @@ export default function CartCheckout() {
             disabled={loading}
             className="bg-teal-600 text-white px-4 py-2 rounded"
           >
-            {loading ? "Processing..." : `Pay $${(cart.total || 0).toFixed(2)}`}
+            {loading
+              ? "Processing..."
+              : `Pay Rs ${(cart.total || 0).toFixed(2)}`}
           </button>
         </div>
       </form>
