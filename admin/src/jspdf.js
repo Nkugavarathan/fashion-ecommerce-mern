@@ -26,7 +26,7 @@ export const handleDownloadPDF = (order) => {
   doc.setTextColor(255, 255, 255)
   doc.setFontSize(24)
   doc.setFont("helvetica", "bold")
-  doc.text("VARA SHOP", 20, 25)
+  doc.text("VARA FASHION SHOP", 20, 25)
 
   // Invoice Title
   doc.setFontSize(20)
@@ -164,12 +164,12 @@ export const handleDownloadPDF = (order) => {
 
   // Shipping (you can add this if available)
   // doc.text("Shipping:", pageWidth - 70, totalsStartY + 8)
-  doc.text("Rs 0.00", pageWidth - 20, totalsStartY + 8, { align: "right" })
+  // doc.text("Rs 0.00", pageWidth - 20, totalsStartY + 8, { align: "right" })
 
   // Total
   doc.setFontSize(12)
   doc.setFont("helvetica", "bold")
-  doc.text("Total Amount:", pageWidth - 70, totalsStartY + 20)
+  doc.text("Total Amount: ", pageWidth - 70, totalsStartY + 20)
   doc.setTextColor(...secondaryColor)
   doc.text(
     `Rs ${Number(order.amount ?? 0).toFixed(2)}`,
@@ -198,7 +198,7 @@ export const handleDownloadPDF = (order) => {
   doc.setFontSize(8)
   doc.setFont("helvetica", "normal")
   doc.text(
-    "Thank you for shopping with VARA Shop!",
+    "Thank you for shopping with VARA Fashion Shop!",
     pageWidth / 2,
     footerY + 8,
     { align: "center" }
