@@ -111,7 +111,7 @@ export default function WidgetLg() {
   }
 
   return (
-    <div className="bg-white p-4 rounded shadow w-full overflow-x-auto">
+    <div className="bg-white p-4 rounded shadow w-full overflow-x-auto ms-5">
       <h3 className="text-lg font-semibold mb-4">Latest Transactions</h3>
       <table className="min-w-full text-sm">
         <thead>

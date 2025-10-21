@@ -9,7 +9,7 @@ import {
 
 export default function Chart({ title, data, dataKey, grid }) {
   return (
-    <div className="bg-white p-4 rounded shadow w-full">
+    <div className="bg-white p-4 rounded shadow w-full my-5 ms-5">
       <h3 className="text-lg font-semibold mb-4">{title}</h3>
       <div className="w-full h-64">
         <ResponsiveContainer width="100%" height="100%">
