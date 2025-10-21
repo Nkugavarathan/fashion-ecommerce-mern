@@ -37,7 +37,7 @@ export default function FeaturedInfo() {
       <div className="bg-white p-5 rounded-xl shadow-md flex-1 min-w-[250px]">
         <span className="text-gray-500 text-sm">Total Income</span>
         <div className="text-2xl font-bold text-gray-800 mt-1">
-          ${totalIncome.toFixed(2)}
+          Rs {totalIncome.toFixed(2)}
         </div>
       </div>
 
