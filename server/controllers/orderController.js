@@ -135,8 +135,9 @@ export const getAllOrders = async (req, res) => {
   try {
     // populate user basic fields
     const orders = await Order.find()
-      .sort({ createdAt: -1 })
       .populate("userId", "username email")
+      .sort({ createdAt: -1 })
+
       .lean()
 
     // Enrich each order.products with product title/price if missing
