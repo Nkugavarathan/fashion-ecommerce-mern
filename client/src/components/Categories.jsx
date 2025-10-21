@@ -46,9 +46,30 @@ const WaveSection = styled.section`
   }
 `
 
+// const SubCategorySection = styled.section`
+//   position: relative;
+//   background-color: #ffffff;
+//   padding: 120px 20px 60px;
+//   overflow: hidden;
+
+//   ${mobile(`
+//     padding: 80px 10px;
+//   `)}
+
+//   svg {
+//     position: absolute;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     transform: rotate(180deg);
+//   }
+// `
+
+// ---------- Component ----------
+
 const SubCategorySection = styled.section`
   position: relative;
-  background-color: #ffffff;
+  background: linear-gradient(to bottom, #a2d9ff 0%, #ffffff 100%);
   padding: 120px 20px 60px;
   overflow: hidden;
 
@@ -64,8 +85,6 @@ const SubCategorySection = styled.section`
     transform: rotate(180deg);
   }
 `
-
-// ---------- Component ----------
 
 export default function Categories() {
   return (
