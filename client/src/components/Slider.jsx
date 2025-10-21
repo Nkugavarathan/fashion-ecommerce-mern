@@ -4,119 +4,111 @@ import ArrowForwardOutlinedIcon from "@mui/icons-material/ArrowForwardOutlined"
 import ArrowBackOutlinedIcon from "@mui/icons-material/ArrowBackOutlined"
 import { sliderItems } from "../data"
 import { mobile, tablet } from "../responsive"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
+
 const Container = styled.div`
   width: 100%;
   height: 100vh;
-  display: flex;
   position: relative;
   overflow: hidden;
+  display: flex;
+  background: #fff;
 
   ${tablet(`
-    margin-top:100px;
-
     height: auto;
+    margin-top: 100px;
   `)}
 
   ${mobile(`
-    margin-top:100px;
     height: auto;
+    margin-top: 100px;
   `)}
 `
 
-const Arrow = styled.span`
+const Arrow = styled.div`
   width: 50px;
   height: 50px;
-  background-color: #fff7f7;
+  background: rgba(255, 255, 255, 0.5);
   border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  cursor: pointer;
   top: 0;
   bottom: 0;
   margin: auto;
-  left: ${(props) => (props.direction === "left" ? "10px" : "auto")};
-  right: ${(props) => (props.direction === "right" ? "10px" : "auto")};
-  opacity: 0.7;
-  z-index: 2;
+  left: ${(props) => (props.direction === "left" ? "20px" : "auto")};
+  right: ${(props) => (props.direction === "right" ? "20px" : "auto")};
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(6px);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.9);
+    transform: scale(1.05);
+  }
 `
 
 const Wrapper = styled.div`
-  height: 100%;
   display: flex;
   transition: all 1s ease;
+  height: 100%;
   transform: translateX(${(props) => props.slideIndex * -100}vw);
 `
 
 const Slide = styled.div`
-  width: 100vw;
-  height: 100vh;
   display: flex;
   align-items: center;
-  background-color: #f5f5f5;
+  width: 100vw;
+  height: 100vh;
 
   ${tablet(`
     flex-direction: column;
     height: auto;
-    padding: 20px 0;
   `)}
 
   ${mobile(`
     flex-direction: column;
     height: auto;
-    padding: 20px 0;
   `)}
 `
 
 const ImgContainer = styled.div`
-  flex: 1;
-  padding: 50px;
-
-  ${tablet(`
-    padding: 20px;
-  `)}
-
-  ${mobile(`
-    padding: 10px;
-  `)}
+  flex: 1.2;
+  height: 100%;
+  overflow: hidden;
 `
 
 const Image = styled.img`
-  height: 80%;
   width: 100%;
+  height: 100%;
   object-fit: cover;
-  border-radius: 10px;
+  transition: transform 1.5s ease;
 
-  ${tablet(`
-    height: auto;
-    max-height: 300px;
-  `)}
-
-  ${mobile(`
-    height: auto;
-    max-height: 250px;
-  `)}
+  ${Slide}:hover & {
+    transform: scale(1.03);
+  }
 `
 
 const InfoContainer = styled.div`
-  flex: 1;
-  padding: 50px;
+  flex: 0.8;
+  height: 100%;
+  padding: 80px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  gap: 20px;
+  background: linear-gradient(90deg, #ffffff, #f7f7f7);
+  color: #111;
 
   ${tablet(`
-    padding: 20px;
+    padding: 40px;
     align-items: center;
     text-align: center;
   `)}
 
   ${mobile(`
-    padding: 15px;
+    padding: 20px;
     align-items: center;
     text-align: center;
   `)}
@@ -124,53 +116,42 @@ const InfoContainer = styled.div`
 
 const Title = styled.h1`
   font-size: 60px;
-  font-weight: bold;
-  margin: 0;
+  font-weight: 800;
+  margin-bottom: 20px;
+  line-height: 1.1;
 
-  ${tablet(`
-    font-size: 40px;
-  `)}
-
-  ${mobile(`
-    font-size: 28px;
-  `)}
+  ${tablet(`font-size: 40px;`)}
+  ${mobile(`font-size: 28px;`)}
 `
 
 const Desc = styled.p`
   max-width: 500px;
-  font-weight: 500;
   font-size: 20px;
-  line-height: 1.6;
-  letter-spacing: 1px;
-  margin: 0;
+  color: #555;
+  line-height: 1.8;
+  margin-bottom: 30px;
 
-  ${tablet(`
-    font-size: 18px;
-  `)}
-
-  ${mobile(`
-    font-size: 16px;
-  `)}
+  ${tablet(`font-size: 18px;`)}
+  ${mobile(`font-size: 16px;`)}
 `
 
 const Button = styled.button`
-  padding: 12px 25px;
+  padding: 14px 30px;
+  background-color: #008080;
+  color: white;
+  text-align: center;
   font-size: 18px;
   font-weight: 600;
-  border: 2px solid teal;
-  background-color: transparent;
+  border: none;
+  border-radius: 30px;
   cursor: pointer;
   transition: all 0.3s ease;
 
   &:hover {
-    background-color: teal;
-    color: white;
+    background-color: #006666;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0, 128, 128, 0.3);
   }
-
-  ${mobile(`
-    font-size: 16px;
-    padding: 10px 20px;
-  `)}
 `
 
 function Slider() {
@@ -199,9 +180,9 @@ function Slider() {
             <InfoContainer>
               <Title>{item.title}</Title>
               <Desc>{item.desc}</Desc>
-              {/* <Link to="/">
-                <Button>SHOP NOW</Button>
-              </Link> */}
+              <Button as="a" href="#categories">
+                Explore
+              </Button>
             </InfoContainer>
           </Slide>
         ))}

@@ -34,7 +34,9 @@ const Wrapper = styled.div`
 const Image = styled.img`
   width: 100%;
   height: 67.5vh; // 75% of 90vh
-  object-fit: cover;
+  object-fit: contain;
+  background-color: #f5f5f5; /* Optional: adds light background behind transparent images */
+  padding: 10px; /* Optional: adds breathing room if image has different aspect ratio */
 
   ${tablet(`
     height: 45vh;
@@ -44,6 +46,7 @@ const Image = styled.img`
     height: 30vh;
   `)}
 `
+
 const InfoContainer = styled.div`
   flex: 1;
   width: 100%;
@@ -82,6 +85,10 @@ const AddContainer = styled.div`
 `
 const ImageContainer = styled.div`
   flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
 `
 
 const Title = styled.h1`
@@ -235,7 +242,7 @@ function SingleProduct() {
           </AddContainer>
         </InfoContainer>
       </Wrapper>
-      <Newsletter />
+      {/* <Newsletter /> */}
       <Footer />
     </Container>
   )

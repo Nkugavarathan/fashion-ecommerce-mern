@@ -25,7 +25,7 @@ const Container = styled.div`
 
 function Categories() {
   return (
-    <>
+    <div id="categories">
       <h2 className="text-center text-teal-600 font-bold text-xl my-4">
         Our Categories
       </h2>
@@ -50,7 +50,7 @@ function Categories() {
           <CategoryItem item={item} key={item.id} />
         ))}
       </Container>
-    </>
+    </div>
   )
 }
 

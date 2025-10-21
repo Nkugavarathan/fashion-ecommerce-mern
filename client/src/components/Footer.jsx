@@ -16,10 +16,10 @@ export default function Footer() {
         <div className="flex-1 min-w-[250px]">
           <h1 className="text-2xl font-bold text-teal-600 mb-4">VARA</h1>
           <p className="mb-4 text-sm">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Aspernatur
-            fuga itaque minima iure ex ad facilis unde, cumque deleniti aut
-            laudantium magni dolores ipsa, a dolorem, esse sint quo
-            exercitationem?
+            Discover the latest trends in fashion with us. From everyday
+            essentials to statement pieces, we bring you styles that define
+            confidence and comfort. Shop quality, shop style — made just for
+            you.
           </p>
           <div className="flex gap-3">
             <span className="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center text-white hover:scale-110 transition">
