@@ -35,14 +35,11 @@ export default function UserList() {
       width: 200,
       renderCell: (params) => (
         <div className="flex items-center">
-          <img
+          {/* <img
             className="w-10 h-10 rounded-full cursor-pointer mr-2"
-            src={
-              params.row.img ||
-              "https://tse4.mm.bing.net/th/id/OIP.Kk4i-k-7bOfsgPv0SJtj5AHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
-            }
-            alt=""
-          />
+            src={params.row.image ||               "https://tse4.mm.bing.net/th/id/OIP.Kk4i-k-7bOfsgPv0SJtj5AHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"}
+            alt="img"
+          /> */}
           {params.row.username}
         </div>
       ),

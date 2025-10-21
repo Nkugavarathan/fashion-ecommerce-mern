@@ -201,11 +201,11 @@ export default function WidgetLg() {
           {orders.map((order) => (
             <tr key={order._id} className="border-b">
               <td className="flex items-center gap-2 p-2">
-                <img
+                {/* <img
                   src="https://via.placeholder.com/40"
                   alt="User Avatar"
                   className="w-8 h-8 rounded-full object-cover"
-                />
+                /> */}
                 <span>{order.userId?.username || "Unknown User"}</span>
               </td>
               <td className="p-2">{formatDate(order.createdAt)}</td>

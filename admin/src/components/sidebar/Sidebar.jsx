@@ -2,17 +2,8 @@ import React from "react"
 import "./sidebar.css"
 import {
   LineStyle,
-  Timeline,
-  TrendingUp,
   PermIdentity,
   Storefront,
-  AttachMoney,
-  BarChart,
-  MailOutline,
-  DynamicFeed,
-  ChatBubbleOutline,
-  WorkOutline,
-  Report,
   ListAlt,
 } from "@mui/icons-material"
 import { Link } from "react-router-dom"
@@ -51,10 +42,10 @@ function Sidebar() {
               to="/orders"
               style={{ textDecoration: "none", color: "inherit" }}
             >
-              <div className="sidebarItem">
-                <ListAlt fontSize="small" style={{ marginRight: 8 }} />
-                <span>Orders</span>
-              </div>
+              <li className="sidebarListItem">
+                <ListAlt className="sidebarIcon" />
+                Orders
+              </li>
             </Link>
           </ul>
         </div>

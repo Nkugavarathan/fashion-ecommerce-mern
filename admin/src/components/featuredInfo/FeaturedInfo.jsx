@@ -32,26 +32,26 @@ export default function FeaturedInfo() {
   }, [])
 
   return (
-    <div className="flex gap-6 flex-wrap ms-5">
-      {/*  Total Income */}
+    <div className="flex flex-wrap gap-6 ms-5">
+      {/* Total Income */}
       <div className="bg-white p-5 rounded-xl shadow-md flex-1 min-w-[250px]">
-        <span className="text-gray-500 text-sm">Total Income</span>
+        <span className="text-gray-500 text-lg">Total Income</span>
         <div className="text-2xl font-bold text-gray-800 mt-1">
           Rs {totalIncome.toFixed(2)}
         </div>
       </div>
 
-      {/*  Total Orders */}
+      {/* Total Orders */}
       <div className="bg-white p-5 rounded-xl shadow-md flex-1 min-w-[250px]">
-        <span className="text-gray-500 text-sm">Total Orders</span>
+        <span className="text-gray-500 text-lg">Total Orders</span>
         <div className="text-2xl font-bold text-gray-800 mt-1">
           {totalOrders}
         </div>
       </div>
 
-      {/*  Total Users */}
+      {/* Total Users */}
       <div className="bg-white p-5 rounded-xl shadow-md flex-1 min-w-[250px]">
-        <span className="text-gray-500 text-sm">Total Users</span>
+        <span className="text-gray-500 text-lg">Total Users</span>
         <div className="text-2xl font-bold text-gray-800 mt-1">
           {totalUsers}
         </div>

@@ -31,7 +31,7 @@ export default function Topbar() {
             </span>
           </div> */}
 
-          <div className="relative cursor-pointer text-gray-600">
+          {/* <div className="relative cursor-pointer text-gray-600">
             <Settings />
           </div>
 
@@ -39,7 +39,7 @@ export default function Topbar() {
             src="https://tse4.mm.bing.net/th/id/OIP.Kk4i-k-7bOfsgPv0SJtj5AHaHa?cb=12&rs=1&pid=ImgDetMain&o=7&rm=3"
             alt="admin-avatar"
             className="w-10 h-10 rounded-full cursor-pointer"
-          />
+          /> */}
         </div>
         {/* Hamburger for mobile */}
         <div className="sm:hidden flex items-center">

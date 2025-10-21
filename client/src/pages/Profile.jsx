@@ -1,204 +1,3 @@
-// import React, { useEffect, useState } from "react"
-// import { useSelector, useDispatch } from "react-redux"
-// import { useNavigate, Link } from "react-router-dom"
-// import { logout } from "../redux/userRedux"
-// import { userRequest } from "../requestMethod"
-// import axios from "axios"
-
-// export default function Profile() {
-//   const dispatch = useDispatch()
-//   const navigate = useNavigate()
-//   const currentUser = useSelector((state) => state.user.currentUser)
-//   const token = useSelector((state) => state.user.token)
-//   const [orders, setOrders] = useState([])
-//   const [loading, setLoading] = useState(false)
-//   const [error, setError] = useState(null)
-
-//   useEffect(() => {
-//     const fetchOrders = async () => {
-//       if (!currentUser) return
-//       setLoading(true)
-//       setError(null)
-//       try {
-//         let res
-//         if (userRequest) {
-//           res = await userRequest.get(`/orders/find/${currentUser._id}`)
-//         } else {
-//           res = await axios.get(
-//             `http://localhost:4000/api/orders/find/${currentUser._id}`,
-//             { headers: { Authorization: `Bearer ${token}` } }
-//           )
-//         }
-//         setOrders(res.data || [])
-//       } catch (err) {
-//         console.error("Fetch orders error:", err)
-//         setError(
-//           err.response?.data?.message || err.message || "Failed to load orders"
-//         )
-//       } finally {
-//         setLoading(false)
-//       }
-//     }
-
-//     fetchOrders()
-//   }, [currentUser, token])
-
-//   const handleLogout = () => {
-//     try {
-//       localStorage.removeItem("token")
-//       localStorage.removeItem("user")
-//     } catch (e) {}
-//     dispatch(logout())
-//     navigate("/login")
-//   }
-
-//   if (!currentUser) {
-//     return (
-//       <div className="p-6 max-w-3xl mx-auto">
-//         <h2 className="text-xl font-semibold mb-4">Not signed in</h2>
-//         <p className="mb-4">
-//           Please{" "}
-//           <Link to="/login" className="text-teal-600">
-//             sign in
-//           </Link>{" "}
-//           to view your profile and orders.
-//         </p>
-//       </div>
-//     )
-//   }
-
-//   return (
-//     <div className="p-6 max-w-4xl mx-auto">
-//       <div className="flex items-center gap-6 mb-6">
-//         <img
-//           src={
-//             currentUser.image ||
-//             currentUser.profileImage ||
-//             "https://i.pravatar.cc/150?img=3"
-//           }
-//           alt={currentUser.username || "Avatar"}
-//           style={{
-//             width: 84,
-//             height: 84,
-//             borderRadius: "50%",
-//             objectFit: "cover",
-//           }}
-//         />
-//         <div>
-//           <h1 style={{ margin: 0 }}>
-//             {currentUser.username || currentUser.name}
-//           </h1>
-//           <p style={{ margin: 0, color: "#666" }}>{currentUser.email}</p>
-//           <div style={{ marginTop: 8 }}>
-//             <button
-//               onClick={handleLogout}
-//               className="px-3 py-1 rounded border border-teal-600 text-teal-600 hover:bg-teal-600 hover:text-white"
-//             >
-//               Logout
-//             </button>
-//           </div>
-//         </div>
-//       </div>
-
-//       <section className="mb-8">
-//         <h2 style={{ marginBottom: 10 }}>Order history</h2>
-
-//         {loading && <p>Loading orders...</p>}
-//         {error && <p style={{ color: "red" }}>{error}</p>}
-
-//         {!loading && orders.length === 0 && <p>No orders found.</p>}
-
-//         <div className="space-y-4">
-//           {orders.map((order) => {
-//             const created = order.createdAt
-//               ? new Date(order.createdAt).toLocaleString()
-//               : ""
-//             const orderId = order._id || order.id
-//             const  =
-//               order.amount ?? order.total ?? order.price ?? order.cartTotal
-
-//             return (
-//               <div
-//                 key={orderId}
-//                 style={{
-//                   border: "1px solid #eee",
-//                   padding: 12,
-//                   borderRadius: 8,
-//                 }}
-//               >
-//                 <div
-//                   style={{
-//                     display: "flex",
-//                     justifyContent: "space-between",
-//                     marginBottom: 8,
-//                   }}
-//                 >
-//                   <div>
-//                     <div style={{ fontWeight: 600 }}>
-//                       Order #{String(orderId).slice(-8)}
-//                     </div>
-//                     <div style={{ color: "#666", fontSize: 13 }}>{created}</div>
-//                   </div>
-//                   <div style={{ textAlign: "right" }}>
-//                     <div style={{ fontWeight: 600 }}>
-//                       Total: ${Number(total || 0).toFixed(2)}
-//                     </div>
-//                     <div style={{ color: "#666", fontSize: 13 }}>
-//                       {order.status || "N/A"}
-//                     </div>
-//                   </div>
-//                 </div>
-
-//                 {/* products list (best-effort — backend shape varies) */}
-//                 <div>
-//                   {order.products && order.products.length > 0 ? (
-//                     order.products.map((p, idx) => {
-//                       // product entry can be { productId, quantity, price } or nested differently
-//                       const title =
-//                         p.title ||
-//                         p.name ||
-//                         p.productName ||
-//                         (p.product && (p.product.title || p.product.name)) ||
-//                         `Product ${idx + 1}`
-//                       const qty =
-//                         p.quantity ??
-//                         p.qty ??
-//                         (p.product && p.product.quantity) ??
-//                         1
-//                       const price =
-//                         p.price ?? (p.product && p.product.price) ?? 0
-//                       return (
-//                         <div
-//                           key={idx}
-//                           style={{
-//                             display: "flex",
-//                             justifyContent: "space-between",
-//                             padding: "6px 0",
-//                             borderTop: "1px solid #fafafa",
-//                           }}
-//                         >
-//                           <div style={{ color: "#333" }}>{title}</div>
-//                           <div style={{ color: "#666" }}>
-//                             x{qty} • ${Number(price).toFixed(2)}
-//                           </div>
-//                         </div>
-//                       )
-//                     })
-//                   ) : (
-//                     <div style={{ color: "#666" }}>
-//                       Order details not available.
-//                     </div>
-//                   )}
-//                 </div>
-//               </div>
-//             )
-//           })}
-//         </div>
-//       </section>
-//     </div>
-//   )
-// }
-
 import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
@@ -326,6 +125,70 @@ const Small = styled.div`
   color: #5b6b6b;
 `
 
+const ModalOverlay = styled.div`
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+`
+
+const ModalContent = styled.div`
+  background: white;
+  width: 90%;
+  max-width: 600px;
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  overflow-y: auto;
+  max-height: 80vh;
+  animation: fadeIn 0.3s ease-in-out;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+`
+
+const Section = styled.div`
+  margin: 12px 0;
+`
+
+const ProductItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+
+  img {
+    width: 70px;
+    height: 70px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+`
+
+const CloseBtn = styled.button`
+  margin-top: 16px;
+  background: crimson;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  &:hover {
+    background: darkred;
+  }
+`
+
 export default function Profile() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
@@ -334,6 +197,9 @@ export default function Profile() {
   const [orders, setOrders] = useState([])
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
+
+  const [selectedOrder, setSelectedOrder] = useState(null)
+  const [showModal, setShowModal] = useState(false)
 
   useEffect(() => {
     if (!currentUser) return
@@ -392,6 +258,10 @@ export default function Profile() {
       </>
     )
   }
+  useEffect(() => {
+    if (showModal) document.body.style.overflow = "hidden"
+    else document.body.style.overflow = "auto"
+  }, [showModal])
 
   // react return
   return (
@@ -403,9 +273,7 @@ export default function Profile() {
             <LeftInfo>
               <Avatar
                 src={
-                  currentUser.image ||
-                  currentUser.profileImage ||
-                  "https://i.pravatar.cc/150?img=3"
+                  currentUser.profileImage || "https://i.pravatar.cc/150?img=3"
                 }
                 alt={currentUser.username || "Avatar"}
               />
@@ -429,13 +297,10 @@ export default function Profile() {
               </Btn>
             </ActionRow>
           </Header>
-
           <SectionTitle>Order history</SectionTitle>
-
           {loading && <Small>Loading orders...</Small>}
           {error && <Small style={{ color: "crimson" }}>{error}</Small>}
           {!loading && orders.length === 0 && <Small>No orders found.</Small>}
-
           <OrdersList>
             {orders.map((order) => {
               const created = order.createdAt
@@ -459,17 +324,91 @@ export default function Profile() {
                       Rs {Number(total).toFixed(2)}
                     </div>
                     <Small>Status: {order.status || "processing"}</Small>
-                    <Link
+                    {/* <Link
                       to={`/order/${orderId}`}
                       style={{ textDecoration: "none" }}
                     >
                       <Btn style={{ padding: "6px 10px" }}>View</Btn>
-                    </Link>
+                    </Link> */}
+                    <Btn
+                      style={{ padding: "6px 10px" }}
+                      onClick={() => {
+                        setSelectedOrder(order)
+                        setShowModal(true)
+                      }}
+                    >
+                      View
+                    </Btn>
                   </OrderRight>
                 </OrderCard>
               )
             })}
           </OrdersList>
+          {/* modal */}
+          {showModal && selectedOrder && (
+            <ModalOverlay onClick={() => setShowModal(false)}>
+              <ModalContent onClick={(e) => e.stopPropagation()}>
+                <h3>Order Details</h3>
+                <hr />
+
+                <Section>
+                  <h4>Products:</h4>
+                  {selectedOrder.products?.map((p, i) => (
+                    <ProductItem key={i}>
+                      <img
+                        src={
+                          p.img || p.image || "https://via.placeholder.com/70"
+                        }
+                        alt={p.title}
+                      />
+                      <div>
+                        <div>
+                          <strong>{p.title || "Product"}</strong>
+                        </div>
+                        <Small>Quantity: {p.quantity}</Small>
+                        <Small>Price: Rs {(p.price || 0).toFixed(2)}</Small>
+                      </div>
+                    </ProductItem>
+                  ))}
+                </Section>
+
+                <Section>
+                  <h4>Order Info:</h4>
+                  <Small>
+                    Date: {new Date(selectedOrder.createdAt).toLocaleString()}
+                  </Small>
+                  <Small>Status: {selectedOrder.status}</Small>
+                  <Small>
+                    Total: Rs {(selectedOrder.amount || 0).toFixed(2)}
+                  </Small>
+                </Section>
+
+                {/*   inside selectedOrder.address object 
+                address
+                          Object
+                          name
+                          "varathan"
+                          email
+                          "kugavarathan28@gmail.com"
+                          address
+                          "No 18 yogapuram"
+
+                          go to ordercollection
+                
+                */}
+                <Section>
+                  <h4>User Details:</h4>
+                  <Small>Name: {selectedOrder.address?.name}</Small>
+                  <Small>Email: {selectedOrder.address?.email}</Small>
+                  <Small>
+                    Address: {selectedOrder.address?.address || "N/A"}
+                  </Small>
+                </Section>
+
+                <CloseBtn onClick={() => setShowModal(false)}>Close</CloseBtn>
+              </ModalContent>
+            </ModalOverlay>
+          )}
         </Container>
       </Page>
     </>
