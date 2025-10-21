@@ -22,6 +22,26 @@ const Container = styled.div`
     margin: 0 5px;
   `)}
 `
+const WaveSection = styled.section`
+  position: relative;
+  background-color: #a2d9ff;
+  height: 70vh;
+  padding-top: 40px;
+  overflow: hidden;
+
+  ${mobile(`
+    height: auto;
+    padding-bottom: 60px;
+  `)}
+
+  svg {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+`
+
 
 function Categories() {
   return (

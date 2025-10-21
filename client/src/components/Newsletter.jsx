@@ -4,7 +4,7 @@ import SendIcon from "@mui/icons-material/send"
 import { mobile, tablet } from "../responsive"
 
 const Container = styled.div`
-  height: 50vh;
+  height: 40vh;
   background-color: #fcf5f5;
   display: flex;
   align-items: center;

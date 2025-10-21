@@ -7,7 +7,7 @@ import Products from "../components/Products"
 import Newsletter from "../components/Newsletter"
 import Footer from "./../components/Footer"
 import BrandsCarousel from "../components/BrandsCarousel"
-
+import CustomerFeedback from "../components/customerFeedback"
 export default function Home() {
   return (
     <div>
@@ -16,7 +16,7 @@ export default function Home() {
       <Categories />
       <Products />
       <BrandsCarousel />
-
+      <CustomerFeedback />
       <Newsletter />
       <Footer />
     </div>
