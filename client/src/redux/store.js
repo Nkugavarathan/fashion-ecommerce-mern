@@ -13,11 +13,12 @@ import storage from "redux-persist/lib/storage"
 
 import cartReducer from "./cartRedux"
 import userReducer from "./userRedux"
-
+import orderReducer from "./orderRedux"
 // combine reducers so persist can target root slices
 const rootReducer = combineReducers({
   cart: cartReducer,
   user: userReducer,
+  order: orderReducer,
 })
 
 // persist configuration — adjust whitelist to persist only needed slices

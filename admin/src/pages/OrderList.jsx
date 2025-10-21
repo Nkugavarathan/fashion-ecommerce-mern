@@ -235,7 +235,11 @@ export default function OrderList() {
           JSON.stringify(o.address))) ||
       "—"
 
-    const amount = Number(o.amount ?? 0) || 0
+    // const amount = Number(o.amount ?? 0) || 0
+    // const amount = Number(o.amount || 0).toFixed(2)
+
+    const amount =
+      o.amount !== undefined && o.amount !== null ? Number(o.amount) : 78
 
     return {
       id: o._id,
@@ -269,7 +273,7 @@ export default function OrderList() {
       field: "amount",
       headerName: "Amount",
       width: 110,
-      valueFormatter: ({ value }) => `$${Number(value || 0).toFixed(2)}`,
+      valueFormatter: ({ value }) => `$${parseFloat(value || 0).toFixed(2)}`,
     },
     { field: "payment", headerName: "Payment", width: 130 },
     { field: "status", headerName: "Status", width: 120 },

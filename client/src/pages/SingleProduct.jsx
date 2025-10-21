@@ -6,8 +6,8 @@ import { mobile, tablet } from "../responsive"
 
 import Footer from "../components/Footer"
 
-import RemoveIcon from "@mui/icons-material/Remove"
-import AddIcon from "@mui/icons-material/Add"
+// import { Remove, Add } from "@mui/icons-material"
+
 import { useParams } from "react-router-dom"
 // import { publicRequest } from "./../requestMethod"
 import axios from "axios"
@@ -33,18 +33,17 @@ const Wrapper = styled.div`
 
 const Image = styled.img`
   width: 100%;
-  height: 90vh;
+  height: 67.5vh; // 75% of 90vh
   object-fit: cover;
 
   ${tablet(`
-    height: 60vh;
+    height: 45vh;
   `)}
 
   ${mobile(`
-    height: 40vh;
+    height: 30vh;
   `)}
 `
-
 const InfoContainer = styled.div`
   flex: 1;
   width: 100%;
@@ -129,6 +128,27 @@ const Amount = styled.span`
   justify-content: center;
   margin: 0 5px;
 `
+// quantity
+const CircleButton = styled.button`
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  background-color: #ddd2d2ff;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: #c9bfbf;
+    transform: scale(1.05);
+  }
+`
+
 const Button = styled.button`
   font-weight: 100;
   border: 2px solid teal;
@@ -186,7 +206,7 @@ function SingleProduct() {
         <InfoContainer>
           <Title>{product.title}</Title>
           <Description>{product.description}</Description>
-          <Price>Price Rs {product.price}</Price>
+          <Price>Price $ {product.price}</Price>
           <FilterContainer>
             <Filter>
               <FilterTitle>Color</FilterTitle>
@@ -205,29 +225,11 @@ function SingleProduct() {
           </FilterContainer>
           <AddContainer>
             <AmountContainer>
-              <RemoveIcon
-                style={{
-                  height: 20,
-                  width: 20,
-                  padding: 10,
-                  borderRadius: 50,
-                  backgroundColor: "#ddd2d2ff",
-                  cursor: "pointer",
-                }}
-                onClick={decreaseQuantity}
-              />
+              <CircleButton onClick={decreaseQuantity}>-</CircleButton>
+
               <Amount>{quantity}</Amount>
-              <AddIcon
-                style={{
-                  height: 20,
-                  width: 20,
-                  padding: 10,
-                  borderRadius: 50,
-                  backgroundColor: "#ddd2d2ff",
-                  cursor: "pointer",
-                }}
-                onClick={increaseQuantity}
-              />
+
+              <CircleButton onClick={increaseQuantity}>+</CircleButton>
             </AmountContainer>
             <Button onClick={addToCart}>Add To Cart</Button>
           </AddContainer>

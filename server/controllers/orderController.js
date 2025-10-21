@@ -2,20 +2,85 @@
 
 //import Order from "../models/orderModel.js"
 
-// export const createOrder = async (req, res) => {
+import Order from "../models/orderModel.js"
+import Product from "../models/productModel.js"
+
 //   try {
-//     const { userId, products, amount, address, paymentInfo } = req.body
-//     if (!userId || !products || !amount) {
+//     let { userId, products, amount, address, paymentInfo } = req.body
+
+//     if (!userId || !products) {
 //       return res.status(400).json({ message: "Missing required order fields" })
 //     }
 
+//     // If products were sent as a JSON string (FormData), parse it
+//     if (typeof products === "string") {
+//       try {
+//         products = JSON.parse(products)
+//       } catch {
+//         // try simple split fallback (comma separated)
+//         products = products
+//           .split(",")
+//           .map((s) => s.trim())
+//           .filter(Boolean)
+//           .map((p) => ({ title: p, quantity: 1, price: 0 }))
+//       }
+//     }
+
+//     // Normalize products array: ensure title, price, quantity are present.
+//     // If productId provided but title/price missing, fetch product snapshot from products collection.
+//     const normalized = await Promise.all(
+//       products.map(async (p) => {
+//         const qty = Number(p.quantity ?? p.qty ?? 1)
+//         // if there is a productId, try to enrich from DB
+//         if (p.productId) {
+//           try {
+//             const prod = await Product.findById(p.productId).lean()
+//             return {
+//               productId: p.productId,
+//               title: p.title || prod?.title || prod?.name || "Unknown Product",
+//               price: Number(p.price ?? prod?.price ?? 0),
+//               quantity: qty,
+//               image: p.image || prod?.image || "",
+//             }
+//           } catch (err) {
+//             // fallback if product lookup fails
+//             return {
+//               productId: p.productId,
+//               title: p.title || "Unknown Product",
+//               price: Number(p.price ?? 0),
+//               quantity: qty,
+//               image: p.image || "",
+//             }
+//           }
+//         }
+
+//         // otherwise use provided snapshot (title/price)
+//         return {
+//           productId: p.productId || null,
+//           title: p.title || "Unknown Product",
+//           price: Number(p.price ?? 0),
+//           quantity: qty,
+//           image: p.image || "",
+//         }
+//       })
+//     )
+
+//     // Compute amount reliably from normalized products (price * qty)
+//     const computedAmount = normalized.reduce(
+//       (sum, it) => sum + Number(it.price || 0) * Number(it.quantity || 0),
+//       0
+//     )
+//     amount = Number(amount) || computedAmount
+
 //     const newOrder = new Order({
 //       userId,
-//       products,
+//       products: normalized,
 //       amount,
 //       address: address || {},
 //       payment: {
-//         cardLast4: paymentInfo?.cardNumber?.slice(-4) || null,
+//         cardLast4: paymentInfo?.cardNumber
+//           ? String(paymentInfo.cardNumber).slice(-4)
+//           : paymentInfo?.cardLast4 || null,
 //         method: paymentInfo?.method || "card",
 //         paid: true,
 //       },
@@ -26,11 +91,10 @@
 //     return res.status(201).json(saved)
 //   } catch (err) {
 //     console.error("createOrder error:", err)
-//     // handle duplicate key index error specifically
 //     if (err && err.code === 11000 && err.keyPattern && err.keyPattern.userId) {
 //       return res.status(409).json({
 //         message:
-//           "Duplicate index error on orders.userId — your orders collection currently has a unique index on userId. Drop that index to allow multiple orders per user.",
+//           "Duplicate index error on orders.userId — drop the unique index on userId to allow multiple orders per user.",
 //         details: err.keyValue,
 //       })
 //     }
@@ -40,110 +104,37 @@
 //   }
 // }
 
-import Order from "../models/orderModel.js"
-import Product from "../models/productModel.js"
-
+// Get all orders (admin) — populate user and enrich product snapshots
 export const createOrder = async (req, res) => {
   try {
-    let { userId, products, amount, address, paymentInfo } = req.body
+    console.log("✅ Authenticated user:", req.user?.username || req.user?.id)
+    console.log("🧾 Incoming order payload:", req.body)
 
-    if (!userId || !products) {
-      return res.status(400).json({ message: "Missing required order fields" })
+    const { userId, products, amount, address, payment } = req.body
+
+    // Validate basic fields
+    if (!userId || !products?.length || !amount) {
+      return res.status(400).json({ message: "Missing required fields" })
     }
-
-    // If products were sent as a JSON string (FormData), parse it
-    if (typeof products === "string") {
-      try {
-        products = JSON.parse(products)
-      } catch {
-        // try simple split fallback (comma separated)
-        products = products
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean)
-          .map((p) => ({ title: p, quantity: 1, price: 0 }))
-      }
-    }
-
-    // Normalize products array: ensure title, price, quantity are present.
-    // If productId provided but title/price missing, fetch product snapshot from products collection.
-    const normalized = await Promise.all(
-      products.map(async (p) => {
-        const qty = Number(p.quantity ?? p.qty ?? 1)
-        // if there is a productId, try to enrich from DB
-        if (p.productId) {
-          try {
-            const prod = await Product.findById(p.productId).lean()
-            return {
-              productId: p.productId,
-              title: p.title || prod?.title || prod?.name || "Unknown Product",
-              price: Number(p.price ?? prod?.price ?? 0),
-              quantity: qty,
-              image: p.image || prod?.image || "",
-            }
-          } catch (err) {
-            // fallback if product lookup fails
-            return {
-              productId: p.productId,
-              title: p.title || "Unknown Product",
-              price: Number(p.price ?? 0),
-              quantity: qty,
-              image: p.image || "",
-            }
-          }
-        }
-
-        // otherwise use provided snapshot (title/price)
-        return {
-          productId: p.productId || null,
-          title: p.title || "Unknown Product",
-          price: Number(p.price ?? 0),
-          quantity: qty,
-          image: p.image || "",
-        }
-      })
-    )
-
-    // Compute amount reliably from normalized products (price * qty)
-    const computedAmount = normalized.reduce(
-      (sum, it) => sum + Number(it.price || 0) * Number(it.quantity || 0),
-      0
-    )
-    amount = Number(amount) || computedAmount
 
     const newOrder = new Order({
       userId,
-      products: normalized,
-      amount,
-      address: address || {},
-      payment: {
-        cardLast4: paymentInfo?.cardNumber
-          ? String(paymentInfo.cardNumber).slice(-4)
-          : paymentInfo?.cardLast4 || null,
-        method: paymentInfo?.method || "card",
-        paid: true,
-      },
-      status: "processing",
+      products,
+      amount: Number(amount), // ensure numeric
+      address,
+      payment,
     })
 
-    const saved = await newOrder.save()
-    return res.status(201).json(saved)
+    const savedOrder = await newOrder.save()
+    console.log("✅ Order saved:", savedOrder)
+
+    res.status(201).json(savedOrder)
   } catch (err) {
-    console.error("createOrder error:", err)
-    if (err && err.code === 11000 && err.keyPattern && err.keyPattern.userId) {
-      return res.status(409).json({
-        message:
-          "Duplicate index error on orders.userId — drop the unique index on userId to allow multiple orders per user.",
-        details: err.keyValue,
-      })
-    }
-    return res
-      .status(500)
-      .json({ message: "Create order failed", error: err.message })
+    console.error("❌ Order creation failed:", err)
+    res.status(500).json({ message: err.message })
   }
 }
 
-// Get all orders (admin) — populate user and enrich product snapshots
 export const getAllOrders = async (req, res) => {
   try {
     // populate user basic fields

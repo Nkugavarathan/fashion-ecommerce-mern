@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
 import { createOrder } from "../redux/apiCalls"
 import axios from "axios"
-
+import { clearCart } from "../redux/cartRedux"
 export default function CartCheckout() {
   const cart = useSelector((state) => state.cart)
   const currentUser = useSelector((state) => state.user.currentUser)
@@ -18,8 +18,62 @@ export default function CartCheckout() {
   const [cvv, setCvv] = useState("")
   const [loading, setLoading] = useState(false)
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  // const handlePay = async (e) => {
+  //   e.preventDefault()
+  //   if (!currentUser) {
+  //     alert("Please login to place order")
+  //     navigate("/login")
+  //     return
+  //   }
+
+  //   if (!address || !cardNumber || !exp || !cvv) {
+  //     alert("Please fill delivery and card details")
+  //     return
+  //   }
+
+  //   if (isSubmitting) return // 🛑 prevent double click
+  //   setIsSubmitting(true)
+  //   setLoading(true)
+
+  //   try {
+  //     const orderPayload = {
+  //       userId: currentUser._id,
+  //       products: cart.products.map((p) => ({
+  //         productId: p._id || p.id,
+  //         quantity: p.quantity,
+  //         price: p.price,
+  //       })),
+  //       amount: Number(cart.total || 0),
+  //       address: { name, email, address },
+  //       payment: {
+  //         cardLast4: cardNumber.slice(-4),
+  //         method: "card",
+  //       },
+  //     }
+
+  //     console.log("🧾 Sending order:", orderPayload)
+  //     const res = await createOrder(orderPayload, dispatch)
+
+  //     if (res && res._id) {
+  //       dispatch(clearCart())
+  //       navigate(`/success?orderId=${res._id}`)
+  //     } else {
+  //       console.warn("Unexpected order response:", res)
+  //       alert("Order placed, but no confirmation received.")
+  //     }
+  //   } catch (err) {
+  //     console.error("❌ Order create failed:", err)
+  //     alert("Order failed: " + (err.response?.data?.message || err.message))
+  //   } finally {
+  //     setIsSubmitting(false)
+  //     setLoading(false)
+  //   }
+  // }
   const handlePay = async (e) => {
     e.preventDefault()
+
     if (!currentUser) {
       alert("Please login to place order")
       navigate("/login")
@@ -33,30 +87,34 @@ export default function CartCheckout() {
 
     setLoading(true)
     try {
-      // Build order payload. For paymentInfo we store masked last4 (practice only)
-      const paymentInfo = {
-        cardNumber: cardNumber.replace(/\s+/g, ""),
-        cardLast4: cardNumber.slice(-4),
-        method: "card",
-      }
-
       const orderPayload = {
         userId: currentUser._id,
-        products: cart.products || [],
-        amount: cart.total || cart.amount || 0,
+        products: cart.products.map((p) => ({
+          productId: p._id || p.id,
+          quantity: p.quantity,
+          price: p.price,
+        })),
+        amount: cart.total || 0,
         address: { name, email, address },
-        paymentInfo,
+        payment: {
+          cardLast4: cardNumber.slice(-4),
+          method: "card",
+        },
       }
 
-      // call API
-      await createOrder(orderPayload, dispatch)
+      console.log("🧾 Sending order:", orderPayload)
 
-      setLoading(false)
-      navigate("/success") // show success page
+      const res = await createOrder(orderPayload, dispatch) // ✅ Only call once
+
+      console.log("✅ Order response:", res)
+
+      dispatch(clearCart())
+      navigate(`/success?orderId=${res._id}`)
     } catch (err) {
-      setLoading(false)
       console.error("Order create failed:", err)
       alert("Order failed: " + (err.response?.data?.message || err.message))
+    } finally {
+      setLoading(false)
     }
   }
 
@@ -136,13 +194,7 @@ export default function CartCheckout() {
             disabled={loading}
             className="bg-teal-600 text-white px-4 py-2 rounded"
           >
-            {loading
-              ? "Processing..."
-              : `Pay $${
-                  (cart.total || cart.amount || 0).toFixed
-                    ? (cart.total || cart.amount || 0).toFixed(2)
-                    : cart.total || cart.amount
-                }`}
+            {loading ? "Processing..." : `Pay $${(cart.total || 0).toFixed(2)}`}
           </button>
         </div>
       </form>
