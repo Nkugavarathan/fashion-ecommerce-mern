@@ -8,6 +8,7 @@ import Newsletter from "../components/Newsletter"
 import Footer from "./../components/Footer"
 import BrandsCarousel from "../components/BrandsCarousel"
 import CustomerFeedback from "../components/customerFeedback"
+import NewArrivals from "../components/NewArrivals"
 export default function Home() {
   return (
     <div>
@@ -15,6 +16,7 @@ export default function Home() {
       <Slider />
       <Categories />
       <Products />
+      <NewArrivals />
       <BrandsCarousel />
       <CustomerFeedback />
       <Newsletter />

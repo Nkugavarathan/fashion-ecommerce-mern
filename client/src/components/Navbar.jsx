@@ -56,34 +56,30 @@ export default function Navbar() {
         scrolled ? "bg-white/90 shadow-md" : "bg-gray-100/90"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 md:px-12 py-3 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-4 flex items-center justify-between gap-6">
         {/* Left: Logo */}
-        <div className="flex items-center gap-2">
-          <img
-            src={logo} // replace with your png
-            alt="Logo"
-            className="w-12 h-12 object-contain"
-          />
-          <span className="text-teal-600 font-bold text-3xl md:text-4xl">
+        <Link to="/" className="flex items-center gap-2">
+          <img src={logo} alt="Logo" className="w-12 h-12 object-contain" />
+          <span className="text-teal-600 font-bold text-2xl md:text-3xl tracking-tight">
             VARA FASHION
           </span>
-        </div>
+        </Link>
 
         {/* Center: Search Bar */}
-        <div className="flex-1 mx-6 hidden md:flex items-center border border-gray-300 rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-teal-400">
+        <div className="flex-1 mx-8 hidden md:flex items-center border border-gray-300 rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-teal-400">
           <input
             type="text"
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="outline-none w-full px-2 py-1 text-lg"
+            className="outline-none w-full px-2 py-1 text-gray-700"
           />
           <SearchIcon className="text-gray-500" />
         </div>
 
-        {/* Right: Desktop Menu */}
+        {/* Right: Menu */}
         <div className="hidden md:flex items-center gap-6 text-lg font-medium">
-          <Link className="hover:text-teal-600" to="/">
+          <Link className="hover:text-teal-600 transition" to="/">
             Home
           </Link>
 
@@ -96,11 +92,11 @@ export default function Navbar() {
                 <img
                   src={avatarSrc}
                   alt="Avatar"
-                  className="w-10 h-10 rounded-full border-2 border-white shadow-sm"
+                  className="w-10 h-10 rounded-full border border-gray-200 shadow-sm"
                 />
               </button>
               {acctOpen && (
-                <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg flex flex-col">
+                <div className="absolute right-0 mt-2 w-40 bg-white rounded-lg shadow-lg overflow-hidden">
                   <button
                     onClick={() => navigate("/profile")}
                     className="px-4 py-2 text-left hover:bg-gray-100"
@@ -117,7 +113,7 @@ export default function Navbar() {
               )}
             </div>
           ) : (
-            <Link className="hover:text-teal-600" to="/login">
+            <Link className="hover:text-teal-600 transition" to="/login">
               Login
             </Link>
           )}
@@ -127,26 +123,6 @@ export default function Navbar() {
               <ShoppingCartOutlinedIcon className="text-gray-800" />
             </Badge>
           </Link>
-        </div>
-
-        {/* Mobile Hamburger + Search */}
-        <div className="flex items-center gap-3 md:hidden">
-          <div className="flex items-center border border-gray-300 rounded-full px-3 py-1 focus-within:ring-2 focus-within:ring-teal-400">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="outline-none px-2 py-1 w-28 text-sm"
-            />
-            <SearchIcon className="text-gray-500" />
-          </div>
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="focus:outline-none"
-          >
-            {menuOpen ? <CloseIcon /> : <MenuIcon />}
-          </button>
         </div>
       </div>
 
