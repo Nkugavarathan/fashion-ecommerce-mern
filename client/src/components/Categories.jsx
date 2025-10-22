@@ -481,7 +481,6 @@ const Container = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   margin: 0 30px;
-  z-index: 1000;
 
   ${tablet(`margin: 0 10px;`)}
   ${mobile(`
