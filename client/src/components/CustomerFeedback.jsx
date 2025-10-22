@@ -38,7 +38,7 @@ export default function CustomerFeedback() {
     <section className="feedback-section min-h-screen w-full flex flex-col items-center justify-center bg-gradient-to-bottom from-pink-50 to-white py-20">
       {/* Title */}
       <div className="text-center mb-16">
-        <h2 className="text-center text-teal-600 font-bold text-6xl mb-4">
+        <h2 className="text-center text-teal-600 font-bold text-5xl mb-10 ">
           Customer Reviews
         </h2>
         <p className="text-gray-600 text-lg">

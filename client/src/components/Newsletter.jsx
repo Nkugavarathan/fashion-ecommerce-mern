@@ -65,7 +65,7 @@ const Button = styled.button`
 function Newsletter() {
   return (
     <Container>
-      <h2 className="text-center text-teal-600 font-bold text-3xl my-4">
+      <h2 className="text-center text-teal-600 font-bold text-5xl mb-10 ">
         Newsletter
       </h2>
       <Description>Got timely updated from your favourite products</Description>

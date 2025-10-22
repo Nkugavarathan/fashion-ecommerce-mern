@@ -1,13 +1,13 @@
 import React from "react"
 import { Link } from "react-router-dom"
-import image from "/images/men.jpg"
+import men from "/images/men.jpg"
 
 export default function MenCategory() {
   return (
     <Link to="/products/men" className="block">
       <div className="relative overflow-hidden rounded-lg shadow-lg h-64 md:h-80 group">
         <img
-          src={image}
+          src={men}
           alt="Men"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80"
         />

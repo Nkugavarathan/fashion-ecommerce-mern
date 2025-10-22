@@ -91,7 +91,7 @@ const LogoBox = styled.div`
 const BrandsCarousel = () => {
   return (
     <Wrapper>
-      <h2 className="text-center text-teal-600 font-bold text-6xl my-2">
+      <h2 className="text-center text-teal-600 font-bold text-5xl my-5 ">
         Our Brands
       </h2>
       <p className="text-center text-gray-600  text-2xl mx-auto mt-6 mb-25">

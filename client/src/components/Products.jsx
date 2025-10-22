@@ -74,7 +74,7 @@ function Products({ category, filters, sort }) {
 
   return (
     <div style={{ backgroundColor: "#f5f5f5" }}>
-      <h2 className="text-center text-teal-600 font-bold text-3xl my-4 pt-2">
+      <h2 className="text-center text-teal-600 font-bold text-5xl mb-10 ">
         Our Products
       </h2>
       <motion.div
