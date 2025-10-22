@@ -9,6 +9,7 @@ import Footer from "./../components/Footer"
 import BrandsCarousel from "../components/BrandsCarousel"
 import CustomerFeedback from "../components/customerFeedback"
 import NewArrivals from "../components/NewArrivals"
+import AIChatWidget from "../components/AIChatWidget"
 export default function Home() {
   return (
     <div>
@@ -20,6 +21,7 @@ export default function Home() {
       <BrandsCarousel />
       <CustomerFeedback />
       <Newsletter />
+      <AIChatWidget />
       <Footer />
     </div>
   )
