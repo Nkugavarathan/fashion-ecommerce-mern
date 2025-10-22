@@ -54,7 +54,7 @@ export default function CustomerFeedback() {
             className="bg-white rounded-2xl shadow-lg border border-pink-100 p-6 hover:shadow-xl transition-shadow duration-300"
             initial="hidden"
             whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
             variants={cardVariants}
           >

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
-
+import { motion } from "framer-motion"
 import Product from "../pages/SingleProduct"
 import { mobile, tablet } from "../responsive"
 import axios from "axios"
@@ -74,20 +74,25 @@ function Products({ category, filters, sort }) {
 
   return (
     <div style={{ backgroundColor: "#f5f5f5" }}>
-      <h2 className="text-center text-teal-600 font-bold text-3xl my-4">
+      <h2 className="text-center text-teal-600 font-bold text-3xl my-4 pt-2">
         Our Products
       </h2>
-
-      <div className="flex justify-center">
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-full max-w-7xl px-4 justify-items-center">
-          {(category ? filteredProducts : products)
-            .slice(0, visibleCount)
-            .map((item) => (
-              <ProductItem item={item} key={item._id} />
-            ))}
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+      >
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ...">
+            {(category ? filteredProducts : products)
+              .slice(0, visibleCount)
+              .map((item, index) => (
+                <ProductItem item={item} key={index} />
+              ))}
+          </div>
         </div>
-      </div>
-
+      </motion.div>
       {(category ? filteredProducts.length : products.length) > 8 && (
         <div className="flex justify-center mt-6">
           <button
