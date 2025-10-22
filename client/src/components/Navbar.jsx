@@ -333,7 +333,7 @@ export default function Navbar() {
       {/* Mobile Menu */}
       {menuOpen && (
         <div className="md:hidden bg-white shadow-md w-full">
-          <div className="flex flex-col justify-center px-6 py-4 space-y-3">
+          <div className="flex flex-col items-center px-6 py-4 space-y-3">
             <Link
               onClick={() => setMenuOpen(false)}
               className="text-lg font-medium hover:text-teal-600"
