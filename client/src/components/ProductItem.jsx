@@ -4,9 +4,9 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined"
 import { mobile, tablet } from "../responsive"
 
 import SearchIcon from "@mui/icons-material/Search"
-import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"
+// import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined"
 import { Link } from "react-router-dom"
-// add imports
+
 import { useDispatch } from "react-redux"
 import { addProduct } from "../redux/cartRedux"
 const Info = styled.div`
@@ -44,15 +44,8 @@ const Container = styled.div`
 
   &:hover ${Info} {
     opacity: 1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
-`
-
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
 `
 
 const Image = styled.img`

@@ -73,8 +73,8 @@ function Products({ category, filters, sort }) {
   }, [sort])
 
   return (
-    <>
-      <h2 className="text-center text-teal-600 font-bold text-xl my-4">
+    <div style={{ backgroundColor: "#f5f5f5" }}>
+      <h2 className="text-center text-teal-600 font-bold text-3xl my-4">
         Our Products
       </h2>
 
@@ -109,7 +109,7 @@ function Products({ category, filters, sort }) {
           </button>
         </div>
       )}
-    </>
+    </div>
   )
 }
 

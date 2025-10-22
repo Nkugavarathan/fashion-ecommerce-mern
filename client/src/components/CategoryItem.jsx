@@ -56,6 +56,25 @@ const Button = styled.button`
     color: white;
   }
 `
+// const WaveSection = styled.section`
+//   position: relative;
+//   background-color: #b0e3ff; /* light sky blue */
+//   height: 60vh;
+//   padding: 60px 20px 100px;
+//   overflow: hidden;
+
+//   ${mobile(`
+//     height: auto;
+//     padding-bottom: 80px;
+//   `)}
+
+//   svg {
+//     position: absolute;
+//     bottom: 0;
+//     left: 0;
+//     width: 100%;
+//   }
+// `
 
 function CategoryItem({ item }) {
   return (
