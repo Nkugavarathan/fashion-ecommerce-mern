@@ -244,19 +244,19 @@ export default function Navbar() {
         {/* Left: Logo */}
         <div className="flex items-center gap-2">
           <img src={logo} alt="Logo" className="w-12 h-12 object-contain" />
-          <span className="text-teal-600 font-bold text-3xl md:text-4xl">
-            VARA
+          <span className="text-teal-600 font-bold text-3xl md:text-4xl me-16">
+            VARA FASHION
           </span>
         </div>
 
         {/* Center: Search Bar */}
-        <div className="flex-1 mx-6 hidden md:flex items-center border border-gray-300 rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-teal-400">
+        <div className="flex-1 mx-6 hidden md:flex items-center border border-gray-300 rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-teal-400 me-16">
           <input
             type="text"
             placeholder="Search products..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="outline-none w-full px-2 py-1 text-lg"
+            className="outline-none w-full px-2 py-1 text-lg "
           />
           <SearchIcon className="text-gray-500" />
         </div>

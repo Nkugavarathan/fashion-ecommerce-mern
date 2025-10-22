@@ -571,7 +571,7 @@ export default function Categories() {
       {/* === SECOND SECTION (Subcategories) === */}
       <SubCategorySection>
         {/* Inverted wave at the top */}
-        <svg viewBox="0 0 1440 350" xmlns="http://www.w3.org/2000/svg">
+        <svg viewBox="0 0 144 1350" xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0">
               <stop stopColor="rgba(35,180,180,1)" offset="0%" />
@@ -585,7 +585,7 @@ export default function Categories() {
           />
         </svg>
 
-        <h2 className="relative z-20 text-center text-white my-5 font-bold text-5xl mb-10">
+        <h2 className="relative z-20 text-center text-teal-500 my-10 font-bold text-5xl ">
           Our Subcategories
         </h2>
 

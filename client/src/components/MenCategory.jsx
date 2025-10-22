@@ -11,13 +11,13 @@ export default function MenCategory() {
           alt="Men"
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105 opacity-80"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-t from-black/40 to-transparent" />
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center text-white px-4">
           {/* <h2 className="text-2xl md:text-3xl font-bold">Men</h2> */}
           <p className="mt-2 text-sm md:text-base">
             Shirts, jackets, casual & more
           </p>
-          <button className="mt-4 bg-white text-gray-800 px-4 py-2 rounded-md font-medium">
+          <button className="mt-4 bg-white text-gray-800 px-4 py-2 rounded-md font-medium hover:bg-teal-700">
             Shop Men
           </button>
         </div>

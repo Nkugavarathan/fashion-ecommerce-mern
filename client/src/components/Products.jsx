@@ -139,7 +139,7 @@ function Products({ category, filters, sort }) {
                 setIsExpanded(true)
               }
             }}
-            className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700 transition mb-3"
+            className="bg-teal-600 text-white px-6 py-2 rounded-md hover:bg-teal-700 transition mb-3"
           >
             {isExpanded ? "Show Less" : "Load More"}
           </button>
