@@ -81,7 +81,7 @@ export default function SearchModal() {
               <div className="p-4 text-sm text-gray-600">Searching...</div>
             )}
             {!loading && results.length === 0 && (
-              <div className="p-4 text-sm text-gray-600">No results</div>
+              <div className="p-4 text-sm text-gray-600">No products found</div>
             )}
             {!loading &&
               results.map((p) => {
@@ -119,7 +119,7 @@ export default function SearchModal() {
                       </div>
                     </div>
                     <div className="text-sm text-teal-700 font-semibold">
-                      {price}
+                      Rs {price}
                     </div>
                   </Link>
                 )

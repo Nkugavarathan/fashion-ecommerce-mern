@@ -126,9 +126,6 @@ export default function Navbar() {
 
         {/* Mobile Hamburger + Search */}
         <div className="flex items-center gap-3 md:hidden">
-          <div className="flex-1 mx-6 hidden md:flex items-center me-16">
-            <SearchModal />
-          </div>
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="focus:outline-none"
@@ -146,6 +143,7 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden bg-white shadow-md w-full">
           <div className="flex flex-col items-center px-6 py-4 space-y-3">
+            <SearchModal />
             <Link
               onClick={() => setMenuOpen(false)}
               className="text-teal-700 hover:text-teal-500 transition-colors duration-300"
@@ -153,7 +151,6 @@ export default function Navbar() {
             >
               Home
             </Link>
-
             {currentUser ? (
               <>
                 <Link
@@ -182,7 +179,6 @@ export default function Navbar() {
                 Login
               </Link>
             )}
-
             <Link onClick={() => setMenuOpen(false)} to="/cart">
               <Badge badgeContent={quantity} color="primary">
                 <ShoppingCartOutlinedIcon className="text-teal-700" />
