@@ -58,11 +58,11 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-2 mb-2 text-sm">
             <PhoneIcon />
-            <span>+771234567</span>
+            <span>+775019192</span>
           </div>
           <div className="flex items-center gap-2 mb-2 text-sm">
             <MailIcon />
-            <span>contactvara@gmail.com</span>
+            <span>supportvara@gmail.com</span>
           </div>
           <img
             src="https://i.ibb.co/Qfvn4z6/payment.png"

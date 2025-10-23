@@ -95,7 +95,7 @@ function QuickViewModal({ dress, onClose, onViewDetails }) {
           <div className="grid md:grid-cols-2 gap-8 p-8">
             {/* Image Section */}
             <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-2xl h-80 md:h-96 flex items-center justify-center">
-              <div className="text-gray-400 text-lg">📸 Dress Image</div>
+              <img src={dress.image} alt="Dress Image" />
             </div>
 
             {/* Details Section */}
@@ -395,9 +395,9 @@ export default function NewArrivals() {
                 onClick={(e) => handleImageClick(dress.id, e)}
               >
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent z-10"></div>
-                {/* Replace with actual image */}
+
                 <div className="w-full h-full flex items-center justify-center text-gray-400">
-                  📸 Dress Image
+                  <img src={dress.image} alt="Dress Image" />
                 </div>
               </div>
 

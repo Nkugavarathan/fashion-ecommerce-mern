@@ -1,6 +1,7 @@
 export const sliderItems = [
   {
     id: 1,
+
     image: "/images/summer.jpg",
     title: "SUMMER BREEZE",
     desc: "Light, airy, and effortlessly chic—our summer dresses are made for sunlit strolls and spontaneous getaways.",
@@ -13,7 +14,7 @@ export const sliderItems = [
   },
   {
     id: 3,
-    image: "/images/slider3.png",
+    image: "/images/slider3.jpg",
     title: "WINTER ESSENTIALS",
     desc: "Stay warm and stylish with our premium winter collection.",
   },
