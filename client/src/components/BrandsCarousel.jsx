@@ -1,6 +1,7 @@
 import React from "react"
 import styled, { keyframes } from "styled-components"
 
+import { motion } from "framer-motion"
 const brands = [
   {
     name: "Gucci",
@@ -90,24 +91,31 @@ const LogoBox = styled.div`
 
 const BrandsCarousel = () => {
   return (
-    <Wrapper>
-      <h2 className="text-center text-teal-600 font-bold text-5xl my-5 ">
-        Our Brands
-      </h2>
-      <p className="text-center text-gray-600  text-2xl mx-auto mt-6 mb-25">
-        We proudly feature products from globally trusted brands. Quality,
-        style, and comfort—curated for you.
-      </p>
-      <Carousel>
-        <Slider>
-          {[...brands, ...brands].map((brand, i) => (
-            <LogoBox key={i}>
-              <img src={brand.img} alt={brand.name} title={brand.name} />
-            </LogoBox>
-          ))}
-        </Slider>
-      </Carousel>
-    </Wrapper>
+    <motion.div
+      initial={{ opacity: 0, y: 50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 1 }}
+      viewport={{ once: false, amount: 0.3 }}
+    >
+      <Wrapper>
+        <h2 className="text-center text-teal-600 font-bold text-5xl my-5 ">
+          Our Brands
+        </h2>
+        <p className="text-center text-gray-600  text-2xl mx-auto mt-6 mb-25">
+          We proudly feature products from globally trusted brands. Quality,
+          style, and comfort—curated for you.
+        </p>
+        <Carousel>
+          <Slider>
+            {[...brands, ...brands].map((brand, i) => (
+              <LogoBox key={i}>
+                <img src={brand.img} alt={brand.name} title={brand.name} />
+              </LogoBox>
+            ))}
+          </Slider>
+        </Carousel>
+      </Wrapper>
+    </motion.div>
   )
 }
 

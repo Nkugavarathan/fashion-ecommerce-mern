@@ -1,166 +1,5 @@
 // import React from "react"
 // import styled from "styled-components"
-// import { mobile, tablet } from "../responsive"
-// import { categories } from "../data"
-// import CategoryItem from "./CategoryItem"
-// import MenCategory from "./MenCategory"
-// import WomenCategory from "./WomenCategory"
-
-// // ---------- Styled Components ----------
-
-// const Container = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: center;
-//   margin: 0 30px;
-//   z-index: 1000;
-
-//   ${tablet(`
-//     margin: 0 10px;
-//   `)}
-
-//   ${mobile(`
-//     flex-direction: column;
-//     align-items: center;
-//     margin: 0 5px;
-//   `)}
-// `
-
-// const WaveSection = styled.section`
-//   position: relative;
-//   background-color: #dfecf5;
-//   height: 100vh;
-//   padding: 60px 20px 100px;
-//   overflow: hidden;
-
-//   ${mobile(`
-//     height: auto;
-//     padding-bottom: 80px;
-//   `)}
-
-//   svg {
-//     position: absolute;
-//     bottom: 0;
-//     left: 0;
-//     width: 100%;
-//   }
-// `
-
-// // const SubCategorySection = styled.section`
-// //   position: relative;
-// //   background-color: #ffffff;
-// //   padding: 120px 20px 60px;
-// //   overflow: hidden;
-
-// //   ${mobile(`
-// //     padding: 80px 10px;
-// //   `)}
-
-// //   svg {
-// //     position: absolute;
-// //     top: 0;
-// //     left: 0;
-// //     width: 100%;
-// //     transform: rotate(180deg);
-// //   }
-// // `
-
-// // ---------- Component ----------
-
-// const SubCategorySection = styled.section`
-//   position: relative;
-//   background: linear-gradient(to bottom, #a2d9ff 0%, #ffffff 100%);
-//   padding: 120px 20px 60px;
-//   overflow: hidden;
-
-//   ${mobile(`
-//     padding: 80px 10px;
-//   `)}
-
-//   svg {
-//     position: absolute;
-//     top: 0;
-//     left: 0;
-//     width: 100%;
-//     transform: rotate(180deg);
-//   }
-// `
-
-// export default function Categories() {
-//   return (
-//     <div id="categories">
-//       {/* === FIRST SECTION (Men / Women) === */}
-//       <WaveSection>
-//         <h2 className="text-center text-teal-700 font-bold text-6xl my-2">
-//           Our Categories
-//         </h2>
-
-//         <Container className="flex flex-wrap justify-center gap-6 mb-10">
-//           <div className="w-full md:w-[480px] lg:w-[350px] p-2">
-//             <MenCategory />
-//           </div>
-//           <div className="w-full md:w-[480px] lg:w-[350px] p-2">
-//             <WomenCategory />
-//           </div>
-//         </Container>
-
-//         {/* Wave at the bottom */}
-//         <svg
-//           id="wave"
-//           style={{ transform: "rotate(0deg)", transition: "0.3s" }}
-//           viewBox="0 0 1440 210"
-//           xmlns="http://www.w3.org/2000/svg"
-//         >
-//           <defs>
-//             <linearGradient id="sw-gradient-0" x1="0" x2="0" y1="1" y2="0">
-//               <stop stopColor="rgba(24,241,21,1)" offset="0%" />
-//               <stop stopColor="rgba(57,115,37,1)" offset="100%" />
-//             </linearGradient>
-//           </defs>
-//           <path
-//             fill="url(#sw-gradient-0)"
-//             d="M0,0L40,10.5C80,21,160,42,240,45.5C320,49,400,35,480,52.5C560,70,640,119,720,143.5C800,168,880,168,960,140C1040,112,1120,56,1200,45.5C1280,35,1360,70,1440,91V210H0Z"
-//           />
-//         </svg>
-//       </WaveSection>
-
-//       {/* === SECOND SECTION (Subcategories) === */}
-//       <SubCategorySection>
-//         {/* Inverted wave at the top */}
-//         <svg
-//           id="wave"
-//           style={{ transform: "rotate(180deg)", transition: "0.3s" }}
-//           viewBox="0 0 1440 210"
-//           xmlns="http://www.w3.org/2000/svg"
-//         >
-//           <defs>
-//             <linearGradient id="sw-gradient-1" x1="0" x2="0" y1="1" y2="0">
-//               <stop stopColor="rgba(243,106,62,1)" offset="0%" />
-//               <stop stopColor="rgba(234,211,8,1)" offset="100%" />
-//             </linearGradient>
-//           </defs>
-//           <path
-//             fill="url(#sw-gradient-1)"
-//             d="M0,0L40,10.5C80,21,160,42,240,45.5C320,49,400,35,480,52.5C560,70,640,119,720,143.5C800,168,880,168,960,140C1040,112,1120,56,1200,45.5C1280,35,1360,70,1440,91V210H0Z"
-//           />
-//         </svg>
-
-//         <h2 className="text-center text-teal-600 font-bold text-3xl my-2">
-//           Our SubCategories
-//         </h2>
-
-//         <Container className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-//           {categories.map((item) => (
-//             <CategoryItem item={item} key={item.id} />
-//           ))}
-//         </Container>
-//       </SubCategorySection>
-//     </div>
-//   )
-// }
-
-// import React from "react"
-// import styled from "styled-components"
 // import { categories } from "../data"
 // import { mobile, tablet } from "../responsive"
 // import CategoryItem from "./CategoryItem"
@@ -771,7 +610,7 @@ import { categories } from "../data"
 import CategoryItem from "./CategoryItem"
 import MenCategory from "./MenCategory"
 import WomenCategory from "./WomenCategory"
-
+import { motion } from "framer-motion"
 // ---------- Styled Components ----------
 
 const Container = styled.div`
@@ -861,18 +700,26 @@ export default function Categories() {
         </svg>
       </WaveSection>
 
-      {/* === SECOND SECTION (Subcategories) === */}
-      <SubCategorySection>
-        <h2 className="text-center text-teal-700 font-bold text-5xl mb-10">
-          Our Subcategories
-        </h2>
+      {/* ===(Subcategories) === */}
 
-        <Container className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {categories.map((item) => (
-            <CategoryItem item={item} key={item.id} />
-          ))}
-        </Container>
-      </SubCategorySection>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1 }}
+        viewport={{ once: false, amount: 0.3 }}
+      >
+        <SubCategorySection>
+          <h2 className="text-center text-teal-700 font-bold text-5xl mb-10">
+            Our Subcategories
+          </h2>
+
+          <Container className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {categories.map((item) => (
+              <CategoryItem item={item} key={item.id} />
+            ))}
+          </Container>
+        </SubCategorySection>
+      </motion.div>
     </div>
   )
 }
