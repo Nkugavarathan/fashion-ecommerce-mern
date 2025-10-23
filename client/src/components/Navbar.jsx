@@ -9,6 +9,7 @@ import MenuIcon from "@mui/icons-material/Menu"
 import CloseIcon from "@mui/icons-material/Close"
 import axios from "axios"
 import logo from "/images/logo.png"
+import SearchModal from "./SearchModal"
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -65,17 +66,10 @@ export default function Navbar() {
         </div>
 
         {/* Center: Search Bar */}
-        {/* <div className="flex-1 mx-6 hidden md:flex items-center border border-gray-300 rounded-full px-4 py-2 focus-within:ring-2 focus-within:ring-teal-400 me-16">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="outline-none w-full px-2 py-1 text-lg "
-          />
-          <SearchIcon className="text-gray-500" />
-        </div> */}
 
+        <div className="flex-1 mx-6 hidden md:flex items-center me-16">
+          <SearchModal />
+        </div>
         {/* Right: Desktop Menu */}
         <div className="hidden md:flex items-center gap-6 text-lg font-medium">
           <Link
@@ -132,15 +126,8 @@ export default function Navbar() {
 
         {/* Mobile Hamburger + Search */}
         <div className="flex items-center gap-3 md:hidden">
-          <div className="flex items-center border border-gray-300 rounded-full px-3 py-1 focus-within:ring-2 focus-within:ring-teal-400">
-            <input
-              type="text"
-              placeholder="Search..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="outline-none px-2 py-1 w-28 text-sm"
-            />
-            <SearchIcon className="text-gray-500" />
+          <div className="flex-1 mx-6 hidden md:flex items-center me-16">
+            <SearchModal />
           </div>
           <button
             onClick={() => setMenuOpen(!menuOpen)}

@@ -239,3 +239,34 @@ export const deleteProduct = async (req, res) => {
     res.status(400).json({ message: "Couldn't delete it. Something's wrong." })
   }
 }
+
+// Search products by query (title, name, categories, description, brand)
+// GET /api/products/search?q=shirt
+export const searchProducts = async (req, res) => {
+  try {
+    const q = (req.query.q || "").trim()
+    if (!q) return res.status(200).json([])
+
+    // case-insensitive partial match
+    const regex = new RegExp(q.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i")
+
+    const products = await Product.find({
+      $or: [
+        { title: regex },
+        { name: regex },
+        { description: regex },
+        { brand: regex },
+        { categories: regex }, // categories can be array or string
+      ],
+    })
+      .limit(50)
+      .lean()
+
+    return res.status(200).json(products)
+  } catch (err) {
+    console.error("searchProducts error:", err)
+    return res
+      .status(500)
+      .json({ message: "Search failed", error: err.message })
+  }
+}

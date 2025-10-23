@@ -7,6 +7,7 @@ import {
   deleteProduct,
   getProductById,
   createMultipleProducts,
+  searchProducts,
 } from "../controllers/productControlloer.js"
 import { upload } from "../middleware/uploadMiddleware.js"
 
@@ -23,6 +24,7 @@ router.delete("/:id", protect, admin, deleteProduct)
 
 router.post("/bulk", createMultipleProducts)
 
+router.get("/search", searchProducts)
 // router.get("/search", async (req, res) => {
 //   try {
 //     const { q } = req.query
