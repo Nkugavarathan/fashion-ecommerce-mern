@@ -68,7 +68,7 @@ const Slider = styled.div`
 const LogoBox = styled.div`
   flex: 0 0 auto;
   width: 160px;
-  height: 90px;
+  height: 120px;
   margin: 0 25px;
   display: flex;
   align-items: center;

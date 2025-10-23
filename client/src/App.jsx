@@ -12,7 +12,7 @@ import Profile from "./pages/Profile"
 import CartCheckout from "./pages/cartCheckout"
 import Categories from "./components/Categories"
 import Products from "./components/Products"
-
+import "./App.css"
 function App() {
   // const user = useSelector((state) => state.user.currentUser)
   return (

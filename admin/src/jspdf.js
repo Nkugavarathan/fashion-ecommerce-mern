@@ -58,10 +58,10 @@ export const handleDownloadPDF = (order) => {
   doc.setFontSize(9)
   doc.setFont("helvetica", "normal")
   doc.text("VARA Shop", 20, infoStartY + 15)
-  doc.text("No 18 Borelesgamuwa", 20, infoStartY + 21)
-  doc.text("Borelesgamuwa", 20, infoStartY + 27)
-  doc.text("Email: support@varashop.com", 20, infoStartY + 33)
-  doc.text("Phone:0112223434", 20, infoStartY + 39)
+  doc.text("No 10 HighLevel Road", 20, infoStartY + 21)
+  doc.text("Nugegoda", 20, infoStartY + 27)
+  doc.text("Email: supportvara@.com", 20, infoStartY + 33)
+  doc.text("Phone:0775019192", 20, infoStartY + 39)
 
   // Customer Info Box
   doc.setFillColor(...lightGray)

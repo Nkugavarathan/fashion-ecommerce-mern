@@ -100,7 +100,7 @@ function Products({ category, filters, sort }) {
       }}
     >
       <h2 className="text-center text-teal-600 font-bold text-5xl mb-10">
-        Our Products
+        Trending Now / Featured Products
       </h2>
 
       <motion.div

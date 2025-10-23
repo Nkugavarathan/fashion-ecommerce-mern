@@ -439,7 +439,7 @@ function Cart() {
                     />
                   </ProductAmountContainer>
                   <ProductPrice>
-                    ${(product.price * product.quantity).toFixed(2)}
+                    Rs {(product.price * product.quantity).toFixed(2)}
                   </ProductPrice>
                   <RemoveButton onClick={() => handleRemove(product._id)}>
                     Remove

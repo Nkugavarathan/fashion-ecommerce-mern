@@ -221,7 +221,7 @@ export default function Categories() {
       {/* === FIRST SECTION (Men / Women) === */}
       <WaveSection>
         <h2 className="text-center text-teal-700 font-bold text-5xl mb-5">
-          Our Categories
+          Explore by Category
         </h2>
 
         <Container className="flex flex-wrap justify-center gap-8">
@@ -283,7 +283,7 @@ export default function Categories() {
           viewport={{ once: false, amount: 0.3 }}
         >
           <h2 className="text-center text-teal-700 font-bold text-5xl mb-10">
-            Our Subcategories
+            Shop by Style / Discover More
           </h2>
 
           <Container className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
