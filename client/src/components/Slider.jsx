@@ -12,7 +12,7 @@ const Container = styled.div`
   position: relative;
   overflow: hidden;
   display: flex;
-  background: #fff;
+  background: linear-gradient(135deg, #e0f7f7, #c2e9e9, #dcfafaff);
 
   ${tablet(`
     height: auto;
@@ -98,8 +98,6 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: linear-gradient(90deg, #ffffff, #f7f7f7);
-  color: #111;
 
   ${tablet(`
     padding: 40px;
@@ -178,7 +176,7 @@ function Slider() {
               <Image src={item.image} alt={item.title} />
             </ImgContainer>
             <InfoContainer>
-              <Title>{item.title}</Title>
+              <Title className="text-teal-600">{item.title}</Title>
               <Desc>{item.desc}</Desc>
               <Button as="a" href="#categories">
                 Explore
