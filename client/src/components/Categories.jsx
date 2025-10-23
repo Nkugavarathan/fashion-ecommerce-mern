@@ -610,6 +610,7 @@ import { categories } from "../data"
 import CategoryItem from "./CategoryItem"
 import MenCategory from "./MenCategory"
 import WomenCategory from "./WomenCategory"
+
 import { motion } from "framer-motion"
 // ---------- Styled Components ----------
 
@@ -667,12 +668,27 @@ export default function Categories() {
         </h2>
 
         <Container className="flex flex-wrap justify-center gap-8">
-          <div className="w-full md:w-[450px] lg:w-[500px] h-auto p-3">
+          {/* Men Category  */}
+          <motion.div
+            initial={{ opacity: 0, x: -100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.8, 0.25, 1] }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="w-full md:w-[450px] lg:w-[500px] h-auto p-3"
+          >
             <MenCategory />
-          </div>
-          <div className="w-full md:w-[450px] lg:w-[500px] h-auto p-3">
+          </motion.div>
+
+          {/* Women Category */}
+          <motion.div
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 0.8, 0.25, 1] }}
+            viewport={{ once: true, amount: 0.3 }}
+            className="w-full md:w-[450px] lg:w-[500px] h-auto p-3"
+          >
             <WomenCategory />
-          </div>
+          </motion.div>
         </Container>
 
         {/* Dark Teal Wave at the bottom */}
