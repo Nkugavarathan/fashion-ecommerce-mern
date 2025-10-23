@@ -7,7 +7,7 @@ import PhoneIcon from "@mui/icons-material/Phone"
 import MailIcon from "@mui/icons-material/Mail"
 import HomeIcon from "@mui/icons-material/Home"
 // import { mobile, tablet } from "../responsive"
-
+import { Link } from "react-router-dom"
 export default function Footer() {
   return (
     <footer className="bg-gray-100 text-gray-700 px-6 py-10">
@@ -38,12 +38,17 @@ export default function Footer() {
         </div>
 
         {/* Center Section */}
-        <div className="flex-1 min-w-[250px] hidden md:block">
+        <div className="flex-1 min-w-[250px]  md:block">
           <h3 className="text-lg font-semibold mb-4">Useful Links</h3>
           <ul className="flex flex-wrap gap-y-2 text-sm">
-            <li className="w-1/2">Home</li>
+            <li className="w-1/2">
+              <Link to="/">Home</Link>
+            </li>
 
-            <li className="w-1/2">My Account</li>
+            <li className="w-1/2">
+              {" "}
+              <Link to="/profile">My Account </Link>
+            </li>
 
             <li className="w-1/2">Terms</li>
           </ul>

@@ -26,7 +26,7 @@ const newArrivals = [
     price: "Rs 3,499",
     originalPrice: "Rs 4,999",
     discount: "25% OFF",
-    image: "/images/bohimian.jpg",
+    image: "/newarrivals/bohimian.jpg",
     tag: "🔥 TRENDING",
     colors: ["Sunset Orange", "Ocean Blue", "Forest Green"],
     description: "Flowey bohemian dress with sunset gradient patterns",
