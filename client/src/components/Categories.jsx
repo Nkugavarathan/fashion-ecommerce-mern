@@ -225,12 +225,16 @@ export default function Categories() {
         </h2>
 
         <Container className="flex flex-wrap justify-center gap-8">
-          {/* Men Category  */}
+          {/* Men Category */}
           <motion.div
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: [0.25, 0.8, 0.25, 1] }}
-            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0, x: -100, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.8, 0.25, 1],
+              delay: 0.1,
+            }}
+            viewport={{ once: false, amount: 0.2 }}
             className="w-full md:w-[450px] lg:w-[500px] h-auto p-3"
           >
             <MenCategory />
@@ -238,10 +242,14 @@ export default function Categories() {
 
           {/* Women Category */}
           <motion.div
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, ease: [0.25, 0.8, 0.25, 1] }}
-            viewport={{ once: false, amount: 0.3 }}
+            initial={{ opacity: 0, x: 100, scale: 0.95 }}
+            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            transition={{
+              duration: 0.8,
+              ease: [0.25, 0.8, 0.25, 1],
+              delay: 0.3,
+            }}
+            viewport={{ once: false, amount: 0.2 }}
             className="w-full md:w-[450px] lg:w-[500px] h-auto p-3"
           >
             <WomenCategory />

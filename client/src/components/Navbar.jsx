@@ -144,6 +144,7 @@ export default function Navbar() {
         <div className="md:hidden bg-white shadow-md w-full">
           <div className="flex flex-col items-center px-6 py-4 space-y-3">
             <SearchModal />
+
             <Link
               onClick={() => setMenuOpen(false)}
               className="text-teal-700 hover:text-teal-500 transition-colors duration-300"

@@ -90,9 +90,6 @@ function Products({ category, filters, sort }) {
     }
   }, [sort])
 
-  // List of products with offers
-  const offerTitles = ["Floral Maxi Dress", "Classic White Shirt"]
-
   return (
     <div
       style={{

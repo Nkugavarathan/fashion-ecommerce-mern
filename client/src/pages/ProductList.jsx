@@ -1,138 +1,103 @@
-import React, { useState, useEffect } from "react"
-import styled from "styled-components"
-import Navbar from "./../components/Navbar"
-import { mobile, tablet } from "../responsive"
+import React, { useState } from "react"
+import Navbar from "../components/Navbar"
 import { useParams } from "react-router-dom"
-import Newsletter from "./../components/Newsletter"
-import Products from "./../components/Products"
-import Footer from "./../components/Footer"
+import Products from "../components/Products"
+import Footer from "../components/Footer"
 
-const Container = styled.div`
-  padding-top: 120px;
-
-  ${mobile(`
-    padding-top: 80px;
-  `)}
-`
-
-const FilterContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-
-  ${mobile(`
-    flex-direction: column;
-    gap: 10px;
-  `)}
-`
-
-const Filter = styled.div`
-  margin: 20px;
-  display: flex;
-  flex-wrap: wrap;
-
-  ${mobile(`
-    flex-direction: column;
-    gap: 10px;
-  `)}
-`
-
-const Select = styled.select`
-  margin-right: 20px;
-
-  ${mobile(`
-    margin-right: 0;
-  `)}
-`
-const Title = styled.h1``
-
-const FilterText = styled.div`
-  font-size: 20px;
-  font-weight: 600;
-  margin-right: 10px;
-`
-
-const Option = styled.option``
-const Button = styled.button`
-  padding: 10px 15px;
-  border: none;
-  background-color: #222;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  &:hover {
-    background-color: #555;
-  }
-`
-
-// filter,and sort product page
 function ProductList() {
   const { category } = useParams()
-
-  //size,color
-  const [filters, setFilters] = useState([])
-
-  // newest,asc,desc
+  const [filters, setFilters] = useState({})
   const [sort, setSort] = useState("newest")
+
   const handleFilters = (e) => {
     const value = e.target.value
-    //spread operator
     setFilters({ ...filters, [e.target.name]: value })
   }
-
-  // useEffect(() => {
-  //   setFilters({})
-  //   setSort("newest")
-  // }, [])
 
   const handleClearFilters = () => {
     setFilters({})
     setSort("newest")
-    // Reset the dropdowns to default
     document.querySelectorAll("select").forEach((select) => {
       select.selectedIndex = 0
     })
   }
 
   return (
-    <Container>
+    <div className="pt-28 px-6 md:px-12">
       <Navbar />
-      <Title>{category} </Title>
-      <FilterContainer>
-        <Filter>
-          <FilterText>Filter Products:</FilterText>
-          <Select name="color" defaultValue="" onChange={handleFilters}>
-            <Option value="" disabled>
+
+      {/* Filter and Sort Section */}
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-6">
+        {/* Filters */}
+        <div className="flex flex-wrap items-center gap-4">
+          <h2 className="text-xl font-semibold text-gray-800">
+            Filter Products:
+          </h2>
+
+          {/* Color Filter */}
+          <select
+            name="color"
+            defaultValue=""
+            onChange={handleFilters}
+            className="border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          >
+            <option value="" disabled>
               Color
-            </Option>
-            <Option>red</Option>
-            <Option>blue</Option>
-            <Option>green</Option>
-            <Option>black</Option>
-            <Option>white</Option>
-          </Select>
-          <Select name="size" defaultValue="" onChange={handleFilters}>
-            <Option value="" disabled>
+            </option>
+            <option>Red</option>
+            <option>Blue</option>
+            <option>Green</option>
+            <option>Black</option>
+            <option>White</option>
+          </select>
+
+          {/* Size Filter */}
+          <select
+            name="size"
+            defaultValue=""
+            onChange={handleFilters}
+            className="border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          >
+            <option value="" disabled>
               Size
-            </Option>
-            <Option>XS</Option>
-            <Option>S</Option>
-            <Option>M</Option>
-            <Option>L</Option>
-            <Option>XL</Option>
-          </Select>
-          <Button onClick={handleClearFilters}>Clear Filters</Button>
-        </Filter>
-        <Filter>
-          <FilterText>Sort Products:</FilterText>
-          <Select onChange={(e) => setSort(e.target.value)}>
-            <Option value="newest">Newest</Option>
-            <Option value="asc">Price (asc)</Option>
-            <Option value="desc">Price (desc)</Option>
-          </Select>
-        </Filter>
-      </FilterContainer>
+            </option>
+            <option>XS</option>
+            <option>S</option>
+            <option>M</option>
+            <option>L</option>
+            <option>XL</option>
+          </select>
+
+          {/* Clear Filters */}
+          <button
+            onClick={handleClearFilters}
+            className="bg-teal-600 text-white px-4 py-2 rounded-md hover:bg-teal-700 transition"
+          >
+            Clear Filters
+          </button>
+        </div>
+
+        {/* Sorting */}
+        <div className="flex items-center gap-3">
+          <h2 className="text-xl font-semibold text-gray-800">
+            Sort Products:
+          </h2>
+          <select
+            onChange={(e) => setSort(e.target.value)}
+            className="border border-gray-300 rounded-md px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-teal-500"
+          >
+            <option value="newest">Newest</option>
+            <option value="asc">Price (asc)</option>
+            <option value="desc">Price (desc)</option>
+          </select>
+        </div>
+      </div>
+
+      {/* Products Section */}
       <Products category={category} filters={filters} sort={sort} />
-    </Container>
+
+      <Footer />
+    </div>
   )
 }
 
