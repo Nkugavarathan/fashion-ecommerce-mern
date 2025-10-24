@@ -57,16 +57,16 @@ export default function Navbar() {
       }`}
     >
       <div className="max-w-7xl mx-auto px-6 md:px-12 py-3 flex items-center justify-between">
-        {/* Left: Logo */}
-        <div className="flex items-center gap-2">
-          <img src={logo} alt="Logo" className="w-12 h-12 object-contain" />
-          <span className="text-teal-600 font-bold text-3xl md:text-4xl me-16">
-            VARA FASHION
-          </span>
-        </div>
-
+        {/* Left: Logo */}{" "}
+        <Link to="/">
+          <div className="flex items-center gap-2">
+            <img src={logo} alt="Logo" className="w-12 h-12 object-contain" />
+            <span className="text-teal-600 font-bold text-3xl md:text-4xl me-16">
+              VARA FASHION
+            </span>
+          </div>
+        </Link>
         {/* Center: Search Bar */}
-
         <div className="flex-1 mx-6 hidden md:flex items-center me-16">
           <SearchModal />
         </div>
@@ -123,7 +123,6 @@ export default function Navbar() {
             </Badge>
           </Link>
         </div>
-
         {/* Mobile Hamburger + Search */}
         <div className="flex items-center gap-3 md:hidden">
           <button

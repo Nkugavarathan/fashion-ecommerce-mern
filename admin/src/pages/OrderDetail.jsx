@@ -249,7 +249,7 @@ export default function OrderDetail() {
                       </td>
                       <td className="py-2">{p.quantity ?? p.qty ?? 1}</td>
                       <td className="py-2">
-                        ${Number(p.price ?? 0).toFixed(2)}
+                        Rs {Number(p.price ?? 0).toFixed(2)}
                       </td>
                     </tr>
                   ))}
@@ -277,7 +277,7 @@ export default function OrderDetail() {
               {new Date(order.createdAt).toLocaleString()}
             </div>
             <div className="mb-2">
-              <strong>Amount:</strong> ${Number(order.amount ?? 0).toFixed(2)}
+              <strong>Amount:</strong> Rs {Number(order.amount ?? 0).toFixed(2)}
             </div>
             <div className="mb-2">
               <strong>Payment:</strong>{" "}

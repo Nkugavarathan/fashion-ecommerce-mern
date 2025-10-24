@@ -16,7 +16,7 @@ const AI_KNOWLEDGE_BASE = {
     standard: "3-5 business days",
     express: "1-2 business days",
     freeThreshold: 2999,
-    areas: "All across India",
+    areas: "All across Sri Lanka",
   },
   returns: {
     period: "30 days",
@@ -82,7 +82,7 @@ export default function AIChatWidget() {
 
     // Location and address
     if (/(where|location|address|place|store|visit)/.test(message)) {
-      return `📍 Our flagship store is located at:\n${AI_KNOWLEDGE_BASE.store.address}\n\nWe also deliver ${AI_KNOWLEDGE_BASE.delivery.areas}. Would you like directions? 🗺️`
+      return `📍 Our Fashion store is located at:\n${AI_KNOWLEDGE_BASE.store.address}\n\nWe also deliver ${AI_KNOWLEDGE_BASE.delivery.areas}. Would you like directions? 🗺️`
     }
 
     // Delivery information
