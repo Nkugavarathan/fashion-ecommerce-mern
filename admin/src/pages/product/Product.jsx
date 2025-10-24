@@ -1095,7 +1095,7 @@ export default function Product() {
 
           <div className="text-gray-700 space-y-1">
             <p>
-              <span className="font-semibold">Price:</span> {price}
+              <span className="font-semibold">Price:</span> Rs {price}
             </p>
             <p>
               <span className="font-semibold">In Stock:</span>{" "}

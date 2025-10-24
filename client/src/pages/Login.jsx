@@ -17,8 +17,8 @@ function Login() {
       if (!data) throw new Error("No data returned")
 
       if (data.user?.isAdmin) {
-        // Open admin site in a new tab
-        window.open("http://localhost:5174/", "_blank")
+        const token = data.token
+        window.open(`http://localhost:5174/?token=${token}`, "_blank")
 
         // Redirect current tab to homepage
         navigate("/")

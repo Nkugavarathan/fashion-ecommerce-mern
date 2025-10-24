@@ -10,13 +10,22 @@ import NewUser from "./pages/newuser/NewUser"
 import Product from "./pages/product/Product"
 import ProductList from "./pages/productlist/ProductList"
 import NewProduct from "./pages/newproduct/NewProduct"
-import Login from "./pages/Login"
+// import Login from "./pages/Login"
 import OrderList from "./pages/OrderList"
 import OrderDetail from "./pages/OrderDetail"
-
+import { useEffect } from "react"
 function App() {
   const location = useLocation()
   const isLoginPage = location.pathname === "/login"
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search)
+    const token = queryParams.get("token")
+
+    if (token) {
+      localStorage.setItem("adminToken", token)
+    }
+  }, [])
 
   return (
     <>
@@ -32,7 +41,7 @@ function App() {
           <Route path="/products" element={<ProductList />} />
           <Route path="/products/:productId" element={<Product />} />
           <Route path="/newproduct" element={<NewProduct />} />
-          <Route path="/login" element={<Login />} />
+          {/* <Route path="/login" element={<Login />} /> */}
           <Route path="/orders" element={<OrderList />} />
           <Route path="/orders/:id" element={<OrderDetail />} />
         </Routes>

@@ -32,6 +32,16 @@ export default function NewProduct() {
       return
     }
 
+    const maxSizeMB = 10
+    const maxSizeBytes = maxSizeMB * 1024 * 1024
+
+    if (file.size > maxSizeBytes) {
+      alert(
+        `❌ Image too large. Please upload a file smaller than ${maxSizeMB}MB.`
+      )
+      return
+    }
+
     const formData = new FormData()
     formData.append("title", inputs.title || "")
     formData.append("desc", inputs.desc || "")
@@ -110,7 +120,7 @@ export default function NewProduct() {
 
         {/* Price */}
         <div className="flex flex-col w-full sm:w-[250px]">
-          <label className="text-gray-600 font-semibold mb-2">Price ($)</label>
+          <label className="text-gray-600 font-semibold mb-2">Price (Rs)</label>
           <input
             name="price"
             type="number"
