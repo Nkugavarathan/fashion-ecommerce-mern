@@ -25,7 +25,6 @@
 // export const { loginFailure, loginStart, loginSuccess } = userSlice.actions
 // export default userSlice.reducer
 
-// ...existing code...
 import { createSlice } from "@reduxjs/toolkit"
 
 const userSlice = createSlice({
@@ -63,4 +62,3 @@ const userSlice = createSlice({
 export const { loginFailure, loginStart, loginSuccess, logout } =
   userSlice.actions
 export default userSlice.reducer
-// ...existing code...
