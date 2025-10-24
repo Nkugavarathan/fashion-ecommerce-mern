@@ -6,7 +6,6 @@ import {
   updateProduct,
   deleteProduct,
   getProductById,
-  createMultipleProducts,
   searchProducts,
 } from "../controllers/productControlloer.js"
 import { upload } from "../middleware/uploadMiddleware.js"
@@ -22,7 +21,7 @@ router.get("/find/:id", getProductById)
 router.get("/", getAllProducts)
 router.delete("/:id", protect, admin, deleteProduct)
 
-router.post("/bulk", createMultipleProducts)
+// router.post("/bulk", createMultipleProducts)
 
 router.get("/search", searchProducts)
 // router.get("/search", async (req, res) => {

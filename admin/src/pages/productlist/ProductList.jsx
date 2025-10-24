@@ -49,7 +49,10 @@ export default function ProductList() {
           </Link>
           <DeleteOutline
             className="text-red-600 cursor-pointer"
-            onClick={() => handleDelete(params.row.id)}
+            onClick={(e) => {
+              e.stopPropagation()
+              handleDelete(params.row.id)
+            }}
           />
         </div>
       ),

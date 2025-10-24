@@ -67,14 +67,14 @@ export const createProduct = async (req, res) => {
 }
 
 //create multiple product at onetime
-export const createMultipleProducts = async (req, res) => {
-  try {
-    const products = await Product.insertMany(req.body)
-    res.status(201).json(products)
-  } catch (error) {
-    res.status(500).json({ message: error.message })
-  }
-}
+// export const createMultipleProducts = async (req, res) => {
+//   try {
+//     const products = await Product.insertMany(req.body)
+//     res.status(201).json(products)
+//   } catch (error) {
+//     res.status(500).json({ message: error.message })
+//   }
+// }
 
 // export const updateProduct = async (req, res) => {
 //   try {
