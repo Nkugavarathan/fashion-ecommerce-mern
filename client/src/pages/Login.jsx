@@ -17,13 +17,16 @@ function Login() {
       if (!data) throw new Error("No data returned")
 
       if (data.user?.isAdmin) {
-        // redirect to admin site (different port)
-        window.location.href = "http://localhost:5174/"
+        // Open admin site in a new tab
+        window.open("http://localhost:5174/", "_blank")
+
+        // Redirect current tab to homepage
+        navigate("/")
       } else {
         navigate("/")
       }
     } catch (err) {
-      alert("Login failed: " + (err.response?.data?.message || err.message))
+      alert("Login failed")
     }
   }
 
