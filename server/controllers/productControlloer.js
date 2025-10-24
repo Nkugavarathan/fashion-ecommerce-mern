@@ -1,70 +1,70 @@
 import Product from "../models/productModel.js"
 
-export const createProduct = async (req, res) => {
-  try {
-    const data = { ...req.body }
+// export const createProduct = async (req, res) => {
+//   try {
+//     const data = { ...req.body }
 
-    if (data.desc) data.description = data.desc
+//     if (data.desc) data.description = data.desc
 
-    // if multer stored a file, set the public URL
-    if (req.file) {
-      data.image = `${req.protocol}://${req.get("host")}/uploads/${
-        req.file.filename
-      }`
-    }
+//     // if multer stored a file, set the public URL
+//     if (req.file) {
+//       data.image = `${req.protocol}://${req.get("host")}/uploads/${
+//         req.file.filename
+//       }`
+//     }
 
-    // helper to normalize fields that should be arrays
-    const normalizeArrayField = (fieldName) => {
-      if (!data[fieldName]) {
-        data[fieldName] = []
-        return
-      }
-      // if already an array (rare when FormData used incorrectly), keep it
-      if (Array.isArray(data[fieldName])) return
-      if (typeof data[fieldName] === "string") {
-        // try parse JSON string -> could be '["a","b"]' or plain "a"
-        try {
-          const parsed = JSON.parse(data[fieldName])
-          if (Array.isArray(parsed)) data[fieldName] = parsed
-          else if (parsed) data[fieldName] = [parsed]
-          else data[fieldName] = []
-        } catch {
-          // fallback: comma separated string -> ["a","b"]
-          data[fieldName] = data[fieldName]
-            .split(",")
-            .map((s) => s.trim())
-            .filter(Boolean)
-        }
-      } else {
-        // any other type, wrap to array
-        data[fieldName] = [data[fieldName]]
-      }
-    }
+//     // helper to normalize fields that should be arrays
+//     const normalizeArrayField = (fieldName) => {
+//       if (!data[fieldName]) {
+//         data[fieldName] = []
+//         return
+//       }
+//       // if already an array (rare when FormData used incorrectly), keep it
+//       if (Array.isArray(data[fieldName])) return
+//       if (typeof data[fieldName] === "string") {
+//         // try parse JSON string -> could be '["a","b"]' or plain "a"
+//         try {
+//           const parsed = JSON.parse(data[fieldName])
+//           if (Array.isArray(parsed)) data[fieldName] = parsed
+//           else if (parsed) data[fieldName] = [parsed]
+//           else data[fieldName] = []
+//         } catch {
+//           // fallback: comma separated string -> ["a","b"]
+//           data[fieldName] = data[fieldName]
+//             .split(",")
+//             .map((s) => s.trim())
+//             .filter(Boolean)
+//         }
+//       } else {
+//         // any other type, wrap to array
+//         data[fieldName] = [data[fieldName]]
+//       }
+//     }
 
-    normalizeArrayField("categories")
-    normalizeArrayField("size")
-    normalizeArrayField("color")
+//     normalizeArrayField("categories")
+//     normalizeArrayField("size")
+//     normalizeArrayField("color")
 
-    // normalize inStock to boolean
-    if (typeof data.inStock === "string") {
-      data.inStock = data.inStock === "true" || data.inStock === "1"
-    } else {
-      data.inStock = Boolean(data.inStock)
-    }
+//     // normalize inStock to boolean
+//     if (typeof data.inStock === "string") {
+//       data.inStock = data.inStock === "true" || data.inStock === "1"
+//     } else {
+//       data.inStock = Boolean(data.inStock)
+//     }
 
-    // map frontend 'gender' to product.category (optional)
-    if (data.gender && !data.category) data.category = data.gender
+//     // map frontend 'gender' to product.category (optional)
+//     if (data.gender && !data.category) data.category = data.gender
 
-    const newProduct = new Product(data)
-    const saved = await newProduct.save()
-    res.status(201).json(saved)
-  } catch (err) {
-    console.error("createProduct error:", err)
-    res
-      .status(500)
-      .json({ message: "Create product failed", error: err.message })
-  }
-}
+//     const newProduct = new Product(data)
+//     const saved = await newProduct.save()
+//     res.status(201).json(saved)
+//   } catch (err) {
+//     console.error("createProduct error:", err)
+//     res
+//       .status(500)
+//       .json({ message: "Create product failed", error: err.message })
+//   }
+// }
 
 //create multiple product at onetime
 // export const createMultipleProducts = async (req, res) => {
@@ -122,37 +122,37 @@ export const createProduct = async (req, res) => {
 //   }
 // }
 
-export const updateProduct = async (req, res) => {
-  try {
-    const data = { ...req.body }
-    if (req.file) {
-      data.image = `${req.protocol}://${req.get("host")}/uploads/${
-        req.file.filename
-      }`
-    }
-    if (data.categories && typeof data.categories === "string") {
-      try {
-        data.categories = JSON.parse(data.categories)
-      } catch {
-        data.categories = data.categories
-          .split(",")
-          .map((s) => s.trim())
-          .filter(Boolean)
-      }
-    }
-    if (typeof data.inStock === "string")
-      data.inStock = data.inStock === "true" || data.inStock === "1"
-    const updated = await Product.findByIdAndUpdate(
-      req.params.id,
-      { $set: data },
-      { new: true }
-    )
-    res.status(200).json(updated)
-  } catch (err) {
-    console.error("updateProduct error:", err)
-    res.status(500).json({ message: "Update failed", error: err.message })
-  }
-}
+// export const updateProduct = async (req, res) => {
+//   try {
+//     const data = { ...req.body }
+//     if (req.file) {
+//       data.image = `${req.protocol}://${req.get("host")}/uploads/${
+//         req.file.filename
+//       }`
+//     }
+//     if (data.categories && typeof data.categories === "string") {
+//       try {
+//         data.categories = JSON.parse(data.categories)
+//       } catch {
+//         data.categories = data.categories
+//           .split(",")
+//           .map((s) => s.trim())
+//           .filter(Boolean)
+//       }
+//     }
+//     if (typeof data.inStock === "string")
+//       data.inStock = data.inStock === "true" || data.inStock === "1"
+//     const updated = await Product.findByIdAndUpdate(
+//       req.params.id,
+//       { $set: data },
+//       { new: true }
+//     )
+//     res.status(200).json(updated)
+//   } catch (err) {
+//     console.error("updateProduct error:", err)
+//     res.status(500).json({ message: "Update failed", error: err.message })
+//   }
+// }
 
 export const getAllProducts = async (req, res) => {
   const qNew = req.query.new // ?new=true
@@ -268,5 +268,107 @@ export const searchProducts = async (req, res) => {
     return res
       .status(500)
       .json({ message: "Search failed", error: err.message })
+  }
+}
+
+/// new
+// helper: normalize string → array
+const normalizeArrayField = (data, fieldName) => {
+  if (!data[fieldName]) {
+    data[fieldName] = []
+    return
+  }
+  if (Array.isArray(data[fieldName])) return
+  if (typeof data[fieldName] === "string") {
+    try {
+      const parsed = JSON.parse(data[fieldName])
+      data[fieldName] = Array.isArray(parsed) ? parsed : parsed ? [parsed] : []
+    } catch {
+      data[fieldName] = data[fieldName]
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean)
+    }
+  } else {
+    data[fieldName] = [data[fieldName]]
+  }
+}
+
+// ✅ Create Product
+export const createProduct = async (req, res) => {
+  try {
+    const data = { ...req.body }
+
+    // if multer uploaded image
+    if (req.file) {
+      data.image = `${req.protocol}://${req.get("host")}/uploads/${
+        req.file.filename
+      }`
+    }
+
+    // normalize all arrays
+    normalizeArrayField(data, "categories")
+    normalizeArrayField(data, "size")
+    normalizeArrayField(data, "color")
+
+    // ensure boolean
+    if (typeof data.inStock === "string") {
+      data.inStock = data.inStock === "true" || data.inStock === "1"
+    }
+
+    // ✅ combine gender + subcategories
+    if (data.gender) {
+      const gender = data.gender.trim().toLowerCase()
+      if (data.categories && !data.categories.includes(gender)) {
+        data.categories = [gender, ...data.categories]
+      }
+    }
+
+    const newProduct = new Product(data)
+    const saved = await newProduct.save()
+    res.status(201).json(saved)
+  } catch (err) {
+    console.error("createProduct error:", err)
+    res.status(500).json({ message: "Create failed", error: err.message })
+  }
+}
+
+// ✅ Update Product
+export const updateProduct = async (req, res) => {
+  try {
+    const data = { ...req.body }
+
+    // new image if uploaded
+    if (req.file) {
+      data.image = `${req.protocol}://${req.get("host")}/uploads/${
+        req.file.filename
+      }`
+    }
+
+    normalizeArrayField(data, "categories")
+    normalizeArrayField(data, "size")
+    normalizeArrayField(data, "color")
+
+    if (typeof data.inStock === "string") {
+      data.inStock = data.inStock === "true" || data.inStock === "1"
+    }
+
+    // ensure gender is included
+    if (data.gender) {
+      const gender = data.gender.trim().toLowerCase()
+      if (!data.categories.includes(gender)) {
+        data.categories = [gender, ...data.categories]
+      }
+    }
+
+    const updated = await Product.findByIdAndUpdate(
+      req.params.id,
+      { $set: data },
+      { new: true }
+    )
+    res.status(200).json(updated)
+  } catch (err) {
+    console.error("updateProduct error:", err)
+    res.status(500).json({ message: "Update failed", error: err.message })
   }
 }

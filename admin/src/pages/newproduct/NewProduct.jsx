@@ -2,28 +2,95 @@ import React, { useState } from "react"
 import { useDispatch } from "react-redux"
 import { addProduct } from "../../redux/apiCalls"
 
+// export default function NewProduct() {
+//   const [inputs, setInputs] = useState({})
+//   const [file, setFile] = useState(null)
+//   const [categories, setCategories] = useState([]) // array
+//   const [sizes, setSizes] = useState([]) // array
+//   const [colors, setColors] = useState([]) // array
+//   const [gender, setGender] = useState("") // men / women / unisex
+//   const dispatch = useDispatch()
+
+// const handleChange = (e) => {
+//   setInputs((prev) => ({
+//     ...prev,
+//     [e.target.name]: e.target.value,
+//   }))
+// }
+//   // multi-select handler
+//   const handleMultiSelect = (e, setter) => {
+//     const selected = Array.from(e.target.selectedOptions).map((o) => o.value)
+//     setter(selected)
+//   }
+
+//   const handleClick = (e) => {
+//     e.preventDefault()
+
+//     if (!file) {
+//       alert("Please upload an image!")
+//       return
+//     }
+//     //upload image size
+//     const maxSizeMB = 10
+//     const maxSizeBytes = maxSizeMB * 1024 * 1024
+
+//     if (file.size > maxSizeBytes) {
+//       alert(
+//         `❌ Image too large. Please upload a file smaller than ${maxSizeMB}MB.`
+//       )
+//       return
+//     }
+
+//     const formData = new FormData()
+//     formData.append("title", inputs.title || "")
+//     // formData.append("desc", inputs.desc || "")
+//     formData.append("description", inputs.desc || "")
+
+//     formData.append("price", inputs.price || "")
+//     formData.append("inStock", inputs.inStock ?? "true")
+//     // send arrays as JSON strings so backend can parse reliably
+//     formData.append("categories", JSON.stringify(categories))
+//     formData.append("size", JSON.stringify(sizes))
+//     formData.append("color", JSON.stringify(colors))
+//     formData.append("gender", gender)
+//     formData.append("image", file)
+
+//     addProduct(formData, dispatch)
+//       .then(() => {
+//         alert("✅ Product add request sent")
+//         setInputs({})
+//         setFile(null)
+//         setCategories([])
+//         setSizes([])
+//         setColors([])
+//         setGender("")
+//         // optionally refresh product list: getProducts(dispatch)
+//       })
+//       .catch((err) => {
+//         console.error("Add product failed:", err)
+//         alert("❌ Create failed — check server logs / network tab")
+//       })
+//   }
+// }
 export default function NewProduct() {
   const [inputs, setInputs] = useState({})
   const [file, setFile] = useState(null)
   const [categories, setCategories] = useState([]) // array
   const [sizes, setSizes] = useState([]) // array
   const [colors, setColors] = useState([]) // array
-  const [gender, setGender] = useState("unisex") // men / women / unisex
+  const [gender, setGender] = useState("") // men / women / unisex
   const dispatch = useDispatch()
-
   const handleChange = (e) => {
     setInputs((prev) => ({
       ...prev,
       [e.target.name]: e.target.value,
     }))
   }
-
   // multi-select handler
   const handleMultiSelect = (e, setter) => {
     const selected = Array.from(e.target.selectedOptions).map((o) => o.value)
     setter(selected)
   }
-
   const handleClick = (e) => {
     e.preventDefault()
 
@@ -31,10 +98,8 @@ export default function NewProduct() {
       alert("Please upload an image!")
       return
     }
-
     const maxSizeMB = 10
     const maxSizeBytes = maxSizeMB * 1024 * 1024
-
     if (file.size > maxSizeBytes) {
       alert(
         `❌ Image too large. Please upload a file smaller than ${maxSizeMB}MB.`
@@ -42,13 +107,18 @@ export default function NewProduct() {
       return
     }
 
+    // Validate file size (max 10 MB)
+
     const formData = new FormData()
     formData.append("title", inputs.title || "")
-    formData.append("desc", inputs.desc || "")
+    formData.append("description", inputs.desc || "")
     formData.append("price", inputs.price || "")
     formData.append("inStock", inputs.inStock ?? "true")
-    // send arrays as JSON strings so backend can parse reliably
-    formData.append("categories", JSON.stringify(categories))
+
+    // ✅ Merge gender + subcategories together
+    const allCategories = gender ? [gender, ...categories] : [...categories]
+    formData.append("categories", JSON.stringify(allCategories))
+
     formData.append("size", JSON.stringify(sizes))
     formData.append("color", JSON.stringify(colors))
     formData.append("gender", gender)
@@ -56,18 +126,18 @@ export default function NewProduct() {
 
     addProduct(formData, dispatch)
       .then(() => {
-        alert("✅ Product add request sent")
+        alert("✅ Product added successfully")
+        // Reset form
         setInputs({})
         setFile(null)
         setCategories([])
         setSizes([])
         setColors([])
-        setGender("unisex")
-        // optionally refresh product list: getProducts(dispatch)
+        setGender("")
       })
       .catch((err) => {
         console.error("Add product failed:", err)
-        alert("❌ Create failed — check server logs / network tab")
+        alert("❌ Create failed — check console or server logs")
       })
   }
 
@@ -142,9 +212,7 @@ export default function NewProduct() {
             onChange={(e) => setGender(e.target.value)}
             className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
           >
-            {/* <option value="unisex" disabled>
-              Men/Women
-            </option> */}
+            <option value="unisex">Unisex</option>
             <option value="men">Men</option>
             <option value="women">Women</option>
           </select>

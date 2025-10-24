@@ -13,9 +13,14 @@ const productSchema = new Schema(
       required: true,
     },
     image: { type: String, required: true },
-    categories: { type: Array },
-    size: { type: Array },
-    color: { type: Array },
+
+    // categories: { type: [String], required: true },
+    // size: { type: Array },
+    // color: { type: Array },
+    categories: { type: [String], required: true }, // e.g. ["men", "shirt"]
+    size: { type: [String] },
+    color: { type: [String] },
+
     price: { type: String, required: true },
     inStock: { type: Boolean, default: true },
   },

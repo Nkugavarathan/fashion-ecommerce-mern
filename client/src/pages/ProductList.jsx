@@ -44,11 +44,11 @@ function ProductList() {
             <option value="" disabled>
               Color
             </option>
-            <option>Red</option>
-            <option>Blue</option>
-            <option>Green</option>
-            <option>Black</option>
-            <option>White</option>
+            <option>red</option>
+            <option>blue</option>
+            <option>green</option>
+            <option>black</option>
+            <option>white</option>
           </select>
 
           {/* Size Filter */}

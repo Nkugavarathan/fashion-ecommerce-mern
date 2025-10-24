@@ -978,7 +978,7 @@ export default function Product() {
   const [price, setPrice] = useState("")
   const [description, setDescription] = useState("")
   const [inStock, setInStock] = useState("yes")
-  const [gender, setGender] = useState("unisex") // main category
+  const [gender, setGender] = useState("") // main category
   const [categories, setCategories] = useState([]) // subcategories array
   const [sizes, setSizes] = useState([]) // size array
   const [colors, setColors] = useState([]) // color array
@@ -1006,10 +1006,10 @@ export default function Product() {
       setPrice(product.price ?? "")
       setDescription(product.description || product.desc || "")
       setInStock(product.inStock ? "yes" : "no")
-      setGender(product.gender || product.category || "unisex")
+      setGender(product.gender || product.category)
       setCategories(Array.isArray(product.categories) ? product.categories : [])
 
-      // ✅ Parse sizes if stored as JSON string
+      //  Parse sizes if stored as JSON string
       try {
         const parsedSizes =
           typeof product.size === "string"
@@ -1101,11 +1101,11 @@ export default function Product() {
               <span className="font-semibold">In Stock:</span>{" "}
               {inStock === "yes" ? "Yes" : "No"}
             </p>
-            <p>
+            {/* <p>
               <span className="font-semibold">Main Category:</span> {gender}
-            </p>
+            </p> */}
             <p>
-              <span className="font-semibold">Subcategories:</span>{" "}
+              <span className="font-semibold">Categories:</span>{" "}
               {categories.join(", ")}
             </p>
             <p>
@@ -1169,10 +1169,12 @@ export default function Product() {
             <div>
               <label className="font-semibold">Main Category(Gender)</label>
               <select
+                name="gender"
                 value={gender}
                 onChange={(e) => setGender(e.target.value)}
-                className="w-full border border-gray-300 rounded-md p-2 mt-1"
+                className="border border-gray-300 rounded-md p-2 focus:ring-2 focus:ring-blue-500"
               >
+                <option value="unisex">Unisex</option>
                 <option value="men">Men</option>
                 <option value="women">Women</option>
               </select>

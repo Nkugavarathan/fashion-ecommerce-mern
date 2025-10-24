@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 import axios from "axios"
 import ProductItem from "./ProductItem"
 import { mobile, tablet } from "../responsive"
-
+import { useLocation } from "react-router-dom"
 // const Container = styled.div`
 //   padding: 10px;
 //   display: flex;
@@ -47,6 +47,8 @@ function Products({ category, filters, sort }) {
   const [isExpanded, setIsExpanded] = useState(false)
   const [products, setProdcuts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
+
+  const location = useLocation()
 
   // Fetch products from backend
   useEffect(() => {
@@ -96,9 +98,11 @@ function Products({ category, filters, sort }) {
         backgroundColor: "#f5f5f5",
       }}
     >
-      <h2 className="text-center text-teal-600 font-bold text-5xl mb-10">
-        Trending Now / Featured Products
-      </h2>
+      {location.pathname === "/" && (
+        <h2 className="text-center text-teal-600 font-bold text-5xl mb-10">
+          Trending Now / Featured Products
+        </h2>
+      )}
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
