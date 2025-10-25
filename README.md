@@ -1,88 +1,254 @@
-# 🛍️ Vara Fashion — Full Stack E-Commerce Website (MERN)
+# 👗 Vara Fashion — Full Stack E-Commerce Website (MERN)
 
-### 👗 Your Fashion, Your Style — Anytime, Anywhere  
+**Your Fashion, Your Style — Anytime, Anywhere.**
 
-Vara Fashion is a **fully functional full-stack e-commerce website** built using the **MERN Stack (MongoDB, Express, React, Node.js)**.  
-It allows users to **browse products, create accounts, add items to the cart, and place real orders**, while the **admin dashboard** provides product management, analytics, and order control.
-
-This project demonstrates my **full-stack development, animation, and authentication** skills and is built as a **major showcase project** for internship and professional portfolio purposes.
+Vara Fashion is a fully functional **MERN Stack** e-commerce platform built in **20 days** featuring secure authentication, admin management, animated UI, order receipts (PDF), and analytics dashboard.  
+It demonstrates strong **end-to-end full-stack skills** — from backend architecture and JWT auth to frontend animations with Tailwind, GSAP, and Framer Motion.
 
 ---
 
-## 🚀 Live Demo
+## 🚀 Live Demo & Media
 
-🎥 **Demo Video:** [Add your demo video link here]  
-🖼️ **Screenshots:**  
-- 🏠 Home Page  
-- 👕 Product Details  
-- 🔐 Login / Signup  
-- 🛒 Cart & Checkout  
-- 📊 Admin Dashboard  
-
-> *(Add screenshots here as markdown images like below)*  
-> `![Home Page](./screenshots/home.png)`  
-> `![Dashboard](./screenshots/dashboard.png)`
+- 🌐 **Live Demo:** [Add deployed link here]  
+- 🎥 **Demo Video:** [Add demo video link here]  
+- 🖼️ **Screenshots:**
+  ![Home Page](./screenshots/home.png)
+  ![Dashboard](./screenshots/dashboard.png)
 
 ---
 
 ## 🧩 Tech Stack
 
-### **Frontend**
-- ⚛️ React.js  
-- 💨 Tailwind CSS  
-- 💅 Styled Components  
-- 🎞️ Framer Motion (for UI animations)  
-- 🌀 GSAP (for smooth scroll animations)  
+### Frontend (Client)
+- ⚛️ React.js (Functional Components + Hooks)
+- 🧠 Redux Toolkit (State Management)
+- 💨 Tailwind CSS + 💅 Styled Components
+- 🎞️ Framer Motion & GSAP (Animations)
+- 📄 jsPDF (Downloadable PDF Receipts)
+- 🌐 Axios (API Integration with `publicRequest` & `userRequest` Interceptors)
+- 📊 Recharts (Admin Analytics)
 
-### **Backend**
-- 🌐 Node.js + Express.js  
-- 🔒 JWT Authentication (secure login & admin access)  
-- 🗄️ MongoDB (with Mongoose ODM)  
-- 🖼️ Multer (image upload for products)  
+### Backend (Server)
+- 🌐 Node.js + Express.js
+- 🗄️ MongoDB + Mongoose ODM
+- 🔒 JWT Authentication & Role-based Authorization
+- 🖼️ Multer (Product Image Uploads)
+- 🧰 Bcrypt, Path, and Morgan (Security + Logging)
+- 📁 Express Static for `/uploads`
 
-### **Other Tools & Libraries**
-- 📈 Recharts (Admin analytics dashboard)  
-- 🧾 jsPDF (Generate printable order receipts)  
-
----
-
-## 🌟 Features
-
-### 👤 User Features
-- ✅ Register & Login using JWT Authentication  
-- ✅ Browse and search fashion products  
-- ✅ Add to cart and place orders  
-- ✅ View order history and download receipts (PDF)  
-- ✅ Responsive & modern UI with Tailwind + Styled Components  
-- ✅ Smooth animations using Framer Motion and GSAP  
-
-### 🛠️ Admin Features
-- ✅ Secure Admin Login  
-- ✅ Add / Edit / Delete Products (with image upload via Multer)  
-- ✅ Manage Orders & Users  
-- ✅ Dashboard analytics (Sales, Users, Orders) using Recharts  
-- ✅ Export & Print Order Details with jsPDF  
+### Admin Dashboard
+- 🔧 Protected Admin Panel
+- 📦 CRUD for Products, Users & Orders
+- 📈 Analytics via Recharts
+- 🧾 PDF Export with jsPDF
 
 ---
 
-## 🧠 Key Learning Highlights
+## ⚙️ Project Structure
 
-- 🚀 **Built a complete MERN full-stack application** from scratch  
-- 🔐 **Implemented secure authentication & authorization** with JWT  
-- 🖼️ **Used Multer** for product image uploads  
-- 📈 **Created data visualizations** using Recharts  
-- 🎞️ **Enhanced UX** with Framer Motion & GSAP animations  
-- 🧾 **Exported order receipts** with jsPDF  
-- 🧩 **Followed modular backend architecture** for scalability  
+vara-fashion/
+│
+├── client/ # React Frontend (User UI)
+├── admin/ # Admin Dashboard (Protected)
+├── server/ # Express Backend (API & DB)
+
 
 ---
 
-## 🧾 Future Improvements
+## 🔐 Authentication Flow
 
-- 💳 Integrate **payment gateways** (Stripe / PayPal)  
-- ❤️ Add **product wishlist & reviews**  
-- 📬 Enable **email notifications** for orders  
-- ☁️ **Deploy on Render / Vercel** with CI/CD pipeline  
-- 📱 Build **mobile app version** using React Native  
+- **JWT Authentication** for both users and admin.  
+- Tokens are stored securely and auto-attached to protected requests via Axios interceptors.  
+- Role-based middleware ensures admin-only access for sensitive routes.
+
+---
+
+## 🧭 API Endpoints
+
+### 🔸 Auth Routes — `/api/auth`
+```js
+POST /register    → registerUser
+POST /login       → loginUser
 
 
+🔸 User Routes — /api/users
+GET /             → getAllUser
+GET /find/:id     → getUserById
+GET /stats        → getUserStats
+PUT /:id          → updateUser (with profile image)
+DELETE /:id       → deleteUser (admin only)
+
+🔸 Product Routes — /api/products
+POST /            → createProduct (upload.single("image"))
+PUT /:id          → updateProduct (upload.single("image"))
+GET /find/:id     → getProductById
+GET /             → getAllProducts
+DELETE /:id       → deleteProduct (admin)
+GET /search       → searchProducts
+
+🔸 Cart Routes — /api/carts
+POST /            → createCart (protected)
+PUT /:id          → updateCart (protected)
+GET /find/:userId → getCartById (protected)
+DELETE /:id       → deleteCart (protected)
+
+🔸 Order Routes — /api/orders
+POST /            → createOrder (user)
+GET /find/:userId → getUserOrders (user)
+GET /             → getAllOrders (admin)
+GET /:id          → getOrderById (admin)
+PUT /:id          → updateOrder (admin)
+DELETE /:id       → deleteOrder (admin)
+
+
+🧱 Backend Setup
+
+server/server.js
+
+app.use("/uploads", express.static(path.join(process.cwd(), "uploads")))
+
+// ✅ API Routes
+app.use("/api/users", userRoute)
+app.use("/api/auth", authRoute)
+app.use("/api/products", productRoutes)
+app.use("/api/carts", cartRoutes)
+app.use("/api/orders", orderRoutes)
+
+// ✅ Fallback route
+app.get("/", (req, res) => {
+  res.send("🚀 E-commerce API is running successfully!")
+})
+
+🔌 Axios Setup (Client Side)
+
+client/src/requestMethod.js
+
+import axios from "axios"
+
+const BASE_URL = "http://localhost:4000/api"
+
+// Public Requests
+export const publicRequest = axios.create({
+  baseURL: BASE_URL,
+})
+
+// Private Requests (auto-inject JWT)
+export const userRequest = axios.create({
+  baseURL: BASE_URL,
+})
+
+userRequest.interceptors.request.use((config) => {
+  try {
+    const rootState = JSON.parse(localStorage.getItem("persist:root"))
+    const userState = rootState ? JSON.parse(rootState.user) : null
+    const token = userState?.token
+    if (token) config.headers.Authorization = `Bearer ${token}`
+  } catch (err) {
+    console.error("Error setting auth header:", err)
+  }
+  return config
+})
+
+🧠 Features Overview
+👤 User
+
+Register / Login via JWT
+
+Browse, search & filter products
+
+Add to Cart, Checkout, and View Orders
+
+Download Order Receipt (PDF)
+
+Fully Responsive Animated UI
+
+Simple Chatbot for Help
+
+🛠️ Admin
+
+Secure Login (Protected Routes)
+
+Add / Edit / Delete Products (Multer Image Upload)
+
+Manage Orders & Users
+
+Sales Analytics (Recharts)
+
+Export Orders as PDF
+
+🧾 Key Highlights
+
+Built complete MERN stack app from scratch (frontend + backend)
+
+Implemented JWT auth & protected routes
+
+Used Multer for image upload and management
+
+Added PDF export using jsPDF for order receipts
+
+Animated UI with Framer Motion and GSAP
+
+Created interactive analytics using Recharts
+
+Designed modular, scalable backend architecture
+
+🧠 Learning Outcomes
+
+Mastered secure auth flows (JWT + middleware).
+
+Integrated frontend Redux with backend APIs.
+
+Learned production-style folder structuring.
+
+Enhanced UX using motion libraries.
+
+Practiced CRUD + data visualization for admin control.
+
+💻 Run Locally
+1️⃣ Clone & Install
+git clone <your-repo-url>
+cd vara-fashion
+cd server && npm install
+cd ../client && npm install
+cd ../admin && npm install
+
+2️⃣ Environment Variables
+
+Create .env in /server:
+
+PORT=4000
+MONGO_URI=your_mongo_uri
+JWT_SECRET=your_jwt_secret
+CLIENT_URL=http://localhost:3000
+
+3️⃣ Run in Development
+# Run backend
+cd server && npm run dev
+
+# Run client
+cd ../client && npm start
+
+# Run admin panel
+cd ../admin && npm start
+
+☁️ Deployment
+
+Frontend: Vercel / Netlify
+
+Backend: Render / Railway
+
+Database: MongoDB Atlas
+
+🚧 Future Enhancements
+
+💳 Stripe / PayPal Integration
+
+❤️ Wishlist & Reviews
+
+📬 Email Notifications for Orders
+
+☁️ Cloud Image Storage (Cloudinary)
+
+🤖 AI Product Recommendation Bot
+
+📱 React Native Mobile Version

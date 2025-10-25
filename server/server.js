@@ -11,7 +11,7 @@ import authRoute from "./routes/authRoute.js"
 import productRoutes from "./routes/productRoutes.js"
 import cartRoutes from "./routes/cartRoutes.js"
 import orderRoutes from "./routes/orderRoutes.js"
-import stripeRoute from "./routes/stripe.js"
+// import stripeRoute from "./routes/stripe.js"
 
 // Load environment variables
 dotenv.config()
@@ -41,7 +41,7 @@ app.use("/api/auth", authRoute)
 app.use("/api/products", productRoutes)
 app.use("/api/carts", cartRoutes)
 app.use("/api/orders", orderRoutes)
-app.use("/api/checkout", stripeRoute)
+// app.use("/api/checkout", stripeRoute)
 
 // ✅ Fallback route
 app.get("/", (req, res) => {
