@@ -14,7 +14,7 @@ export const sliderItems = [
   },
   {
     id: 3,
-    image: "/images/slider3.jpg",
+    image: "/images/winter.jpg",
     title: "WINTER ESSENTIALS",
     desc: "Stay warm and stylish with our premium winter collection.",
   },
@@ -29,7 +29,7 @@ export const categories = [
   },
   {
     id: 2,
-    img: "/images/summer.jpg", // Long wear Love
+    img: "/images/longwear.jpg", // Long wear Love
     title: "Long wear Love",
     category: "longwear",
   },

@@ -6,22 +6,43 @@ import { sliderItems } from "../data"
 import { mobile, tablet } from "../responsive"
 // import { Link } from "react-router-dom"
 
+// const Container = styled.div`
+//   width: 100%;
+//   height: calc(100vh - 80px); /* subtract navbar height (adjust value) */
+//   position: relative;
+//   overflow: hidden;
+//   display: flex;
+//   background: linear-gradient(135deg, #e0f7f7, #c2e9e9, #dcfafaff);
+//   margin-top: 80px; /* same as your navbar height */
+
+//   ${tablet(`
+//     height: auto;
+//     margin-top: 100px;
+//   `)}
+
+//   ${mobile(`
+//     height: auto;
+//     margin-top: 100px;
+//   `)}
+// `
+
 const Container = styled.div`
   width: 100%;
-  height: 100vh;
+
   position: relative;
   overflow: hidden;
   display: flex;
   background: linear-gradient(135deg, #e0f7f7, #c2e9e9, #dcfafaff);
+  margin-top: 50px;
 
   ${tablet(`
     height: auto;
-    margin-top: 100px;
+    margin-top: 50px;
   `)}
 
   ${mobile(`
     height: auto;
-    margin-top: 100px;
+    margin-top: 50px;
   `)}
 `
 
@@ -50,12 +71,12 @@ const Arrow = styled.div`
   }
 `
 
-const Wrapper = styled.div`
-  display: flex;
-  transition: all 1s ease;
-  height: 100%;
-  transform: translateX(${(props) => props.slideIndex * -100}vw);
-`
+// const Wrapper = styled.div`
+//   display: flex;
+//   transition: all 1s ease;
+//   height: 100%;
+//   transform: translateX(${(props) => props.slideIndex * -100}vw);
+// `
 
 const Slide = styled.div`
   display: flex;
@@ -73,24 +94,30 @@ const Slide = styled.div`
     height: auto;
   `)}
 `
+const Wrapper = styled.div`
+  display: flex;
+  transition: all 1s ease;
+  height: 100%;
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
+`
 
 const ImgContainer = styled.div`
   flex: 1.2;
   height: 100%;
+  position: relative;
   overflow: hidden;
 `
 
 const Image = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 1.5s ease;
+  object-fit: contain;
 
+  transition: transform 1.5s ease;
   ${Slide}:hover & {
     transform: scale(1.03);
   }
 `
-
 const InfoContainer = styled.div`
   flex: 0.8;
   height: 100%;
@@ -175,6 +202,7 @@ function Slider() {
             <ImgContainer>
               <Image src={item.image} alt={item.title} />
             </ImgContainer>
+
             <InfoContainer>
               <Title className="text-teal-600">{item.title}</Title>
               <Desc>{item.desc}</Desc>
