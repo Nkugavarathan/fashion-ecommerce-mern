@@ -5,6 +5,7 @@ import axios from "axios"
 import ProductItem from "./ProductItem"
 import { mobile, tablet } from "../responsive"
 import { useLocation } from "react-router-dom"
+import { publicRequest, userRequest } from "../requestMethod"
 // const Container = styled.div`
 //   padding: 10px;
 //   display: flex;
@@ -54,10 +55,8 @@ function Products({ category, filters, sort }) {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        const res = await axios.get(
-          category
-            ? `http://localhost:4000/api/products?category=${category}`
-            : "http://localhost:4000/api/products"
+        const res = await publicRequest.get(
+          category ? `/products?category=${category}` : "/products"
         )
         setProdcuts(res.data)
       } catch (error) {
@@ -91,6 +90,10 @@ function Products({ category, filters, sort }) {
       setFilteredProducts((prev) => [...prev].sort((a, b) => b.price - a.price))
     }
   }, [sort])
+  const cardVariants = {
+    hidden: { opacity: 0, y: 40 }, // starts faded & lower
+    visible: { opacity: 1, y: 0 }, // rises up and appears
+  }
 
   return (
     <div
@@ -98,33 +101,86 @@ function Products({ category, filters, sort }) {
         backgroundColor: "#f5f5f5",
       }}
     >
-      {location.pathname === "/" && (
+      {/* {location.pathname === "/" && (
         <h2 className="text-center text-teal-600 font-bold text-5xl mb-10">
           Trending Now / Featured Products
         </h2>
-      )}
-
-      <motion.div
+      )} */}
+      {/* <motion.div
         initial={{ opacity: 0, y: 30 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
         viewport={{ once: true, amount: 0.3 }}
+      > */}
+      {/* <div className="flex justify-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+          {(category ? filteredProducts : products)
+            .slice(0, visibleCount)
+            .map((item, index) => {
+              return (
+                <div key={index} style={{ position: "relative" }}>
+                  <ProductItem item={item} />
+                </div>
+              )
+            })}
+        </div>
+      </div> */}
+      {/* </motion.div> */}
+
+      {/* <motion.div
+        initial={{ opacity: 0, y: 50 }} // start 50px lower and invisible
+        animate={{ opacity: 1, y: 0 }} // animate to original position and fully visible
+        transition={{ duration: 0.9, ease: "easeOut" }}
+        className="container mx-auto px-4"
       >
+        {location.pathname === "/" && (
+          <h2 className="text-center text-teal-600 font-bold text-5xl mb-10">
+            Trending Now / Featured Products
+          </h2>
+        )}
+
         <div className="flex justify-center">
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
             {(category ? filteredProducts : products)
               .slice(0, visibleCount)
-              .map((item, index) => {
-                return (
-                  <div key={index} style={{ position: "relative" }}>
-                    <ProductItem item={item} />
-                  </div>
-                )
-              })}
+              .map((item, index) => (
+                <div key={index} className="relative">
+                  <ProductItem item={item} />
+                </div>
+              ))}
           </div>
         </div>
-      </motion.div>
+      </motion.div> */}
 
+      <div className="container mx-auto px-4">
+        {location.pathname === "/" && (
+          <h2 className="text-center text-teal-600 font-bold text-5xl mb-10">
+            Trending Now / Featured Products
+          </h2>
+        )}
+
+        <div className="flex justify-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            {(category ? filteredProducts : products)
+              .slice(0, visibleCount)
+              .map((item, index) => (
+                <motion.div
+                  key={index}
+                  className=" "
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.3 }}
+                  transition={{ duration: 0.6, delay: index * 0.1 }}
+                  variants={cardVariants}
+                >
+                  <ProductItem item={item} />
+                </motion.div>
+              ))}
+          </div>
+        </div>
+      </div>
+
+      {/*  loadmore btn */}
       {(category ? filteredProducts.length : products.length) > 8 && (
         <div className="flex justify-center mt-6">
           <button

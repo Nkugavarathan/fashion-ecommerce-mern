@@ -134,7 +134,7 @@ export default function CategoriesSection() {
       {/* ===(Subcategories) === */}
       <WaveSection>
         {/* Soft gradient background with subtle wave bottom */}
-        <div className="absolute inset-0 z-0 bg-gradient-to-b from-[#b4d1cef1] via-[#009688] to-[#4DB6AC]" />
+        <div className="absolute inset-0 z-0 bg-linear-to-b from-[#b4d1cef1] via-[#009688] to-[#4DB6AC]" />
 
         {/* Top Heading */}
         <motion.h2

@@ -2,12 +2,12 @@ import { motion } from "framer-motion"
 
 const feedbacks = [
   {
-    name: "Aarav Patel",
+    name: "Aaravi",
     feedback: "Great quality dresses, delivered fast!",
     rating: 5,
   },
   {
-    name: "Meera Sharma",
+    name: "Meera ",
     feedback: "Affordable prices and trendy collection.",
     rating: 4,
   },
@@ -17,12 +17,12 @@ const feedbacks = [
     rating: 5,
   },
   {
-    name: "Divya Nair",
+    name: "Perera",
     feedback: "Perfect sizing and neat packaging.",
     rating: 5,
   },
   {
-    name: "Karan Singh",
+    name: "Varathan",
     feedback: "Genuine products with great discounts.",
     rating: 4,
   },
