@@ -273,11 +273,6 @@ function Cart() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const cart = useSelector((state) => state.cart)
-  const [stripeToken, setStripeToken] = useState(null)
-
-  const onToken = (token) => {
-    setStripeToken(token)
-  }
 
   // ✅ Handle Quantity Changes
   const handleQuantity = (product, type) => {
@@ -296,25 +291,6 @@ function Cart() {
   const handleRemove = (id) => {
     dispatch(removeProduct(id))
   }
-
-  useEffect(() => {
-    const makeRequest = async () => {
-      try {
-        const res = await axios.post(
-          "http://localhost:4000/api/checkout/payment",
-          {
-            tokenId: stripeToken.id,
-            amount: cart.total * 100,
-          }
-        )
-        dispatch(clearCart())
-        navigate("/success", { state: { data: res.data } })
-      } catch (err) {
-        console.log(err)
-      }
-    }
-    makeRequest()
-  }, [stripeToken, cart.total, navigate, dispatch])
 
   const handleClearCart = () => {
     if (window.confirm("Are you sure you want to clear your cart?")) {
@@ -483,6 +459,7 @@ function Cart() {
               <Button>CHECKOUT NOW</Button>
             </Link>
 
+            {/* checkout */}
             <Outlet />
           </Summary>
         </Bottom>
