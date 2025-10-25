@@ -18,9 +18,9 @@ router.post("/", protect, createOrder)
 router.get("/find/:userId", protect, getUserOrders)
 
 // admin routes
-router.get("/", getAllOrders)
+router.get("/", protect, admin, getAllOrders)
 // router.get("/income", protect, admin, monthlyIncome)
-router.get("/:id", getOrderById)
+router.get("/:id", protect, admin, getOrderById)
 router.put("/:id", protect, admin, updateOrder)
 router.delete("/:id", protect, admin, deleteOrder)
 

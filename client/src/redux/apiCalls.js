@@ -7,29 +7,6 @@ import {
   createOrderFailure,
 } from "./orderRedux"
 
-// export const createOrder = async (orderData, dispatch) => {
-//   dispatch(createOrderStart())
-//   try {
-//     const res = await userRequest.post("/orders", orderData)
-//     dispatch(createOrderSuccess(res.data))
-//   } catch (err) {
-//     console.error("Order creation failed:", err)
-//     dispatch(createOrderFailure())
-//     throw err
-//   }
-// }
-
-// export const createOrder = async (order, dispatch) => {
-//   try {
-//     const res = await userRequest.post("/orders", order)
-//     dispatch({ type: "CREATE_ORDER_SUCCESS", payload: res.data })
-//     return res.data // ✅ return created order
-//   } catch (err) {
-//     console.error("❌ createOrder error:", err)
-//     throw err // ✅ propagate error to frontend
-//   }
-// }
-
 export const createOrder = async (order, dispatch) => {
   try {
     console.log("📦 Sending order to backend:", order)

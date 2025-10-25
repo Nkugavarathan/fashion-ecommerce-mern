@@ -210,12 +210,13 @@ export default function Profile() {
         let res
         if (userRequest) {
           res = await userRequest.get(`/orders/find/${currentUser._id}`)
-        } else {
-          res = await axios.get(
-            `http://localhost:4000/api/orders/find/${currentUser._id}`,
-            { headers: { Authorization: `Bearer ${token}` } }
-          )
         }
+        // } else {
+        //   res = await axios.get(
+        //     `http://localhost:4000/api/orders/find/${currentUser._id}`,
+        //     { headers: { Authorization: `Bearer ${token}` } }
+        //   )
+        // }
         setOrders(res.data || [])
       } catch (err) {
         setError(
