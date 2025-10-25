@@ -101,23 +101,48 @@ const Wrapper = styled.div`
   transform: translateX(${(props) => props.slideIndex * -100}vw);
 `
 
+// const ImgContainer = styled.div`
+//   flex: 1.2;
+//   height: 100%;
+//   position: relative;
+//   overflow: hidden;
+// `
+
+// const Image = styled.img`
+//   width: 100%;
+//   height: 100%;
+//   object-fit: contain;
+
+//   transition: transform 1.5s ease;
+//   ${Slide}:hover & {
+//     transform: scale(1.03);
+//   }
+// `
+
 const ImgContainer = styled.div`
   flex: 1.2;
-  height: 100%;
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+
+  justify-content: center;
+  border-radius: 50%;
+  padding: 20px; /* soft border gap */
 `
 
 const Image = styled.img`
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-
-  transition: transform 1.5s ease;
+  width: 500px; /* You can adjust this size */
+  height: 500px;
+  border-radius: 50%; /* ✅ Makes the image circular */
+  object-fit: contain; /* ✅ Ensures it stays neat inside the circle */
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* ✅ Beautiful soft shadow */
+  transition: transform 1s ease, box-shadow 1s ease;
+  border: 22px solid teal;
   ${Slide}:hover & {
-    transform: scale(1.03);
+    transform: scale(1.05); /* subtle zoom */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
   }
 `
+
 const InfoContainer = styled.div`
   flex: 0.8;
   height: 100%;
