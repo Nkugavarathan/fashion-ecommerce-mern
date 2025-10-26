@@ -7,7 +7,10 @@ From secure **JWT authentication** and **admin dashboards** to animated product 
 ---
 ## 🚀 Live Demo & Media
 - 🌐 **Live Demo:** []  
-- 🎥 **Demo Video:** [Add demo video link here]  
+-## 🎥 Demo Video
+
+[![Watch Demo on YouTube](https://img.youtube.com/vi/hywZ-p3JLxE/0.jpg)](https://youtu.be/hywZ-p3JLxE)
+
 - 🖼️ **Screenshots:**
   [Home Page](./screenshots/home.JPG)
   [Dashboard](./screenshots/dashboard.JPG)
