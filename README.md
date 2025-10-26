@@ -11,6 +11,10 @@ Vara Fashion is a dynamic, full-featured MERN Stack e-commerce platform built fo
   [Home Page](./screenshots/home.JPG)
   [Dashboard](./screenshots/dashboard.JPG)
   [Recipt](./screenshots/recipt.JPG)
+  [Success Page](./screenshots/succsspage.JPG)
+  [New Arrive](./screenshots/newarrivae.JPG)
+  [Products](./screenshots/products.JPG)
+  [Single Product](./screenshots/singleproduct.JPG)
 ---
 ### 🧩 Tech Stack
 ## Frontend (Client)
