@@ -1,12 +1,8 @@
 # 👗 Vara Fashion — Full Stack E-Commerce Experience (MERN)
 
-**Your Fashion, Your Style — Anytime, Anywhere.**
-
-Vara Fashion is a dynamic, full-featured **MERN Stack** e-commerce platform built for modern shoppers and ambitious developers alike.  
-From secure **JWT authentication** and **admin dashboards** to animated product displays and downloadable **PDF order receipts**, this app delivers a seamless, responsive experience across devices.
+Vara Fashion is a dynamic, full-featured MERN Stack e-commerce platform built for modern shoppers and ambitious developers alike. From secure JWT authentication and admin dashboards to animated product displays and downloadable PDF order receipts,this web app delivers a seamless, responsive experience across devices.
 ---
-## 🚀 Live Demo & Media
-- 🌐 **Live Demo:** []  
+## 🚀 Live Demo & Media 
 -## 🎥 Demo Video
 
 [![Watch Demo on YouTube](https://img.youtube.com/vi/hywZ-p3JLxE/0.jpg)](https://youtu.be/hywZ-p3JLxE)
@@ -15,10 +11,6 @@ From secure **JWT authentication** and **admin dashboards** to animated product 
   [Home Page](./screenshots/home.JPG)
   [Dashboard](./screenshots/dashboard.JPG)
   [Recipt](./screenshots/recipt.JPG)
-  [Success Page](./screenshots/succsspage.JPG)
-  [New Arrive](./screenshots/newarrivae.JPG)
-  [Single Product](./screenshots/singleproduct.JPG)
-  [Products](./screenshots/products.JPG)
 ---
 ### 🧩 Tech Stack
 ## Frontend (Client)
