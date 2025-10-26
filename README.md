@@ -9,8 +9,13 @@ From secure **JWT authentication** and **admin dashboards** to animated product 
 - 🌐 **Live Demo:** []  
 - 🎥 **Demo Video:** [Add demo video link here]  
 - 🖼️ **Screenshots:**
-  ![Home Page](./screenshots/home.JPG)
-  ![Dashboard](./screenshots/dashboard.JPG)
+  [Home Page](./screenshots/home.JPG)
+  [Dashboard](./screenshots/dashboard.JPG)
+  [Recipt](./screenshots/recipt.JPG)
+  [Success Page](./screenshots/succsspage.JPG)
+  [New Arrive](./screenshots/newarrivae.JPG)
+  [Single Product](./screenshots/singleproduct.JPG)
+  [Products](./screenshots/products.JPG)
 ---
 ### 🧩 Tech Stack
 ## Frontend (Client)
